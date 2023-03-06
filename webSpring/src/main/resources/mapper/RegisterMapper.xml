@@ -9,4 +9,7 @@
 	<select id="idChkCount" resultType="int">
 		select count(id) count from regist where id=#{param1}
 	</select>
+	<select id="zipSearch" resultType="com.naver.dcancer.dto.ZipcodeDTO">
+		select zipcode, sido, doroname, buildnum1, buildnum2, buildname, dong, bungi1, bungi2 from zipcode where doroname like '%${param}%' order by doroname asc
+	</select>
 </mapper>

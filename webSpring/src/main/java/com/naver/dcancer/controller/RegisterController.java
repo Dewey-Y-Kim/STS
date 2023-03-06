@@ -1,5 +1,7 @@
 package com.naver.dcancer.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.dcancer.dto.RegisterDTO;
+import com.naver.dcancer.dto.ZipcodeDTO;
 import com.naver.dcancer.service.RegisterService;
 
 @Controller
@@ -61,6 +65,17 @@ public class RegisterController {
 		model.addAttribute("id", id);
 		model.addAttribute("result", cnt);
 		return "register/idChk";
+	}
+	@RequestMapping(value="/zipcodeSearch", method=RequestMethod.GET)
+	public ModelAndView zipcodesearch(String doroname) {
+		ModelAndView mav=new ModelAndView();
+		List<ZipcodeDTO> zipList= null;
+		if(doroname!=null) {
+			zipList=service.zipSearch(doroname);
+		}
+		mav.addObject("zipList",zipList);
+		mav.setViewName("register/zipcodeSearch");
+		return mav;
 	}
 
 }

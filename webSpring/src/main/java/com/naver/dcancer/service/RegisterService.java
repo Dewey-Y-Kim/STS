@@ -1,8 +1,12 @@
 package com.naver.dcancer.service;
 
+import java.util.List;
+
 import com.naver.dcancer.dto.RegisterDTO;
+import com.naver.dcancer.dto.ZipcodeDTO;
 
 public interface RegisterService {
 	public RegisterDTO loginOk(String usrid, String usrpwd);
 	public int idChkCount(String id);
+	public List<ZipcodeDTO> zipSearch(String doroname);
 }

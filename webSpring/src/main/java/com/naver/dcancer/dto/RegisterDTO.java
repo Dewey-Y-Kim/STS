@@ -11,6 +11,7 @@ public class RegisterDTO {
 	private String address;
 	private String hobby;
 	private String usrdate;
+	
 	@Override
 	public String toString() {
 		return "RegisterDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", tel=" + tel + ", email=" + email
