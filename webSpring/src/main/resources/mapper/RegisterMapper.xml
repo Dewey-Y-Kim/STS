@@ -12,4 +12,13 @@
 	<select id="zipSearch" resultType="com.naver.dcancer.dto.ZipcodeDTO">
 		select zipcode, sido, doroname, buildnum1, buildnum2, buildname, dong, bungi1, bungi2 from zipcode where doroname like '%${param}%' order by doroname asc
 	</select>
+	<insert id="registInsert">
+		Insert into regist(ID, PW, NAME, TEL, EMAIL, ZIPCODE, ADDR, ADDRESS, HOBBY) values(#{id}, #{pw}, #{name}, #{tel}, #{email}, #{zipcode}, #{addr}, #{address}, #{hobby})
+	</insert>
+	<select id="registEdit" resultType="com.naver.dcancer.dto.RegisterDTO">
+		select ID, NAME, TEL, EMAIL, ZIPCODE, ADDR, ADDRESS, HOBBY from regist where id=#{param1} 
+	</select>
+	<update id="registEditOk">
+		update regist set TEL=#{tel}, EMAIL=#{email}, ZIPCODE=#{zipcode}, ADDR=#{addr}, ADDRESS=#{address}, HOBBY=#{hobby} where id=#{id} and pw=#{pw}
+	</update>
 </mapper>

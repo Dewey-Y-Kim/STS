@@ -77,5 +77,41 @@ public class RegisterController {
 		mav.setViewName("register/zipcodeSearch");
 		return mav;
 	}
-
+	@RequestMapping(value="joinOk",method=RequestMethod.POST)
+	public ModelAndView joinOk(RegisterDTO dto) {
+		int result = service.registInsert(dto);
+		ModelAndView mav = new ModelAndView();
+		if(result==1) {// 가입 성공 로그인폼 이동
+			mav.setViewName("redirect:loginForm");
+		}else { //가입실패 
+			mav.addObject("msg","회원등록을 실패하였습니다.");
+			mav.setViewName("register/joinOkResult");
+		}
+		return mav;
+	}
+	@GetMapping("joinedit")
+	public ModelAndView joinEdit(HttpSession session) {
+		ModelAndView mav=new ModelAndView();
+		RegisterDTO dto=service.registEdit((String)session.getAttribute("logId"));
+		mav.addObject("dto",dto);
+		mav.setViewName("register/joinedit");
+		return mav;
+	}
+	@PostMapping("/joinEditOk")
+	public ModelAndView joinEditOk(RegisterDTO dto,HttpSession session) {
+		dto.setId((String)session.getAttribute("logId"));
+		System.out.println(dto.getId());
+		int result=service.registEditOk(dto);
+		System.out.println("joinEditOk:result :"+result);
+		ModelAndView mav= new ModelAndView();
+		
+		if(result>0) {
+			mav.setViewName("redirect:joinedit");
+		}else {
+			mav.addObject("msg", "정보수정에 실패하였습니다.");
+			mav.setViewName("/register/joinOkResult");
+			
+		}
+		return mav;
+	}
 }

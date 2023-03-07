@@ -24,7 +24,7 @@
 			</c:if>
 			<c:if test="${logStatus=='Y'}">
 			<li> <a href="logout">logout</a></li>
-			<li> edit account</li>
+			<li> <a href="joinedit">회원정보수정</a></li>
 			</c:if>
 			<li> bbs</li>
 			<li> data</li>

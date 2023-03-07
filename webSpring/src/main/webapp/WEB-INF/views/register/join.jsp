@@ -74,7 +74,33 @@
 				alert("이름은 2~10글자까지 한글만 가능합니다.");
 				return false;
 			}
-				
+			var tel = $("#tel1").val()+"-"+$("#tel2").val()+"-"+$("#tel3").val();
+			var reg= /^(010|02|031|041|051)-[0-9]{3,4}-[0-9]{4}$/
+			
+			if(!reg.test(tel)){
+				alert("전화번호를 잘못입력하였습니다.");
+				return false;
+			}
+			/*
+			var reg= /^\w{6,15}[@][a-zA-Z]{2,9}[.][a-zA-Z]{2,5}([.][a-zA-Z]{2,5})?$/
+			console.log($("#email").val())
+			if(!reg.test($("#email").val())){
+				alert("이메일을 확인 해주세요");
+				return false;
+			}
+			*/
+			var hobbyCount=0;
+			$("input[name=hobbys]").each(function(){
+				if(this.checked==true) hobbyCount++;
+			});
+			
+			if(hobbyCount<2){
+				alert("취미를 2개이상 선택해주세요.");
+				return false;
+			}
+			$("#joinform").attr("action","joinOk");
+			return true;
+			
 		});
 	});
 	
@@ -85,16 +111,16 @@
 		<ul>
 			<li>아이디id</li>
 			<li>
-				<input type="text" name="id" id="id" minlength="5" maxlength="20"/>
+				<input type="text" name="id" id="id" minlength="5" maxlength="20" value="testhi"/>
 				<input type="button" value="중복검사"/>
 				<input type="hidden" id="idstatus" value="n"/>
 			</li>
 			<li>pw</li>
-			<li><input type="password" name="pw" id="pw" minlength="4" maxlenth="15"/></li>
+			<li><input type="password" name="pw" id="pw" minlength="4" maxlenth="15" value="12345"/></li>
 			<li>pw2
-			<li><input type="password" name="pw2" id="pw2"/></li>
+			<li><input type="password" name="pw2" id="pw2" value="12345"/></li>
 			<li>name</li>
-			<li><input type="text" name="name" id="name"/></li>
+			<li><input type="text" name="name" id="name" value="주아라"/></li>
 			<li>tel</li>
 			<li>
 			<select name="tel1" id="tel1">
@@ -104,8 +130,8 @@
 				<option value="041">041</option>
 				<option value="051">051</option>
 			</select>
-			-<input type="text" name="tel2" id="tel2" Maxlength="4" minlength="3"/>-
-			<input type="text" name="tel3" id="tel3" Maxlength="4" minlength="4"/>
+			-<input type="text" name="tel2" id="tel2" Maxlength="4" minlength="3" value="123"/>-
+			<input type="text" name="tel3" id="tel3" Maxlength="4" minlength="4" value="1234"/>
 			</li>
 			<li>email</li>
 			<li><input type="text" name="email" id="email"/></li>
@@ -117,14 +143,14 @@
 			<li>addr</li>
 			<li><input type="text" name="addr" id="addr"/></li>
 			<li>address </li>
-			<li><input type="text" name="addr" id="addr"/></li>
+			<li><input type="text" name="address" id="address"/></li>
 			<li>hobby</li>
 			<li>
-				<input type="checkbox" name="hobby" id="hobby" value="검도"/>검도
-				<input type="checkbox" name="hobby" id="hobby" value="등산"/>등산
-				<input type="checkbox" name="hobby" id="hobby" value="사이클"/>사이클
-				<input type="checkbox" name="hobby" id="hobby" value="IT"/>IT
-				<input type="checkbox" name="hobby" id="hobby" value="웨이트"/>웨이트
+				<input type="checkbox" name="hobbys" class="hobby" value="검도"/>검도
+				<input type="checkbox" name="hobbys" class="hobby" value="등산"/>등산
+				<input type="checkbox" name="hobbys" class="hobby" value="사이클"/>사이클
+				<input type="checkbox" name="hobbys" class="hobby" value="IT"/>IT
+				<input type="checkbox" name="hobbys" class="hobby" value="웨이트"/>웨이트
 			</li>
 			<li><input type="submit" value="가입하기"/>
 		</ul>	
