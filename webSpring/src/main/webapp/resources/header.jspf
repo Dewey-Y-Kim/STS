@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>insert title here</title>
-<link rel="stylesheet"  href="inc/style.css" type="text/css"/>
+<link rel="stylesheet"  href="/dcancer/inc/style.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script type="text/javascript" href="inc/script.js"></script>
+<script type="text/javascript" href="/dcancer/inc/script.js"></script>
 
 </head>
 <body>
@@ -19,14 +19,14 @@
 	<div class="menu">
 		<ul>
 			<c:if test="${logStatus!='Y'}">
-			<li><a href="loginForm">Login</a></li>
-			<li><a href="join">회원가입</a></li>
+			<li><a href="/dcancer/loginForm">Login</a></li>
+			<li><a href="/dcancer/join">회원가입</a></li>
 			</c:if>
 			<c:if test="${logStatus=='Y'}">
-			<li> <a href="logout">logout</a></li>
-			<li> <a href="joinedit">회원정보수정</a></li>
+			<li> <a href="/dcancer/logout">logout</a></li>
+			<li> <a href="/dcancer/joinedit">회원정보수정</a></li>
 			</c:if>
-			<li> bbs</li>
+			<li><a href="/dcancer/board/list">게시판</a></li>
 			<li> data</li>
 			<li> grade db</li>
 		</ul>
