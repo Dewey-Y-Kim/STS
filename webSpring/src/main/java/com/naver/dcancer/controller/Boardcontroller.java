@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.dcancer.dao.BoardDAO;
-import com.naver.dcancer.dao.PagingVO;
 import com.naver.dcancer.dto.BoardDTO;
+import com.naver.dcancer.dto.PagingVO;
 import com.naver.dcancer.service.BoardService;
 // Controller : veiw 언어 사용 불가-jsp생성 및 구현/ RestController : view 언어 사용 가능, 반환형 String = 컨텐츠
 @RestController
@@ -36,6 +36,7 @@ public class Boardcontroller {
 		mav.addObject("list",service.pageSelect(vo));
 		mav.setViewName("/board/list");
 		mav.addObject("vo",vo);
+		System.out.println(vo.getLastIdxPage());
 		return mav;
 	}
 	

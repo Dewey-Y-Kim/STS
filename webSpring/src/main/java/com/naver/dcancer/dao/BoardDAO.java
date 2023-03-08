@@ -3,6 +3,7 @@ package com.naver.dcancer.dao;
 import java.util.List;
 
 import com.naver.dcancer.dto.BoardDTO;
+import com.naver.dcancer.dto.PagingVO;
 
 public interface BoardDAO {
 	public int boardInsert(BoardDTO dto);

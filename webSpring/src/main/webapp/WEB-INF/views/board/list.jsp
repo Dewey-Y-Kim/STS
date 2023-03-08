@@ -31,6 +31,13 @@
 		float : left;
 		padding : 1% 2%;
 	}
+	.paging_div li{
+		float:left;
+		padding : 10px 20px;
+	}
+	.paging_div a:link, .paging_div a:hover, .paging_div a:visited{
+		color : #000;
+	}
 	.search_div{
 		clear:left;
 		padding : 1%;
@@ -70,13 +77,27 @@
 	</ul>
 	<div class="paging_div">
 		<ul>
+			<c:if test="${vo.idxPage==1 }">
 			<li>prev</li>
+			</c:if>
+			<c:if test="${vo.idxPage!=1 }">
+			<li><a href="list?nowPage=${vo.nowPage-5}">prev</a></li>
+			</c:if>
+			<!--<c:forEach var="num" begin="1" end="${onePageCnt}" step="1">
+				<li>${vo.idxPage+num}</li>
+			</c:forEach> -->
 			<li>1</li>
 			<li>2</li>
 			<li>3</li>
 			<li>4</li>
-			<li>5</li>
+			<li>5</li> 
+			<c:if test="${vo.idxPage eq vo.lastIdxPage}">
 			<li>next</li>
+			</c:if>
+			<c:if test="${vo.idxPage ne vo.lastIdxPage}">
+			${vo.nowPage+vo.onePageCnt }
+			<li><a href="list?nowPage=${vo.nowPage+5 }">next</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<div class="search_div"> 

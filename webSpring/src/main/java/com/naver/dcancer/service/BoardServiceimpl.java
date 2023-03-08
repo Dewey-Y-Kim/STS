@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.naver.dcancer.dao.BoardDAO;
-import com.naver.dcancer.dao.PagingVO;
 import com.naver.dcancer.dto.BoardDTO;
+import com.naver.dcancer.dto.PagingVO;
 
 @Service
 public class BoardServiceimpl implements BoardService {

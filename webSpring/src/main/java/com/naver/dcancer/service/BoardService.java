@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.naver.dcancer.dao.PagingVO;
 import com.naver.dcancer.dto.BoardDTO;
+import com.naver.dcancer.dto.PagingVO;
 
 
 public interface BoardService {

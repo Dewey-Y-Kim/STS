@@ -1,4 +1,4 @@
-package com.naver.dcancer.dao;
+package com.naver.dcancer.dto;
 
 public class PagingVO {
 	// page 필요 변수 정의
@@ -10,13 +10,12 @@ public class PagingVO {
 	private int lastPage;
 	private int onePageCnt=5;
 	private int idxPage=1;
+	private int lastIdxPage;
 	// search 필요 변수 정의
 	
-	@Override
-	public String toString() {
-		return "PagingVO [nowPage=" + nowPage + ", onePageRec=" + onePageRec + ", totalRec=" + totalRec + ", totalPage="
-				+ totalPage + ", lastPageRec=" + lastPageRec + ", lastPage=" + lastPage + "]";
-	}
+	
+	
+	
 	public int getNowPage() {
 		return nowPage;
 	}
@@ -53,6 +52,7 @@ public class PagingVO {
 	}
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
+		lastIdxPage=(totalPage-1)/onePageCnt*onePageCnt+1;
 	}
 	public int getLastPageRec() {
 		return lastPageRec;
@@ -74,7 +74,24 @@ public class PagingVO {
 	public void setIdxPage(int idxPage) {
 		this.idxPage = idxPage;
 	}
-	
+	public int getOnePageCnt() {
+		return onePageCnt;
+	}
+	public void setOnePageCnt(int onePageCnt) {
+		this.onePageCnt = onePageCnt;
+	}
+	public int getLastIdxPage() {
+		return lastIdxPage=(totalPage-1)/onePageCnt*onePageCnt+1;
+	}
+	public void setLastIdxPage(int lastIdxPage) {
+		this.lastIdxPage = lastIdxPage;
+	}
+	@Override
+	public String toString() {
+		return "PagingVO [nowPage=" + nowPage + ", onePageRec=" + onePageRec + ", totalRec=" + totalRec + ", totalPage="
+				+ totalPage + ", lastPageRec=" + lastPageRec + ", lastPage=" + lastPage + ", onePageCnt=" + onePageCnt
+				+ ", idxPage=" + idxPage + ", lastIdxPage=" + lastIdxPage + "]";
+	}
 	
 	
 }
