@@ -81,14 +81,12 @@
 				alert("전화번호를 잘못입력하였습니다.");
 				return false;
 			}
-			/*
-			var reg= /^\w{6,15}[@][a-zA-Z]{2,9}[.][a-zA-Z]{2,5}([.][a-zA-Z]{2,5})?$/
-			console.log($("#email").val())
+			var reg= /^\w{6,15}@[a-zA-Z]{2,9}.[a-zA-Z]{2,5}(.[a-zA-Z]{2,5})?$/;
+			console.log(reg.test($("#email").val()));
 			if(!reg.test($("#email").val())){
 				alert("이메일을 확인 해주세요");
 				return false;
 			}
-			*/
 			var hobbyCount=0;
 			$("input[name=hobbys]").each(function(){
 				if(this.checked==true) hobbyCount++;

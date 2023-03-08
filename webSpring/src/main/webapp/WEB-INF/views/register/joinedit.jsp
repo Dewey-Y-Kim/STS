@@ -3,7 +3,7 @@
 <style> 
 	#joineditform ul{
 		overflow : auto;
-		width : 80%;
+		width : 70%;
 	}
 	
 	#joineditform li{
@@ -78,7 +78,7 @@
 			<li>
 				<input type="text" name="id" id="id" value="${dto.id }" readonly/>
 			</li>
-			<li>비밀번호를 입력해주세요</li>
+			<li>비밀번호</li>
 			<li><input type="password" name="pw" id="pw" minlength="4" maxlenth="15"/></li>
 			<li>성명</li>
 			<li><input type="text" name="name" id="name" value="${dto.name }"readonly/></li>
@@ -107,7 +107,7 @@
 			<li><input type="text" name="address" id="address" value="${dto.address}"/></li>
 			<li>취미</li>
 			<li>
-				<input type="checkbox" name="hobbys" class="hobby" value="검도" <c:forEach var="hob" items="${dto.hobbys}"><c:if test="hob=='검도'">checked</c:if></c:forEach>/>검도
+				<input type="checkbox" name="hobbys" class="hobby" value="검도" <c:forEach var="hob" items="${dto.hobbys}"><c:if test="hob=='검도'"><c:out value='checked'/></c:if></c:forEach> />검도
 				<input type="checkbox" name="hobbys" class="hobby" value="등산" <c:forEach var="hob" items="${dto.hobbys}"><c:if test="hob=='등산'">checked</c:if></c:forEach>/>등산
 				<input type="checkbox" name="hobbys" class="hobby" value="사이클" <c:forEach var="hob" items="${dto.hobbys}"><c:if test="hob=='사이클'">checked</c:if></c:forEach>/>사이클
 				<input type="checkbox" name="hobbys" class="hobby" value="IT" <c:forEach var="hob" items="${dto.hobbys}"><c:if test="hob=='IT'">checked</c:if></c:forEach>/>IT

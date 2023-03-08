@@ -113,9 +113,10 @@ public class RegisterDTO {
 	public void setHobby(String hobby) {
 		this.hobby = hobby;
 		hobbys=hobby.split("/");
+		System.out.println("hobbySetter");
 	}
 	public String[] getHobbys() {
-		
+		this.hobby = hobby;
 		return hobbys;
 	}
 	public void setHobbys(String[] hobbys) {

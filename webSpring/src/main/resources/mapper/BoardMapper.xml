@@ -3,4 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.dcancer.dao.BoardDAO">
+	<insert id="boardInsert">
+		insert into board(no, title, content, id, ip) values(Board_Sq.nextval, #{title}, #{content}, #{id}, #{ip})
+	</insert>
+	<select id="boardCnt" resultType="int">
+		select count(no) from board
+	</select>
+	<select id="pageSelect" resultType="com.naver.dcancer.dto.BoardDTO">
+		select * from
+		(select * from
+		(select b.no, b.title, r.name, b.id, b.hit, to_char(b.writedate,'MM-DD HH:MI') writedate from board b join regist r on b.id = r.id order by b.no desc) 
+		<![CDATA[where rownum<=${onePageRec}*${nowPage} order by no asc]]>)
+		<choose>
+		<when test="nowPage!=totalPage">  
+		<![CDATA[where rownum<=${onePageRec} order by no desc]]>
+		</when>
+		<when test="nowPage==totalPage">
+		<![CDATA[where rownum<=${lastPageRec} order by no desc]]>
+		</when>
+		</choose>	
+	</select>
 </mapper>
