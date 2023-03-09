@@ -12,9 +12,19 @@ public class PagingVO {
 	private int idxPage=1;
 	private int lastIdxPage;
 	// search 필요 변수 정의
+	private String searchKey;
+	private String searchWord;
 	
-	
-	
+	public String sTostring() {
+		return "SearchVO [searchKey]"+searchKey+"[searchWord]"+searchWord; 
+	}
+	@Override
+	public String toString() {
+		return "PagingVO [nowPage=" + nowPage + ", onePageRec=" + onePageRec + ", totalRec=" + totalRec + ", totalPage="
+				+ totalPage + ", lastPageRec=" + lastPageRec + ", lastPage=" + lastPage + ", onePageCnt=" + onePageCnt
+				+ ", idxPage=" + idxPage + ", lastIdxPage=" + lastIdxPage + ", searchKey=" + searchKey + ", searchWord="
+				+ searchWord + "]";
+	}
 	
 	public int getNowPage() {
 		return nowPage;
@@ -86,12 +96,20 @@ public class PagingVO {
 	public void setLastIdxPage(int lastIdxPage) {
 		this.lastIdxPage = lastIdxPage;
 	}
-	@Override
-	public String toString() {
-		return "PagingVO [nowPage=" + nowPage + ", onePageRec=" + onePageRec + ", totalRec=" + totalRec + ", totalPage="
-				+ totalPage + ", lastPageRec=" + lastPageRec + ", lastPage=" + lastPage + ", onePageCnt=" + onePageCnt
-				+ ", idxPage=" + idxPage + ", lastIdxPage=" + lastIdxPage + "]";
+	
+	public String getSearchKey() {
+		return searchKey;
 	}
+	public void setSearchKey(String searchKey) {
+		this.searchKey = searchKey;
+	}
+	public String getSearchWord() {
+		return searchWord;
+	}
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
+	
 	
 	
 }

@@ -3,6 +3,7 @@ package com.naver.dcancer.controller;
 import java.nio.charset.Charset;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,14 +30,13 @@ public class Boardcontroller {
 	public ModelAndView boardlist(PagingVO vo) {
 		//db 조회
 		//total record 
-		vo.setTotalRec(service.boardCnt());
-		System.out.println(vo.toString());
-		
+		vo.setTotalRec(service.boardCnt(vo));
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("list",service.pageSelect(vo));
 		mav.setViewName("/board/list");
 		mav.addObject("vo",vo);
-		System.out.println(vo.getLastIdxPage());
+		System.out.println(vo.toString());
+		System.out.println(vo.sTostring());
 		return mav;
 	}
 	
@@ -66,5 +66,97 @@ public class Boardcontroller {
 		headers.add("Content-type", "text/html; charset=UTF-8");
 		
 		return new ResponseEntity<String>(htmltag,headers,HttpStatus.OK); 
+	}
+	@GetMapping("/contentView")
+	public ModelAndView contentView(BoardDTO dto,PagingVO vo) {
+		service.hitCount(dto.getNo());
+		ModelAndView mav = new ModelAndView();
+		dto=service.contentSelect(dto.getNo());
+		mav.setViewName("board/contentView");
+		mav.addObject("dto",dto);
+		mav.addObject("vo",vo);
+		return mav;
+	}
+	@GetMapping("/edit")
+	public ModelAndView contentEdit(int no,PagingVO vo) {
+		ModelAndView mav=new ModelAndView();
+		BoardDTO dto= service.editSelect(no);
+		// String title = dto.getTitle();
+		// title.replaceAll("\"","&quot;");
+		// title.replaceAll("\'","&sbquo;");
+		// dto.setTitle(title);
+		mav.addObject("dto",dto);
+		mav.addObject("vo",vo);
+		mav.setViewName("board/BoardEdit");
+		
+		return mav;
+	}
+	@PostMapping("/EditOk")
+	public ResponseEntity<String> contentOk(BoardDTO dto,PagingVO vo,HttpSession session) {
+		dto.setId((String)session.getAttribute("logId"));
+		String htmltag="<script>";
+		try {
+		int result=service.contentUpdate(dto);
+		
+		
+		htmltag+="location.href='contentView?no="+dto.getNo()+"&nowPage="+vo.getNowPage();
+		if(vo.getSearchWord()!=null) {
+			htmltag+="&searchKey="+vo.getSearchKey()+"&searchWord="+vo.getSearchWord();
+		}
+		htmltag+="';";
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			htmltag += "alert('글이 등록되지 않았습니다.');";
+			htmltag += "history.back();";
+		}
+		htmltag+="</script>";
+		System.out.println(dto.toString());
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("text","html",Charset.forName("UTF-8")));
+		headers.add("Content-Type", "text/html; charset=UTF-8");
+		ResponseEntity<String> entity= new ResponseEntity<String>(htmltag, headers, HttpStatus.OK);
+		return entity;
+	}
+	@GetMapping("/delete")
+	public ResponseEntity<String> delContent(int no,PagingVO vo,HttpSession session){
+		BoardDTO dto = new BoardDTO();
+		String logid=(String)session.getAttribute("logId");
+		String html="<script>";
+		html+="location.href='list?nowPage="+vo.getNowPage();
+		if(vo.getSearchWord()!=null) {
+			html+="&searchKey="+vo.getSearchKey()+"&searchWord"+vo.getSearchWord();
+		}
+		html+="'";
+		try {
+			service.delRecord(no,logid);
+		}catch(Exception e) {
+			e.printStackTrace();
+			html+="alert('글이 등록되지 않았습니다.');";
+			html+="history.back;";
+		}
+		html+="</script>";
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(new MediaType("text","html", Charset.forName("UTF-8")));
+		header.add("Context-type", "text/html; charset=Utf-8");
+		ResponseEntity<String> entity= new ResponseEntity<String>(html,header,HttpStatus.OK);
+		return entity;
+	}
+	@GetMapping("/boardDel")
+	public ModelAndView BoardDel(BoardDTO dto,PagingVO vo, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		dto.setId((String)session.getAttribute("logId"));
+		int result=service.boardDel(dto);
+		mav.addObject("nowPage",vo.getNowPage());
+		if(vo.getSearchWord()!=null) {
+			mav.addObject("searchKey",vo.getSearchKey());
+			mav.addObject("searchWord",vo.getSearchWord());
+		}
+		if(result>0) {
+			mav.setViewName("redirect:list");
+		}else {
+			mav.setViewName("redirect:boardView");
+		}
+		return mav;
 	}
 }

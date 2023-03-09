@@ -21,13 +21,34 @@ public class BoardServiceimpl implements BoardService {
 	}
 
 	@Override
-	public int boardCnt() {
-		return dao.boardCnt();
+	public int boardCnt(PagingVO vo) {
+		return dao.boardCnt(vo);
 	}
 
 	@Override
 	public List<BoardDTO> pageSelect(PagingVO vo) {
 		return dao.pageSelect(vo);
 	}
-	
+
+	@Override
+	public BoardDTO contentSelect(int no) {
+		return dao.contentSelect(no);
+	}
+	public BoardDTO editSelect(int no) {
+		return dao.editSelect(no);
+	}
+	public int contentUpdate(BoardDTO dto) {
+		return dao.contentUpdate(dto);
+	}
+	public int delRecord(int no, String logid) {
+		return dao.delRecord(no, logid);
+	}
+	public void hitCount(int no) {
+		dao.hitCount(no);
+	}
+
+	@Override
+	public int boardDel(BoardDTO dto) {
+		return dao.boardDel(dto);
+	}
 }

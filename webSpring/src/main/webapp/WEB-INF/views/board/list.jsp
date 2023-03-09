@@ -35,7 +35,7 @@
 		float:left;
 		padding : 10px 20px;
 	}
-	.paging_div a:link, .paging_div a:hover, .paging_div a:visited{
+	.paging_div a:link, .paging_div a:hover, .paging_div a:visited .boardlist a:link, .boardlist a:hover, .boardlist a:visited{
 		color : #000;
 	}
 	.search_div{
@@ -50,10 +50,22 @@
 	}
 	
 </style>
+<script>
+	$(function(){
+		$("#search_frm").submit(function(){
+			if($("#searchWord").val()=""){
+				alert("검색어를 입력하세요");
+				return false;
+			}
+		return true;
+		});
+	});
+</script>
+
 <div class="container">
 	<h1>게시판 목록</h1>
 	
-	<div class="boardHead"><a href="write">글쓰기</a> 
+	<div class="boardHead"><a href="write"><button>글쓰기</button></a> 
 		<div class="phead">
 			<div> 총 레코드 : ${vo.totalRec}</div><br/>
 			<div> ${vo.nowPage}/${vo.totalPage}</div>
@@ -68,11 +80,13 @@
 		<li>조회수</li>
 		<li>등록일</li>
 		<c:forEach var="bDTO" items="${list}">
+			
 			<li>${bDTO.no }</li>
-			<li>${bDTO.title }</li>
+			<li><a href="contentView?no=${bDTO.no}&nowPage=${vo.nowPage }<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey}&searchWord=${vo.searchWord}</c:if>">${bDTO.title }</a></li>
 			<li>${bDTO.name }</li>
 			<li>${bDTO.hit }</li>
 			<li>${bDTO.writedate}</li>
+			
 		</c:forEach>
 	</ul>
 	<div class="paging_div">
@@ -81,33 +95,37 @@
 			<li>prev</li>
 			</c:if>
 			<c:if test="${vo.idxPage!=1 }">
-			<li><a href="list?nowPage=${vo.nowPage-5}">prev</a></li>
+			<li><a href="list?nowPage=${vo.idxPage-vo.onePageCnt}<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey }&searchWord=${vo.searchWord }</c:if>">prev</a></li>
 			</c:if>
-			<!--<c:forEach var="num" begin="1" end="${onePageCnt}" step="1">
-				<li>${vo.idxPage+num}</li>
-			</c:forEach> -->
-			<li>1</li>
-			<li>2</li>
-			<li>3</li>
-			<li>4</li>
-			<li>5</li> 
+			<!-- 페이지이동 -->
+			<c:forEach var="page" begin="${vo.idxPage}" end="${vo.idxPage + vo.onePageCnt-1}">
+				<c:if test="${page<=vo.totalPage}">
+					<c:if test="${page == vo.nowPage }">
+						<li style="background:#eee;">
+					</c:if>
+					<c:if test="${page != vo.nowPage }">
+						<li>
+					</c:if>
+					<a href="list?nowPage=${page}<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey }&searchWord=${vo.searchWord }</c:if>">${page }</a> </li>
+				</c:if>
+			</c:forEach>
+			 
 			<c:if test="${vo.idxPage eq vo.lastIdxPage}">
 			<li>next</li>
 			</c:if>
 			<c:if test="${vo.idxPage ne vo.lastIdxPage}">
-			${vo.nowPage+vo.onePageCnt }
-			<li><a href="list?nowPage=${vo.nowPage+5 }">next</a></li>
+			<li><a href="list?nowPage=${vo.idxPage+vo.onePageCnt }<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey }&searchWord=${vo.searchWord }</c:if>">next</a></li>
 			</c:if>
 		</ul>
 	</div>
 	<div class="search_div"> 
-		<form method="get" id="search_frm">
-			<select>
-				<option value="제목">제목</option>
-				<option value="작성자">작성자</option>
-				<option value="내용">내용</option>
+		<form method="get" id="search_frm" action="list">
+			<select name="searchKey">
+				<option value="title">제목</option>
+				<option value="name">작성자</option>
+				<option value="content">내용</option>
 			</select>
-			<input type="text" name=""/>
+			<input type="text" name="searchWord" id="searchWord"/>
 			<input type="submit" value="search"/>
 		</form>
 		<!--  <input type="select" name="onePageRec" value="5">5</input>
