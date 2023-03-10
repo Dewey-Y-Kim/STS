@@ -16,4 +16,16 @@
 		이름 :${name }<br/>
 	</div>
 	<img src="img/whyItworks.png" onclick="test()"/>
+	<div>
+		<h2>파일업로드</h2>
+		<pre>
+			pom.xml 프레임워크 feat.mavenrepository
+				1. commons -fileupload
+				2. commons - io
+			mvc-context MultipartResolver 객체 추가(bean)
+			
+			upload 위치 추가
+				appServlet/servlet-context
+		</pre>
+	</div>
 </div>

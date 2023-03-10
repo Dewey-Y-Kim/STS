@@ -22,10 +22,13 @@
 		border-bottom : 1px solid #eee;
 	}
 	.boardlist li:nth-child(5n+2){
-		width : 60%;
+		width : 50%;
 		white-space : nowrap;
 		overflow : hidden;
 		text-overflow: ellipsis;
+	}
+	.boardlist li:nth-child(5n){
+		width : 15%;
 	}
 	.paging_div li {
 		float : left;

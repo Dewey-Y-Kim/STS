@@ -27,7 +27,7 @@
 			<li> <a href="/dcancer/joinedit">회원정보수정</a></li>
 			</c:if>
 			<li><a href="/dcancer/board/list">게시판</a></li>
-			<li> data</li>
+			<li><a href="<%=request.getContextPath()%>/data/list"> data</a></li>
 			<li> grade db</li>
 		</ul>
 	
