@@ -22,6 +22,8 @@
 	 		<mvc:mapping path="/board/write"/>
 	 		<mvc:mapping path="/board/delete"/>
 	 		<mvc:mapping path="/board/boardDel"/>
+	 		<mvc:mapping path="/data/dataWrite"/>
+	 		<mvc:mapping path="/data/writeOk"/>
 	 		<bean class="com.naver.dcancer.LoginInterceptor"/>
 	 	</mvc:interceptor>
 	 </mvc:interceptors>

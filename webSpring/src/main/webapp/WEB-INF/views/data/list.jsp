@@ -27,10 +27,13 @@
 	text-align : center;
 }
 </style>
+<script>
+
+</script>
 <div class="container">
 	<h4> 자료실 목록</h4>
 	<div>
-		<button>글쓰기</button>
+		<a href="dataWrite"><button>글쓰기</button></a>
 	</div>
 	<div>
 		<ul class="list">
@@ -41,11 +44,11 @@
 			<li class="first">등록일</li>
 			
 			<c:forEach var="data" items="${list}">
-				<li>{data.no}</li>
-				<li><a href="<%=request.getContextPath() %>/write">{data.title}</a></li>
-				<li>{data.name}</li>
-				<li>{data.hit}</li>
-				<li>{data.writedate}</li>
+				<li>${data.no}</li>
+				<li><a href="<%=request.getContextPath() %>/data/view/${data.no}">${data.title}</a></li>
+				<li>${data.name}</li>
+				<li>${data.hit}</li>
+				<li>${data.writedate}</li>
 			</c:forEach>
 			<li>번호</li>
 			<li>제목</li>
