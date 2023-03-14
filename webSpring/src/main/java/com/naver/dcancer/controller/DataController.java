@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,7 +67,7 @@ public class DataController {
 					
 					for(int renameNum=1;;renameNum++) {
 						//파일명 확장자 나누기
-						String newfilename=uploadName+" ("+renameNum+")"+uploadExt;
+						String newfilename=uploadName+" ("+renameNum+")."+uploadExt;
 						upload = new File(path, newfilename);
 						if(!upload.exists()) {
 							originalFN = newfilename;
@@ -95,7 +96,7 @@ public class DataController {
 			System.out.println("chk"+list.toString());
 			int fileResult = service.datafileInsert(list);
 			
-			mav.setViewName("data/list");
+			mav.setViewName("redirect:list");
 			
 			System.out.println(result+"////"+fileResult);
 		} catch(Exception e) {
@@ -124,5 +125,136 @@ public class DataController {
 		mav.setViewName("data/view");
 		return mav;
 		
+	}
+	@GetMapping("data/edit/{num}")
+	public ModelAndView dataEdit(@PathVariable("num")int no,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		DataDTO dto = service.editRec(no, (String)session.getAttribute("logId"));
+		
+		if(dto!=null) {
+			List<DataFileDTO> list= service.viewFiles(no);
+			mav.addObject("dto", dto);
+			mav.addObject("fileDto",list);
+			mav.setViewName("data/editFrm");
+			mav.addObject("fileCnt",list.size());
+		}else {
+			mav.setViewName("redirect:data/list"+no);
+		}
+		return mav;
+	}
+	@PostMapping("/data/editOk")
+	public ModelAndView dataEditOk(DataDTO dto,HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String path = session.getServletContext().getRealPath("/Upload");
+		System.out.println("[EditOk]"+path);
+		dto.setId((String)session.getAttribute("logId"));
+		// DB파일과 삭제 정리- 남은파일
+		
+		List<String> finalFileList = service.datafileList(dto.getNo()); //새로 업로드
+		
+		// 새로 파일 업로드
+		MultipartHttpServletRequest mr=(MultipartHttpServletRequest)request;
+		List<MultipartFile> mfList=mr.getFiles("filename");
+		System.out.println(mfList.size());
+		List<String> newFileList = new ArrayList<String>(); // 새로 업로드된 파일을 저장할 컬랙션
+		if(mfList!=null) {
+			//새로 업로드한 MultpartFile갯수 만큼 반복
+			for(MultipartFile mf : mfList) {
+				String fileName=mf.getOriginalFilename();
+				if(fileName!=null && !fileName.equals("")) {
+					File f= new File(path,fileName);
+					if(f.exists()) {
+						
+						for(int fileNum=1;; fileNum++) {
+							int point = fileName.lastIndexOf(".");
+							String filenameNoExt = fileName.substring(0, point);
+							String ext = fileName.substring(point+1);
+							
+							String newFile = filenameNoExt+ " ("+fileNum+")."+ext;
+							File file = new File(path, newFile);
+							if(!file.exists()) {
+								fileName=newFile;
+								break;
+							}
+						}
+					}
+					try {
+						mf.transferTo(new File(path, fileName));
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+					newFileList.add(fileName);
+				}
+			}
+		}
+		// finalFileList dto.getDel() newFileList
+		try {
+		/* 정상구현
+		 * 1.원글 업데이트
+		 * 2. db - 삭제파일 + 새로 업데이트된파일 레코드 업데이트
+		 * 3. 삭제 파일 제거
+		 * 4. list로 이동
+		*/
+			int result=service.dataEditUpdate(dto);
+			
+			if(dto.getDel()!=null) {
+				for(int i=0;i<dto.getDel().size();i++) {
+					finalFileList.remove(dto.getDel().get(i));
+				}
+			}
+			//DB에 새로 uploadfile 추가
+			finalFileList.addAll(newFileList);
+			System.out.println("[editOk]addAll"+finalFileList.toString());
+			service.dataFileDelete(dto.getNo());
+			List<DataFileDTO> fileDTOList = new ArrayList<DataFileDTO>();
+			for(String fname : finalFileList) {
+				DataFileDTO fDTO = new DataFileDTO();
+				fDTO.setFilename(fname);
+				fDTO.setNo(dto.getNo());
+				fileDTOList.add(fDTO);
+			}
+			
+			System.out.println("fdl"+fileDTOList.size());
+			int fResult= service.datafileInsert(fileDTOList);
+			if(dto.getDel()!=null) {
+				for(int i=0; i<dto.getDel().size();i++) {
+					fileDel(path,dto.getDel().get(i));
+				}
+			}
+			mav.setViewName("redirect:view/"+dto.getNo());
+			
+		}catch(Exception e) {
+		// 실패
+		/*
+		 * 1. 새로 업로드된 파일 삭제
+		 * 2. 수정페이지로
+		 */
+			for(int i=0;i<newFileList.size();i++) {
+				fileDel(path,newFileList.get(i));
+			
+			}
+			mav.setViewName("data/result");
+		}
+		return mav;
+	}
+	@GetMapping("data/del/{no}")
+	public ModelAndView del(@PathVariable int no, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		List<String> fileNameList= service.datafileList(no);
+				
+		String path=session.getServletContext().getRealPath("/Upload");
+		service.dataFileDelete(no);
+		
+		int result = service.dataDel(no, (String)session.getAttribute("logId"));
+		if(result>0) {
+			for(String filename:fileNameList) {
+				fileDel(path, filename);
+			}
+			mav.setViewName("redirect:/data/list");
+		}else {
+			mav.setViewName("redirect:/data/view/"+no);
+		}
+		return mav;
 	}
 }

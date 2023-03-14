@@ -39,5 +39,16 @@ public class DataServiceImpl implements DataService {
 	public List<DataFileDTO> viewFiles(int no) {
 		return dao.viewFiles(no);
 	}
-
+	public DataDTO editRec(int no,String id) {
+		return dao.editRec(no, id);
+	}
+	public List<String> datafileList(int no){
+		return dao.datafileList(no);
+	}
+	public int dataEditUpdate(DataDTO dto) {
+		return dao.dataEditUpdate(dto);
+	}
+	public int dataDel(int no, String logid) {
+		return dao.dataDel(no, logid);
+	}
 }

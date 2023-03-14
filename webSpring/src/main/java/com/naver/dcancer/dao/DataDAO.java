@@ -14,4 +14,8 @@ public interface DataDAO {
 	public int dataFileDelete(int no);
 	public DataDTO view(int no);
 	public List<DataFileDTO> viewFiles(int no);
+	public DataDTO editRec(int no,String id);
+	public List<String> datafileList(int no);
+	public int dataEditUpdate(DataDTO dto);
+	public int dataDel(int no, String logid);
 }

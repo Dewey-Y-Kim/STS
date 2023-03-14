@@ -1,5 +1,7 @@
 package com.naver.dcancer.dto;
 
+import java.util.List;
+
 public class DataDTO {
 	private int no;
 	private String title;
@@ -9,12 +11,16 @@ public class DataDTO {
 	private String writedate;
 	private String ip;
 	private String name;
+	private List<String> del; 
 	
+	
+
 	@Override
 	public String toString() {
 		return "DataDTO [no=" + no + ", title=" + title + ", content=" + content + ", id=" + id + ", hit=" + hit
 				+ ", writedate=" + writedate + ", ip=" + ip + ", name=" + name + "]";
 	}
+	
 	public String getName() {
 		return name;
 	}
@@ -63,6 +69,11 @@ public class DataDTO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
-	
+	public List<String> getDel() {
+		return del;
+	}
+
+	public void setDel(List<String> del) {
+		this.del = del;
+	}
 }

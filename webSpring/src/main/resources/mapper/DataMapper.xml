@@ -25,10 +25,22 @@
 	<delete id="dataFileDelete">
 		delete from datafile where no=${param1}
 	</delete>
+	<delete id="dataDel">
+		delete from data where no=${param1} and id=#{param2}
+	</delete>
 	<select id="view" resultType="com.naver.dcancer.dto.DataDTO">
 		select no, id, title, content, hit, writedate from data where no=${param1}
 	</select>
 	<select id="viewFiles" resultType="com.naver.dcancer.dto.DataFileDTO">
 		select no, filename from Datafile where no=${param1}
 	</select>
+	<select id="editRec" resultType="com.naver.dcancer.dto.DataDTO">
+		select no, id, title, content from data where no=${param1} and id=#{param2}
+	</select>
+	<select id="datafileList" resultType="string">
+		select filename from datafile where no=${param1}
+	</select>
+	<update id="dataEditUpdate">
+		update data set title=#{title}, content=#{content} where no=${no} and id=#{id}
+	</update>
 </mapper>

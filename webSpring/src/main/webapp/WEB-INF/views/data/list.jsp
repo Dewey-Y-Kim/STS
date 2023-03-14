@@ -50,12 +50,6 @@
 				<li>${data.hit}</li>
 				<li>${data.writedate}</li>
 			</c:forEach>
-			<li>번호</li>
-			<li>제목</li>
-			<li>글쓴이</li>
-			<li>조회수</li>
-			<li>등록일</li>
-			
 		</ul>
 	</div>
 </div>

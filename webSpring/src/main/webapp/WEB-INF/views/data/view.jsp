@@ -21,20 +21,18 @@
 }
 </style>
 <script>
-	
-	function del(){
-		if(confirm("삭제하시겠습니까?")){
-			location.href="boardDel?no=${dto.no}&nowPage=${vo.nowPage}<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey}&searchWord=${vo.searchWord}</c:if>";
-		};
+	function dataDelChk(){
+		if(confirm("글을 삭제하시겠습니까?")){
+			location.href = "../del/${dto.no}";
+		}
 	};
 </script>
 <div class="choose" > 
 <ul>
-<li><a href="list?nowPage=${vo.nowPage}<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey}&searchWord=${vo.searchWord}</c:if>"><button>목록</button></a></li>
+<li><a href="list"><input type="button" value="목록"></button></a></li>
 <c:if test="${logId==dto.id}">
-<li><a href="edit?no=${dto.no}&nowPage=${vo.nowPage}<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey}&searchWord=${vo.searchWord}</c:if>"><button>수정</button></a></li>
-<li><button onclick="del()">삭제</button></li>
-<li><a href="delete?no=${dto.no}<!-- &nowPage=${vo.nowPage}<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey}&searchWord=${vo.searchWord}</c:if>--> " ><button>삭제2</button></a>
+<li><a href="../edit/${dto.no}"><input type="button" value="수정"/></a></li>
+<li><input type="button" value="삭제" onclick="dataDelChk()"/></li>
 </c:if>
 </ul>
 </div>
@@ -55,7 +53,7 @@
 </ul>
 <div>
 	<c:forEach var="list" items="${list}">
-		<a href="/dcancer/upload/${list.filename}" download> ${list.filename }</a>
+		<a href="/dcancer/Upload/${list.filename}" download="${list.filename}"> ${list.filename }</a>
 	</c:forEach>
 </div>
 </div>
