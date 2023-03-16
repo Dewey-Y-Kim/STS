@@ -14,10 +14,14 @@ public class replyController {
 	@Autowired
 	ReplyService service;
 	@PostMapping("/replySend")
-	public int replySend(ReplyDTO dto, HttpServletRequest request) {
+	public String replySend(ReplyDTO dto, HttpServletRequest request) {
 		dto.setIp(request.getRemoteAddr());
-		dto.setWriter((String)request.getSession().getAttribute("logId"));
+		dto.setId((String)request.getSession().getAttribute("logId"));
 		int result = service.replyInsert(dto);
-		return result;
+		String report="fail";
+		if(result>0) {
+			report="success";
+		}
+		return report;
 	}
 }

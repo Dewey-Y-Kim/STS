@@ -51,7 +51,6 @@
 	};
 	$(function(){
 		$("#replyFrm").submit(function(){
-			alert("모디");
 			if($("#coment").val()==""){
 				alert("글을 입력해주세요.");
 				return false;
@@ -108,7 +107,7 @@
 		<h1>댓글</h1>
 		<li><textarea name="content" id="comment"></textarea> </li>
 		<li><button>댓글등록</button></li>
-		<li><input type="hidden" name="${dto.no }"></li>
+		<li><input type="hidden" name="no" value="${dto.no }"></li>
 	</ul>
 	</form>
 </div>

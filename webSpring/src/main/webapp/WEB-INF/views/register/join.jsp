@@ -81,7 +81,7 @@
 				alert("전화번호를 잘못입력하였습니다.");
 				return false;
 			}
-			var reg= /^\w{6,15}@[a-zA-Z]{2,9}.[a-zA-Z]{2,5}(.[a-zA-Z]{2,5})?$/;
+			reg= /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 			console.log(reg.test($("#email").val()));
 			if(!reg.test($("#email").val())){
 				alert("이메일을 확인 해주세요");
@@ -118,7 +118,7 @@
 			<li>pw2
 			<li><input type="password" name="pw2" id="pw2" value="12345"/></li>
 			<li>name</li>
-			<li><input type="text" name="name" id="name" value="주아라"/></li>
+			<li><input type="text" name="name" id="name" value="아주라"/></li>
 			<li>tel</li>
 			<li>
 			<select name="tel1" id="tel1">

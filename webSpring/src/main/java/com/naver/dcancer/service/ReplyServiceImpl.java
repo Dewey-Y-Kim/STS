@@ -15,6 +15,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int replyInsert(ReplyDTO dto) {
 		// TODO Auto-generated method stub
+		System.out.println("[dao.replyInsert]"+dto.toString());
 		return dao.replyInsert(dto);
 	}
 	
