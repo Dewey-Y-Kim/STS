@@ -6,7 +6,7 @@
 	<title>Home</title>
 </head>
 <script>
-	function(){
+	function test(){
 		$("#ajax").click(function(){
 			
 		});
