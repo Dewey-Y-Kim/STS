@@ -3,7 +3,7 @@ package com.naver.dcancer.dto;
 public class ReplyDTO {
 	private int no;
 	private String id;
-	private String content;
+	private String reply;
 	private String writedate;
 	private String ip;
 	private int replyNo;
@@ -19,12 +19,7 @@ public class ReplyDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
+	
 	public String getWritedate() {
 		return writedate;
 	}
@@ -43,10 +38,17 @@ public class ReplyDTO {
 	public void setReplyNo(int replyNo) {
 		this.replyNo = replyNo;
 	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
 	@Override
 	public String toString() {
-		return "ReplyDTO [no=" + no + ", id=" + id + ", content=" + content + ", writedate=" + writedate + ", ip=" + ip
+		return "ReplyDTO [no=" + no + ", id=" + id + ", reply=" + reply + ", writedate=" + writedate + ", ip=" + ip
 				+ ", replyNo=" + replyNo + "]";
 	}
+	
 	
 }

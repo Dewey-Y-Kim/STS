@@ -26,6 +26,8 @@
 			
 			upload 위치 추가
 				appServlet/servlet-context
+				
+				
 		</pre>
 	</div>
 </div>

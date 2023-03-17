@@ -78,7 +78,7 @@ public class AjaxController {
 	}
 	@RequestMapping(value="ajaxJson",method=RequestMethod.GET, produces="application/test;charset=UTF-8")
 	@ResponseBody
-	public String ajaxJson(int num,String name, String tel) {
+	public String ajaxJson() {
 		String[] orderK= {"부정", "분노", "협상", "우울","수용"}; 
 		String[] orderE= { "Denial","Anger","Bargaining","Depression","Acceptance"};
 		// JsonType= {no:1,name:2} -java-> {\"no\",\"1\",\"name\":\"2\"}

@@ -131,12 +131,14 @@
 				}
 			});
 		});
+		
 		$("#ajaxRestObject").click(function(){
 			$.ajax({
 				url : 'ajaxRestObject',
 				data : {
 					name:"만성피로",
-					age:"40"
+					no:"40",
+					content:"되라"
 				},
 				success:function(result){
 					console.log(result);
@@ -160,10 +162,11 @@
 				success:function(result){
 					console.log(result);
 					var tag="<ul>";
-					$(result.list).each(function(idx, data){
-						tag+="<li>"+data.no+"</li><li>"+data.name+"  //  "+data.title+"</li><li>"+data.content+"</li>";
+					$(result).each(function(idx, data){
+						tag+="<li>"+data.title+"("+data.name+"):"+data.content+"</li>"
 					});
 					tag+="</ul>";
+					console.log(tag);
 					$("#resultLine").append(tag);
 				}, error: function(e){
 					console.log(e.responseText);
@@ -180,6 +183,8 @@
 <input type="button" id="ajaxList" value="aJax List"/>
 <input type="button" id="ajaxMap" value="aJax Map"/>
 <input type="button" id="ajaxJson" value="aJax Json"/>
+<input type="button" id="ajaxRestObject" value="aJax Rest Object"/>
+<input type="button" id="ajaxRestList" value="aJax Rest Object"/>
 <div id="resultLine">
 	
 </div>

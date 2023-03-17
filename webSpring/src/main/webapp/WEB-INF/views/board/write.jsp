@@ -18,6 +18,16 @@
 		max-width: 100%;
 		margin: 20px auto;
 	}
+	#frm_order>li:nth-child(2), #frm_order>li:first-child{
+	float:left;
+	width : 10%;
+	}
+	#board_frm li:nth-child(2){
+		float:right;
+		display : inline-block;
+		
+	}
+	
 </style>
 <script>
     $(function(){
@@ -180,14 +190,15 @@
 </script>
 <div class="container">
 	<form method="post" action="writeOk" id="board_frm">
-		<ul>
+		<ul id="frm_order">
 			<li>제목</li>
-			<li><input type="text" name="title" id="title"/></li>
-			<li>내용</li>
-			<li><textarea name="content" id="content"></textarea>
 			<li>
 				<input type="submit" value="글 등록하기"/>
 			</li>
+			<li><input type="text" name="title" id="title"/></li>
+			<li>내용</li>
+			<li><textarea name="content" id="content"></textarea>
+			
 		</ul>
 	</form>
 </div>

@@ -22,7 +22,7 @@ public class AjaxRestController {
 	}
 		
 	@PostMapping("ajaxRestList")
-	public List<AjaxDTO> ajaxList(int no, String name,String tel) {
+	public List<AjaxDTO> ajaxList(int num, String name,String tel) {
 		List<AjaxDTO> list = new ArrayList<AjaxDTO>();
 		String[] contents = {"이거 해봐야징","되나?","될거야","아마도","뭐가문제냐;","언젠간 되겠지"};
 		String[] titles = {"계획","테스팅","믿음","불안","분노","체념"};
@@ -31,7 +31,7 @@ public class AjaxRestController {
 			list.add(new AjaxDTO(i+1,titles[i],contents[i],names[i]));
 		}
 		System.out.println(list.size());
-		System.out.println("no="+no+"\tname:"+name);
+		System.out.println("num="+num+"\tname:"+name+"\ttel:"+tel);
 		return list;
 	}
 }
