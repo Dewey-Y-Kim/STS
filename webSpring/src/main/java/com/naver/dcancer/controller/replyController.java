@@ -17,7 +17,8 @@ import com.naver.dcancer.service.ReplyService;
 public class replyController {
 	@Autowired
 	ReplyService service;
-	@PostMapping("dcancer/replySend")
+	
+	@PostMapping("replySend")
 	public String replySend(ReplyDTO dto, HttpServletRequest request) {
 		dto.setIp(request.getRemoteAddr());
 		dto.setId((String)request.getSession().getAttribute("logId"));
@@ -28,19 +29,22 @@ public class replyController {
 		}
 		return report;
 	}
-	@GetMapping("dcancer/replyList")
+	@GetMapping("replyList")
 	public List<ReplyDTO> replyList(int no) {
-		return service.replyListsel(no);
+		List list= service.replyListsel(no);
+		return list;
 	}
-	@PostMapping("dcacner/replyEdit")
+	@PostMapping("replyEdit")
 	public String replyEdit(ReplyDTO dto, HttpSession session) {
+		System.out.println("[dto.edit]"+dto.toString());
 		dto.setId((String)session.getAttribute("logId"));
 		int result = service.replyUpdate(dto);
 		return String.valueOf(result);
 	}
 	@GetMapping("/replyDelete")
-	public String replyDelete(int no, HttpSession session) {
-		int result= service.replyDel(no, (String)session.getAttribute("logId"));
+	public String replyDelete(int replyno, HttpSession session) {
+		int result= service.replyDel(replyno, (String)session.getAttribute("logId"));
+		System.out.println(result);
 		return String.valueOf(result);
 	}
 }

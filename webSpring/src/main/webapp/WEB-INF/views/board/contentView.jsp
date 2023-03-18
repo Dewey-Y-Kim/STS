@@ -30,13 +30,12 @@
 		width: 100%;
 	}
 	#reply{
+		clear : left;
 		width :100%;
 		height:30px;
-	}
-	#reply li{
+		
 	}
 	#reply textarea {
-	
     width: 80%;
     height: 6.25em;
     border: 1px solid #eee;
@@ -45,9 +44,6 @@
 	#reply_frm li:first-child{
 	width:10%;
 	padding :10px 0;
-	}
-	#reply_frm li:eq(3),#reply_frm li:eq(2){
-	float:left;
 	}
 </style>
 <script>
@@ -60,7 +56,7 @@
 	$(function(){
 		function replyList(){
 			$.ajax({
-				url:"/replyList",
+				url:"/dcancer/replyList",
 				data:{
 					no:${dto.no}	
 				},
@@ -68,25 +64,28 @@
 				dataType:"json",
 					success:function(reply){
 					var tag="";
-					$(reply).each(function(i,ReplyDTO){
-						tag+="<li><div><b>"+ReplyDTO.id+" ("+ReplyDTO.writedate+")</b>";
-						if(ReplyDTO.id=="logId"){
+					$(reply).each(function(i,rdto){
+						tag+="<li><div><b>"+rdto.id+" ("+rdto.writedate+")</b>";
+						console.log("logId : "+"${logId}");
+						if(rdto.id=='${logId}'){
 							tag+="<input type='button' value='수정'/>";
-							tag+="<input type='button' value='삭제' id='"+ReplyDTO.replyno+"'/>";
-							tag+="<p>"+ReplyDTO.content+"</p></div>";
+							tag+="<input type='button' value='삭제' id='"+rdto.replyNo+"'/>";
+							tag+="<p>"+rdto.reply+"</p></div>";
 							
 							tag+="<div style='display:none;'>";
 							tag+="<form method='post'>";
-							tag+="<input type='hidden' name='replyno' value='"+ReplyDTO.replyno+"'/>";
-							tag+="<textarea name='reply' style='width:400px;height:80px;'>"+ReplyDTO.reply+"</textarea></form><div>";
+							tag+="<input type='hidden' name='replyNo' value='"+rdto.replyNo+"'/>";
+							tag+="<textarea name='reply' style='width:400px;height:80px;'>"+rdto.reply+"</textarea>";
+							tag+="<input type='submit' value='댓글수정'/></form><div>";
 						}else{
-							tag+="<p>"+ReplyDTO.reply+"<p></div>";
+							console.log('login안됨');
+							tag+="<p>"+rdto.reply+"<p></div>";
 						}
 						tag+="</li>";
 					});
-					$("#reply").html(tag);
+					$("#replyList").html(tag);
 				},error(e){
-					console.log("error2");
+					console.log(e.responseText);
 				}
 			});
 		}
@@ -113,16 +112,17 @@
 			});
 			return false;
 		});
-		$(document).on('#reply input[value="edit"]',function(){
+		$(document).on('click','#replyList input[value=수정]',function(){
 			/*
 			var dom = $(document).children("li);");
 			dom.children("div").eq(0).css('display','block');
 			dom.children("div").eq(1).css('display','none');
 			*/
-			$(this).parent().css("display",none);
+			console.log("수정이벤트");
+			$(this).parent().css("display",'none');
 			$(this).parent().next().css("display","block");
 		});
-		$(document).on('click','#replyList input[value=수정]',function(){
+		$(document).on('click','#replyList input[value="댓글수정"]',function(){
 			var params = $(this).parent().serialize();
 			console.log(params);
 			$.ajax({
@@ -130,6 +130,11 @@
 				data:params,
 				type:"POST",
 				success:function(result){
+					/* $('#replyList>div>div:nth-first').css('display',block);
+					$('#replyList>div>div:nth-last').css('display',none);
+					*/
+					$(this).parent().css('display','none');
+					$(this).parent().next().css('display','block');
 					replyList();
 				},error(e){
 					console.log(e.responseText);
@@ -141,10 +146,9 @@
 			if(confirm("이 댓글을 삭제할까요?")){
 				var params="replyno="+$(this).attr("id");
 				console.log(params);
-				var url="/replyDelete";
 				$.ajax({
-					url:url,
-					data:param,
+					url:"/dcancer/replyDelete",
+					data:params,
 					success:function(result){
 						console.log(result);
 						replyList();
@@ -191,13 +195,12 @@
 <div id="reply">
 	<form id="replyFrm">
 		<ul>
-			<li>댓글</li>
-			
+			<li>댓글</li><li><button>댓글등록</button></li>
 			<li><textarea name="reply" id="reply"></textarea> </li>
 			<li><input type="hidden" name="no" value="${dto.no }"></li>
-			<li><button>댓글등록</button></li>
 		</ul>
 	</form>
+	<div id=replyList></div>
 </div>
 
 </c:if>

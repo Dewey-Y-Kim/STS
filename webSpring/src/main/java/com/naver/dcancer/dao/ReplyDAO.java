@@ -1,5 +1,6 @@
 package com.naver.dcancer.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.naver.dcancer.dto.ReplyDTO;

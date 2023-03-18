@@ -6,13 +6,13 @@
 	<insert id="replyInsert">
 		insert into replyboard(no, replyno, id, reply, ip) values(${no} ,reply_sq.nextval, #{id},#{reply} ,#{ip})
 	</insert>
-	<select id="replyListsel" resultType="com.naver.dcancer.dto.replyDTO">
-		select replyno, no, reply, id,writedate from replyboard where no=${param1} oreder by replyno desc
+	<select id="replyListsel" resultType="com.naver.dcancer.dto.ReplyDTO">
+		select replyno, no, reply, id, writedate from replyboard where no=${param1} order by replyno desc
 	</select>
 	<update id="replyUpdate">
-		update replyboard set reply=#{reply} where replyno=replyno and id=#{id}
+		update replyboard set reply=#{reply} where replyno=${replyNo} and id=#{id}
 	</update>
 	<delete id="replyDel">
-		delete from replyboard where no=${param1} and id=#{param2}
+		delete from replyboard where replyno=${param1} and id=#{param2}
 	</delete>
 </mapper>

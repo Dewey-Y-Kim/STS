@@ -20,6 +20,7 @@ public class ReplyServiceImpl implements ReplyService {
 		System.out.println("[dao.replyInsert]"+dto.toString());
 		return dao.replyInsert(dto);
 	}
+	@Override
 	public List<ReplyDTO> replyListsel(int no){
 		return dao.replyListsel(no);
 	}
@@ -31,6 +32,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int replyDel(int no, String id) {
 		// TODO Auto-generated method stub
+		
 		return dao.replyDel(no, id);
 	}
 	
