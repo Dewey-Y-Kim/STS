@@ -3,7 +3,13 @@
 <Style>
 	#logFrm input{padding-bottom: 50px 0; width:90%;}
 </Style>
-
+<script>
+	$(function(){
+		$("input[value='아이디 찾기']).click(function(){
+			window.open("/findId","width=500, height=600");
+		});
+	});
+</script>
 
 
 <div class="container">
@@ -16,10 +22,10 @@
 			<li><input type="submit" value="Login" /></li>
 		</ul>
 	</form>
-	<div style="background: gray;margin=20%;">
+	<div style="background: gray;margin:20%">
 		<a href="join"> 회원가입</a>
-		<a href="">아이디찾기</a>
-		<a href="">비밀번호찾기</a>
+		<a href="findId" name="findInfo" value="ID">아이디 찾기'</a>
+		<a href="findId" name="findInfo" value="PWD">비밀번호찾기</a>
 		
 	</div>
 </div>

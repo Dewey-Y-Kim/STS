@@ -68,21 +68,22 @@
 						tag+="<li><div><b>"+rdto.id+" ("+rdto.writedate+")</b>";
 						console.log("logId : "+"${logId}");
 						if(rdto.id=='${logId}'){
-							tag+="<input type='button' value='수정'/>";
-							tag+="<input type='button' value='삭제' id='"+rdto.replyNo+"'/>";
+							//tag+="<input type='button' value='수정'/>";
+							//tag+="<input type='button' value='삭제' id='"+rdto.replyNo+"'/>";
 							tag+="<p>"+rdto.reply+"</p></div>";
 							
-							tag+="<div style='display:none;'>";
-							tag+="<form method='post'>";
-							tag+="<input type='hidden' name='replyNo' value='"+rdto.replyNo+"'/>";
-							tag+="<textarea name='reply' style='width:400px;height:80px;'>"+rdto.reply+"</textarea>";
-							tag+="<input type='submit' value='댓글수정'/></form><div>";
+							//tag+="<div class='edit_box' style='display:none;'>";
+							//tag+="<form method='post'>";
+							//tag+="<input type='hidden' name='replyNo' value='"+rdto.replyNo+"'/>";
+							//tag+="<textarea name='reply' style='width:400px;height:80px;'>"+rdto.reply+"</textarea>";
+							//tag+="<input type='submit' value='댓글수정'/></form><div>";
 						}else{
 							console.log('login안됨');
-							tag+="<p>"+rdto.reply+"<p></div>";
+							tag+="<p>"+rdto.reply+"</p></div>";
 						}
 						tag+="</li>";
 					});
+					console.log(tag);
 					$("#replyList").html(tag);
 				},error(e){
 					console.log(e.responseText);
@@ -113,12 +114,11 @@
 			return false;
 		});
 		$(document).on('click','#replyList input[value=수정]',function(){
-			/*
-			var dom = $(document).children("li);");
+			var dom = $(document).children("li");
 			dom.children("div").eq(0).css('display','block');
 			dom.children("div").eq(1).css('display','none');
-			*/
 			console.log("수정이벤트");
+
 			$(this).parent().css("display",'none');
 			$(this).parent().next().css("display","block");
 		});
@@ -161,6 +161,7 @@
 				
 		})
 		replyList();
+		
 	});
 	
 </script>

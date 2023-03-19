@@ -29,26 +29,5 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<jsp-config>
-		<jsp-property-group>
-		<url-pattern>/WEB-INF/views/*</url-pattern>
-			<include-prelude>/include/header.jspf</include-prelude>
-			<include-coda>/include/footer.jspf</include-coda>
-		</jsp-property-group>
-	</jsp-config>
-	
-	<filter>
-		<description></description>
-		<display-name>SpringEncodeFilter</display-name>
-		<filter-name>SpringEncodeFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<init-param>encoding</init-param>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mappng>
-		<filter-name>SpringEncodeFilter</filter-name>
-		<url-patten>/*</url-patten>
-	</filter-mappng>
+
 </web-app>

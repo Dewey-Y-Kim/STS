@@ -114,4 +114,23 @@ public class RegisterController {
 		}
 		return mav;
 	}
+	@GetMapping("/findId")
+	public ModelAndView findId(String findInfo) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("register/findId");
+		mav.addObject("findInfo", findInfo);
+		System.out.println(findInfo);
+		return mav;
+	}
+	@PostMapping("chkId")
+	public String chkId(String name, String email) {
+		String str;
+		int i = service.findId(name,email);
+		if(i==1) {
+			str = "이메일을 발송하였습니다.";
+		} else {
+			str = "이메일을 검색하는데 실패하였습니다. 관리자에게 문의 부탁드립니다.";
+		}
+		return str;
+	}
 }

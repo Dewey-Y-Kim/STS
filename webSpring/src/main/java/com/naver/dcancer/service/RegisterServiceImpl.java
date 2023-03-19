@@ -41,5 +41,9 @@ public class RegisterServiceImpl implements RegisterService {
 		// TODO Auto-generated method stub
 		return dao.registEditOk(dto);
 	}
+	@Override
+	public int findId(String name, String email) {
+		return dao.findId(name, email);
+	}
 	
 }

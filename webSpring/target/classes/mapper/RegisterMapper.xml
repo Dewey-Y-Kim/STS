@@ -21,4 +21,7 @@
 	<update id="registEditOk">
 		update regist set TEL=#{tel}, EMAIL=#{email}, ZIPCODE=#{zipcode}, ADDR=#{addr}, ADDRESS=#{address}, HOBBY=#{hobby} where id=#{id} and pw=#{pw}
 	</update>
+	<select id="findId">
+		select id, name, tel, email, from regist where id=#{param1} and email=#{param2}
+	</select>
 </mapper>
