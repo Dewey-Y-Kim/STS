@@ -8,7 +8,10 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +26,8 @@ import com.naver.dcancer.service.DataService;
 
 @Controller
 public class DataController {
+	private DataSourceTransactionManager transMNG;
+	
 	@Inject
 	DataService service;
 	@RequestMapping("/data/list")
@@ -44,74 +49,83 @@ public class DataController {
 	@PostMapping("/data/dataWriteOk")
 	public ModelAndView writeOk(HttpServletRequest request, DataDTO dto) {
 		ModelAndView mav=new ModelAndView();
-		dto.setId((String)request.getSession().getAttribute("logId"));
-		
-		MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest)request;
-		List<MultipartFile> files = mhsr.getFiles("file");
-		//Path
-		dto.setIp(request.getRemoteAddr());
-		String path = request.getSession().getServletContext().getRealPath("/Upload");
-		List<DataFileDTO> list = new ArrayList();
-		if(files != null) {
-			for(int i=0;i<files.size();i++) {
-			//for(MultipartFile file:files) {
-			MultipartFile file = files.get(i);
-			String originalFN=file.getOriginalFilename();
-			System.out.println(originalFN);
-			if(originalFN !=null && originalFN != "") {
-				File upload= new File(path,originalFN);
-				if(upload.exists()) {
-					int point=originalFN.lastIndexOf(".");
-					String uploadName=originalFN.substring(0, point);
-					String uploadExt=originalFN.substring(point+1);
-					
-					for(int renameNum=1;;renameNum++) {
-						//파일명 확장자 나누기
-						String newfilename=uploadName+" ("+renameNum+")."+uploadExt;
-						upload = new File(path, newfilename);
-						if(!upload.exists()) {
-							originalFN = newfilename;
-							break; // 
-						}
-					}
-				
-				}
-				try {
-					file.transferTo(new File(path,originalFN));
-				}catch (Exception e) {
-						e.printStackTrace();
-				}
-				DataFileDTO dfDTO = new DataFileDTO();
-				dfDTO.setFilename(originalFN);
-				list.add(dfDTO);
-				}
-			}	
-		}
-		
+		DefaultTransactionDefinition def= new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus state = transMNG.getTransaction(def);
 		try {
+			dto.setId((String)request.getSession().getAttribute("logId"));
+			
+			MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest)request;
+			List<MultipartFile> files = mhsr.getFiles("file");
+			//Path
+			dto.setIp(request.getRemoteAddr());
+			String path = request.getSession().getServletContext().getRealPath("/Upload");
+			List<DataFileDTO> list = new ArrayList();
+			if(files != null) {
+				for(int i=0;i<files.size();i++) {
+					//for(MultipartFile file:files) {
+					MultipartFile file = files.get(i);
+					String originalFN=file.getOriginalFilename();
+					System.out.println(originalFN);
+					if(originalFN !=null && originalFN != "") {
+						File upload= new File(path,originalFN);
+						if(upload.exists()) {
+							int point=originalFN.lastIndexOf(".");
+							String uploadName=originalFN.substring(0, point);
+							String uploadExt=originalFN.substring(point+1);
+							
+							for(int renameNum=1;;renameNum++) {
+								//파일명 확장자 나누기
+								String newfilename=uploadName+" ("+renameNum+")."+uploadExt;
+								upload = new File(path, newfilename);
+								if(!upload.exists()) {
+									originalFN = newfilename;
+									break; // 
+								}
+							}
+							
+						}
+						try {
+							file.transferTo(new File(path,originalFN));
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
+						DataFileDTO dfDTO = new DataFileDTO();
+						dfDTO.setFilename(originalFN);
+						list.add(dfDTO);
+					}
+				}	
+			}
+			
+			//try {
 			int result=service.dataInsert(dto);
 			for (DataFileDTO fDTO: list) {
 				fDTO.setNo(dto.getNo());
 			}
-			System.out.println("chk"+list.toString());
 			int fileResult = service.datafileInsert(list);
+			transMNG.commit(state);
 			
 			mav.setViewName("redirect:list");
-			
-			System.out.println(result+"////"+fileResult);
-		} catch(Exception e) {
-			for(DataFileDTO fdto : list) {
+			//} catch(Exception e) {
+			/*
+			 * for(DataFileDTO fdto : list) {
+			 
 				fileDel(path,fdto.getFilename());
 			service.dataDelete(dto.getNo());
 			service.dataFileDelete(dto.getNo());
-			mav.addObject("msg","글 올리기가 실패하였습니다.");
-			mav.setViewName("data/result");
+			
 			e.printStackTrace();
 			}
 		}
-		System.out.println(mav.toString());
+			 */
+		}catch(Exception e) {
+			transMNG.rollback(state);
+			mav.addObject("msg","글 올리기가 실패하였습니다.");
+			mav.setViewName("data/result");
+		}
 		return mav;
 	}
+	
 	public void fileDel(String path, String name) {
 		File f= new File(path, name);
 		f.delete();
@@ -147,16 +161,16 @@ public class DataController {
 	public ModelAndView dataEditOk(DataDTO dto,HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String path = session.getServletContext().getRealPath("/Upload");
-		System.out.println("[EditOk]"+path);
 		dto.setId((String)session.getAttribute("logId"));
 		// DB파일과 삭제 정리- 남은파일
-		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus status = transMNG.getTransaction(def);
 		List<String> finalFileList = service.datafileList(dto.getNo()); //새로 업로드
 		
 		// 새로 파일 업로드
 		MultipartHttpServletRequest mr=(MultipartHttpServletRequest)request;
 		List<MultipartFile> mfList=mr.getFiles("filename");
-		System.out.println(mfList.size());
 		List<String> newFileList = new ArrayList<String>(); // 새로 업로드된 파일을 저장할 컬랙션
 		if(mfList!=null) {
 			//새로 업로드한 MultpartFile갯수 만큼 반복
@@ -223,18 +237,20 @@ public class DataController {
 				}
 			}
 			mav.setViewName("redirect:view/"+dto.getNo());
-			
+		transMNG.commit(status);	
 		}catch(Exception e) {
 		// 실패
 		/*
 		 * 1. 새로 업로드된 파일 삭제
 		 * 2. 수정페이지로
 		 */
-			for(int i=0;i<newFileList.size();i++) {
-				fileDel(path,newFileList.get(i));
-			
-			}
+			/*
+			 * for(int i=0;i<newFileList.size();i++) {
+			 * 	fileDel(path,newFileList.get(i));
+			 * }
+			 */
 			mav.setViewName("data/result");
+			transMNG.rollback(status);
 		}
 		return mav;
 	}

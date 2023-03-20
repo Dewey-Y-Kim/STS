@@ -19,4 +19,5 @@ public interface BoardService {
 	public int delRecord(int no, String logid);
 	public void hitCount(int no);
 	public int boardDel(BoardDTO dto);
+	public int MultiDel(List nolist);
 }

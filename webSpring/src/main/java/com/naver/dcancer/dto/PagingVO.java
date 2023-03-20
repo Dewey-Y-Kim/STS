@@ -3,12 +3,12 @@ package com.naver.dcancer.dto;
 public class PagingVO {
 	// page 필요 변수 정의
 	private int nowPage=1;
-	private int onePageRec=5; //한페이지에 보여줄 레코드수
+	private int onePageRec=10; //한페이지에 보여줄 레코드수
 	private int totalRec; //총 레코드 수
 	private int totalPage; //총 페이지 수
 	private int lastPageRec;
 	private int lastPage;
-	private int onePageCnt=5;
+	private int onePageCnt=10;
 	private int idxPage=1;
 	private int lastIdxPage;
 	// search 필요 변수 정의

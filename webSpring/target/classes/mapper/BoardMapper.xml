@@ -48,4 +48,10 @@
 	<delete id="boardDel">
 		delete from board where no=${no} and id=#{id} 
 	</delete>
+	<delete id="MultiDel">
+		delete from board  
+		<foreach item="no" collection="list" open="where no in (" separator="," close=")">
+		#{no}
+		</foreach>
+	</delete>
 </mapper>

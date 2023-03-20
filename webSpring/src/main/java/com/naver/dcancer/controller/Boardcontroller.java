@@ -1,6 +1,8 @@
 package com.naver.dcancer.controller;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,11 +34,12 @@ public class Boardcontroller {
 		//total record 
 		vo.setTotalRec(service.boardCnt(vo));
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("list",service.pageSelect(vo));
+		List<BoardDTO> list = service.pageSelect(vo);
+		mav.addObject("list",list);
 		mav.setViewName("/board/list");
 		mav.addObject("vo",vo);
 		System.out.println(vo.toString());
-		System.out.println(vo.sTostring());
+		System.out.println(list.get(0).toString());
 		return mav;
 	}
 	
@@ -147,6 +150,7 @@ public class Boardcontroller {
 		ModelAndView mav = new ModelAndView();
 		dto.setId((String)session.getAttribute("logId"));
 		int result=service.boardDel(dto);
+		
 		mav.addObject("nowPage",vo.getNowPage());
 		if(vo.getSearchWord()!=null) {
 			mav.addObject("searchKey",vo.getSearchKey());
@@ -157,6 +161,23 @@ public class Boardcontroller {
 		}else {
 			mav.setViewName("redirect:boardView");
 		}
+		return mav;
+	}
+	@PostMapping("/MultiDel")
+	public ModelAndView MultiDel(BoardDTO dto, PagingVO vo) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(dto.getNolist().toString());
+		int result=service.MultiDel(dto.getNolist());
+		for(int i=0;i<dto.getNolist().size();i++) {
+			System.out.println("[MultiDel]"+dto.getNolist().get(i));	
+		}
+		
+		mav.addObject("nowPage",vo.getNowPage());
+		if(vo.getSearchWord()!=null&& !vo.getSearchWord().equals("")) {
+			mav.addObject("searchKey",vo.getSearchKey());
+			mav.addObject("searchWord",vo.getSearchWord());
+		}
+		mav.setViewName("redirect:list");
 		return mav;
 	}
 }

@@ -21,14 +21,17 @@
 		line-height : 40px;
 		border-bottom : 1px solid #eee;
 	}
-	.boardlist li:nth-child(5n+2){
+	.boardlist li:first-child{
+		width : 3%;	
+	}
+	.boardlist li:nth-child(6n+2){
 		width : 50%;
 		white-space : nowrap;
 		overflow : hidden;
 		text-overflow: ellipsis;
 	}
-	.boardlist li:nth-child(5n){
-		width : 15%;
+	.boardlist li:nth-child(6n){
+		width : 10%;
 	}
 	.paging_div li {
 		float : left;
@@ -62,6 +65,27 @@
 			}
 		return true;
 		});
+		//전체선택 
+		$('#allchooser').click(function(){
+			$(".boardlist input[name=nolist]").prop('checked',$('#allchooser').prop('checked'));
+		});
+		$('#choiseDel').click(function(){
+			var checkCnt=0;
+			console.log(checkCnt);
+			$(".boardlist input[name='nolist']").each(function(idx,obj){
+				if($(obj)){ //obj.checked
+					checkCnt++;
+				}
+			});
+			if(checkCnt >0 ){
+				if(confirm('정말 지울래?')){
+					$('#delList').submit();
+					
+				}else{
+					alert('선택된 글이 없습니다.');
+				}
+			}
+		});
 	});
 </script>
 
@@ -69,29 +93,39 @@
 	<h1>게시판 목록</h1>
 	
 	<div class="boardHead"><a href="write"><button>글쓰기</button></a> 
+	<div>
+		<input type="button" id='choiseDel' value='선택삭제'/>
+	</div>
 		<div class="phead">
 			<div> 총 레코드 : ${vo.totalRec}</div><br/>
 			<div> ${vo.nowPage}/${vo.totalPage}</div>
 		</div>
 	</div>
 	
-	
+	<form method='POST' action='MultiDel' id='delList'>
 	<ul class="boardlist">
+		<input id='nowPage' type='hidden' value='${vo.nowPage }'/>
+		<c:if test="${$vo.searchword!=null }">
+		<input id='searchWord' value='${vo.searchWord }' type='hidden'/>
+		<input id='searchKey' value='${vo.searchKey }' type='hidden'/>
+		</c:if>
+		<li><input id='allchooser' type='checkbox'/></li>
 		<li>번호</li>
 		<li>제목</li>
 		<li>작성자</li>
 		<li>조회수</li>
 		<li>등록일</li>
 		<c:forEach var="bDTO" items="${list}">
-			
+			<c:if test="${logId == bDTO.id }"><li><input type='checkbox' name='nolist' value='${bDTO.no}'/></li>	</c:if>
+			<c:if test="${logId!=bDTO.id }"><li><input type='checkbox' value='${bdto.id}' disabled/>		</li></c:if>
 			<li>${bDTO.no }</li>
 			<li><a href="contentView?no=${bDTO.no}&nowPage=${vo.nowPage }<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey}&searchWord=${vo.searchWord}</c:if>">${bDTO.title }</a></li>
 			<li>${bDTO.name }</li>
 			<li>${bDTO.hit }</li>
 			<li>${bDTO.writedate}</li>
-			
 		</c:forEach>
 	</ul>
+	</form>
 	<div class="paging_div">
 		<ul>
 			<c:if test="${vo.idxPage==1 }">
@@ -121,6 +155,7 @@
 			</c:if>
 		</ul>
 	</div>
+
 	<div class="search_div"> 
 		<form method="get" id="search_frm" action="list">
 			<select name="searchKey">

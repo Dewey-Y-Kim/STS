@@ -1,5 +1,9 @@
 package com.naver.dcancer.dto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class BoardDTO {
 	private int no;
 	private String title;
@@ -9,13 +13,17 @@ public class BoardDTO {
 	private int hit;
 	private String writedate;
 	private String ip;
-	@Override
-	public String toString() {
-		return "BoardDTO [no=" + no + ", title=" + title + ", content=" + content + ", name=" + name + ", id=" + id
-				+ ", hit=" + hit + ", writedate=" + writedate + ", ip=" + ip + "]";
-	}
+	private ArrayList nolist;
+//	
+	
 	public int getNo() {
 		return no;
+	}
+	public ArrayList getNolist() {
+		return nolist;
+	}
+	public void setNolist(ArrayList nolist) {
+		this.nolist = nolist;
 	}
 	public void setNo(int no) {
 		this.no = no;
@@ -62,6 +70,7 @@ public class BoardDTO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+	
 	
 	
 }

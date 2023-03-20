@@ -51,4 +51,10 @@ public class BoardServiceimpl implements BoardService {
 	public int boardDel(BoardDTO dto) {
 		return dao.boardDel(dto);
 	}
+
+	@Override
+	public int MultiDel(List nolist) {;
+		// TODO Auto-generated method stub
+		return dao.MultiDel(nolist);
+	}
 }
