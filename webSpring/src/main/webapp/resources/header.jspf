@@ -27,7 +27,7 @@
 			</c:if>
 			<li><a href="/dcancer/board/list">게시판</a></li>
 			<li><a href="<%=request.getContextPath()%>/data/list"> data</a></li>
-			<li> grade db</li>
+			<li><a href="/dcancer/answer/list">질문게시판</a></li>
 			<li> <a href="/dcancer/transaction"> transAction</a></li>
 		</ul>
 	
