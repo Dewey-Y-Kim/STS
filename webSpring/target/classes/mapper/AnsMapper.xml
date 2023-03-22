@@ -7,12 +7,24 @@
 		Select Count(no) from ansboard
 	</select>
 	<select id="answerList" resultType="com.naver.dcancer.dto.AnswerDTO">
-		select no, title, a.id,hit, writedate, ip, refno, lv, step, r.name from ansboard a join regist r on a.id=r.id order by no desc
+		select no, title, a.id,hit, writedate, ip, refno, lv, r.name from ansboard a join regist r on a.id=r.id order by refno desc, step
 	</select>
 	<insert id="answerInsert">
 		insert into ansboard(no, title, content, id, ip, refno) values(answer_sq.nextval, #{title}, #{content}, #{id}, #{ip}, answer_sq.currval)
 	</insert>
 	<select id="ansView" resultType="com.naver.dcancer.dto.AnswerDTO">
-		select no, title, a.id, r.name, writedate, hit, content from ansboard a join regist r on a.id=r.id
+		select no, title, a.id, r.name, writedate, hit, content from ansboard a join regist r on a.id=r.id where no=${param1}
 	</select>
+	<update id="addhit">
+		update ansboard set hit = hit+1 where no=#{param1}
+	</update>
+	<select id="replydataselect" resultType="com.naver.dcancer.dto.AnswerDTO">
+		select refno, lv, step from ansboard where no=${param1} 
+	</select>
+	<update id="replyStepUp">
+		update ansboard set step = step+1 where refno=${refno} and step>${step}
+	</update>
+	<insert id="replyInsert">
+		insert into ansboard(no, title, content, id, ip, refno, lv, step) values(answer_sq.nextval, #{title}, #{content}, #{id}, #{ip}, ${refno}, ${lv+1}, ${step+1})
+	</insert>
 </mapper>

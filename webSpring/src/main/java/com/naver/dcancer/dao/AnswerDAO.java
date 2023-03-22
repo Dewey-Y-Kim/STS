@@ -9,4 +9,8 @@ public interface AnswerDAO {
 	public List<AnswerDTO> answerList();
 	public int answerInsert(AnswerDTO dto);
 	public AnswerDTO ansView(int no);
+	public int addhit(int no);
+	public AnswerDTO replydataselect(int no);
+	public int replyStepUp(AnswerDTO orignaDTO);
+	public int replyInsert(AnswerDTO dto);
 }

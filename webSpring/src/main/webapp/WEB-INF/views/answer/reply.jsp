@@ -188,13 +188,15 @@
     	return true;
     });
 </script>
-<div class="container">
-	<form method="post" action="writeOk" id="board_frm">
+<div class="reply">
+	<form method="post" action="/dcancer/answer/replyOk" id="board_frm">
 		<ul id="frm_order">
-			<li>제목</li>
+			<input type="hidden" name="no" value="${no}"/>
+			<li>원글 번호 :${no}</li>
 			<li>
-				<input type="submit" value="글 등록하기"/>
+				<input type="submit" value="답글 등록하기"/>
 			</li>
+			<li>제목</li>
 			<li><input type="text" name="title" id="title"/></li>
 			<li>내용</li>
 			<li><textarea name="content" id="content"></textarea>

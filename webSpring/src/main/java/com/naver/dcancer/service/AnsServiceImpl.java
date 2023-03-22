@@ -30,4 +30,23 @@ public class AnsServiceImpl implements AnsService {
 		// TODO Auto-generated method stub
 		return dao.ansView(no);
 	}
+	@Override
+	public int addhit(int no) {
+		// TODO Auto-generated method stub
+		return dao.addhit(no);
+	}
+	@Override
+	public AnswerDTO replydataselect(int no) {
+		// TODO Auto-generated method stub
+		return dao.replydataselect(no);
+	}
+	@Override
+	public int replyStepUp(AnswerDTO orignaDTO) {
+		// TODO Auto-generated method stub
+		return dao.replyStepUp(orignaDTO);
+	}
+	public int replyInsert(AnswerDTO dto) {
+		return dao.replyInsert(dto);
+	}
+	
 }

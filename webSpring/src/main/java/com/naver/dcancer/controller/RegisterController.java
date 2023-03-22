@@ -46,6 +46,7 @@ public class RegisterController {
 		}
 		return mav;
 	}
+	
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView mav = new ModelAndView();

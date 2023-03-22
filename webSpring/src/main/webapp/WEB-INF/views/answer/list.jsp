@@ -25,13 +25,13 @@
 		border-bottom : 1px solid #eee;
 	}
 	.boardlist li:nth-child(5n+2){
-		width : 55%;
+		width : 53%;
 		white-space : nowrap;
 		overflow : hidden;
 		text-overflow: ellipsis;
 	}
 	.boardlist li:nth-child(5n){
-		width : 15%;
+		width : 17%;
 	}
 	.paging_div li {
 		float : left;
@@ -77,10 +77,17 @@
 		<li>등록일</li>
 		<c:forEach var="bDTO" items="${list}">
 			<li>${bDTO.no }</li>
-			<li><a href="View?no=${bDTO.no}">${bDTO.title }</a></li>
+			<li>
+				<c:if test="${bDTO.lv>0}">
+			<c:forEach var="lvno" begin="1" end="${bDTO.lv}">
+			&nbsp;&nbsp;
+			</c:forEach>
+			<img src="/dcancer/img/replyarrow.png" style="height:40%;"></c:if>
+			<a href="View?no=${bDTO.no}">${bDTO.title }</a></li>
 			<li>${bDTO.name }</li>
 			<li>${bDTO.hit }</li>
 			<li>${bDTO.writedate}</li>
+			
 		</c:forEach>
 	</ul>
 </div>

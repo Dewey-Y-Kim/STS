@@ -31,6 +31,7 @@
 	 		<mvc:mapping path="/answer/edit"/>
 	 		<mvc:mapping path="/answer/delete"/>
 	 		<mvc:mapping path="/answer/boardDel"/>
+	 		<mvc:mapping path="/answer/ansReplyWrite/*"/>
 	 		<bean class="com.naver.dcancer.LoginInterceptor"/>
 	 	</mvc:interceptor>
 	 </mvc:interceptors>
