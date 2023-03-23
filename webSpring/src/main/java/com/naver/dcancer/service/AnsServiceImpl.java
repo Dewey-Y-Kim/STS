@@ -48,5 +48,15 @@ public class AnsServiceImpl implements AnsService {
 	public int replyInsert(AnswerDTO dto) {
 		return dao.replyInsert(dto);
 	}
+	@Override
+	public AnswerDTO replySelect(int no) {
+		// TODO Auto-generated method stub
+		return dao.replySelect(no);
+	}
+	@Override
+	public int replyUpdateOk(int no) {
+		// TODO Auto-generated method stub
+		return dao.replyUpdateOk(no);
+	}
 	
 }

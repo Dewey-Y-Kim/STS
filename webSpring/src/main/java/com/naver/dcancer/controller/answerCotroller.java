@@ -136,4 +136,24 @@ public class answerCotroller {
 		}
 		return entity;
 	}
+	@GetMapping("replyUpdate/{no}")
+	public ModelAndView replyUpdate(@PathVariable int no) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("dto",service.replySelect(no));
+		mav.setViewName("answer/edit");
+		return mav;
+	}
+	@PostMapping("replyUpdateOk")
+	public ResponseEntity<String> replyUpdateOk(int no){
+		ResponseEntity<String> entity = null;
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type","text/html;charset=utf-8");
+		int result= service.replyUpdateOk(no);
+		if (result>0) {
+			
+		}else {
+			
+		}
+		return entity;
+	}
 }

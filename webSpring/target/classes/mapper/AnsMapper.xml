@@ -27,4 +27,7 @@
 	<insert id="replyInsert">
 		insert into ansboard(no, title, content, id, ip, refno, lv, step) values(answer_sq.nextval, #{title}, #{content}, #{id}, #{ip}, ${refno}, ${lv+1}, ${step+1})
 	</insert>
+	<select id="replySelect" resultType="com.naver.dcancer.dto.AnswerDTO">
+		select no, title, hit, writedate,name from ansboard where no={param1}
+	</select>
 </mapper>

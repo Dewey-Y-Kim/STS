@@ -13,4 +13,6 @@ public interface AnswerDAO {
 	public AnswerDTO replydataselect(int no);
 	public int replyStepUp(AnswerDTO orignaDTO);
 	public int replyInsert(AnswerDTO dto);
+	public AnswerDTO replySelect(int no);
+	public int replyUpdateOk(int no);
 }
