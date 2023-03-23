@@ -149,11 +149,15 @@ public class answerCotroller {
 		HttpHeaders header = new HttpHeaders();
 		header.add("Content-Type","text/html;charset=utf-8");
 		int result= service.replyUpdateOk(no);
+		String tag ="<script>";
 		if (result>0) {
-			
+			tag+="location.href='/answer/list'";
+			entity= new ResponseEntity<String>(tag,header,HttpStatus.OK);
 		}else {
-			
+			tag+="alert('글 등록이 실패하였습니다.');history.back();";
+			entity= new ResponseEntity<String>(tag,header,HttpStatus.BAD_REQUEST);
 		}
+		tag+="<script>";
 		return entity;
 	}
 }

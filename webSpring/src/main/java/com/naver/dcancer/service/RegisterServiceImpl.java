@@ -42,7 +42,7 @@ public class RegisterServiceImpl implements RegisterService {
 		return dao.registEditOk(dto);
 	}
 	@Override
-	public int findId(String name, String email) {
+	public String findId(String name, String email) {
 		return dao.findId(name, email);
 	}
 	

@@ -12,5 +12,5 @@ public interface RegisterService {
 	public int registInsert(RegisterDTO dto);
 	public RegisterDTO registEdit(String id);
 	public int registEditOk(RegisterDTO dto);
-	public int findId(String name, String email);
+	public String findId(String name, String email);
 }

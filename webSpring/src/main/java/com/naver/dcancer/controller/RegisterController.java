@@ -2,16 +2,20 @@ package com.naver.dcancer.controller;
 
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.dcancer.dto.RegisterDTO;
@@ -22,7 +26,8 @@ import com.naver.dcancer.service.RegisterService;
 public class RegisterController {
 	@Autowired
 	RegisterService service;
-	
+	@Autowired
+	JavaMailSenderImpl mailSender;
 	@GetMapping("/loginForm")
 	public String login() {
 		return "register/loginForm"; // /WEB-INF/views/register/loginForm.jsp
@@ -115,23 +120,37 @@ public class RegisterController {
 		}
 		return mav;
 	}
+	//이메일 발송
 	@GetMapping("/findId")
-	public ModelAndView findId(String findInfo) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("register/findId");
-		mav.addObject("findInfo", findInfo);
-		System.out.println(findInfo);
-		return mav;
+	public String findId() {
+		return "/register/findId";
 	}
-	@PostMapping("chkId")
-	public String chkId(String name, String email) {
-		String str;
-		int i = service.findId(name,email);
-		if(i==1) {
-			str = "이메일을 발송하였습니다.";
-		} else {
-			str = "이메일을 검색하는데 실패하였습니다. 관리자에게 문의 부탁드립니다.";
-		}
-		return str;
-	}
+	@PostMapping("/chkId")
+	@ResponseBody
+	public String chkId(RegisterDTO dto) {
+		String id = service.findId(dto.getName(),dto.getEmail());
+		
+			//spring framework 설정
+			String emailTitle="아이디찾기 결과";
+			String emailContent= "<div style='bacground:lightblue; margin:50px;"
+					+ "padding:50px; border:2px solid grey; font-size 2em; text-align:center'>";
+			emailContent+= "검색한 아이디는 "+id+"입니다.</div>";
+			
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				System.out.println("clear1"); 
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+				
+				messageHelper.setFrom("dcancer@naver.com");
+				messageHelper.setTo("dcancer@naver.com");
+				messageHelper.setSubject(emailTitle);
+				messageHelper.setText("text/html;charset=UTF-8",emailContent);
+				mailSender.send(message);
+				System.out.println("[][][]clear");
+				return "Y";
+			} catch(Exception e) {
+				e.printStackTrace();
+				return "N";
+			}
+	} 
 }

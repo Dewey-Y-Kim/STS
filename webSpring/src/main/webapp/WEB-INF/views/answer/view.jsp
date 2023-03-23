@@ -11,7 +11,7 @@
 <c:if test="${logStatus=='Y' }">
 <div id="submenu">
 	<a href="ansReplyWrite/${dto.no }"><input type='button' value='답글'/></a>
-	<input type='button' value='수정'/>
+	<a href="replyUpdate/${dto.no }"><input type='button' value='수정'/></a>
 	<input type='button' value='삭제'/>
 </div>
 </c:if>
