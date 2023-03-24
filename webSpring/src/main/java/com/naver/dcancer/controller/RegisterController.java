@@ -141,13 +141,11 @@ public class RegisterController {
 				 
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 				
-				messageHelper.setFrom("cancereal@gmail.com");
-				messageHelper.setTo("dcancer@naver.com");
+				messageHelper.setTo("");
+				messageHelper.setFrom("");
 				messageHelper.setSubject(emailTitle);
 				messageHelper.setText("text/html;charset=UTF-8",emailContent);
-				System.out.println("clear1");
 				mailSender.send(message);
-				System.out.println("[][][]clear");
 				return "Y";
 			} catch(Exception e) {
 				e.printStackTrace();
