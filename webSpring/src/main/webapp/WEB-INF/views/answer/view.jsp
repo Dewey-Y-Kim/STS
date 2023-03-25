@@ -12,7 +12,7 @@
 <div id="submenu">
 	<a href="ansReplyWrite/${dto.no }"><input type='button' value='답글'/></a>
 	<a href="replyUpdate/${dto.no }"><input type='button' value='수정'/></a>
-	<input type='button' value='삭제'/>
+	<a href="replyDel/${dto.no }"><input type='button' value='삭제'/></a>
 </div>
 </c:if>
 <div class='ansview'>

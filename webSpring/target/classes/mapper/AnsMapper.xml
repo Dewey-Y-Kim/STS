@@ -30,4 +30,15 @@
 	<select id="replySelect" resultType="com.naver.dcancer.dto.AnswerDTO">
 		select a.no, title, content, hit, writedate, r.name from ansboard a join regist r on a.id=r.id where no=${param1}
 	</select>
+	<select id="getLevel" resultType="int">
+		select lv from ansboard where no=${param1}
+	</select>
+	<delete id="ansDel">
+		delete from ansboard where refno=${param1}
+	</delete>
+	<update id="ansDelUp">
+	<![CDATA[
+		update ansboard set title='삭제된 글입니다.', content='<p>삭제된 글입니다.</p>' hit=0, writedate=sysdate where no=${param1}
+	]]>
+	</update>
 </mapper>

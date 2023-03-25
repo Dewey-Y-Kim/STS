@@ -160,4 +160,21 @@ public class answerCotroller {
 		tag+="<script>";
 		return entity;
 	}
+	@GetMapping("/replyDel/{no}")
+	public ModelAndView replyDel(@PathVariable int no, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		int lv= service.getLv(no);
+		if(lv==0) {//delte 같은 refno 삭제
+			int result=service.ansDel(no);
+			if(result>0) {
+				mav.setViewName("redirect:list");
+			}
+		}else { //내용 변경
+			service.ansDelUp(no);
+			mav.addObject("no",no);
+			mav.setViewName("redirect:view");
+		}
+		return mav;
+	}
+	
 }

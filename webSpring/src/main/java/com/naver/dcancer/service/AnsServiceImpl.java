@@ -58,5 +58,20 @@ public class AnsServiceImpl implements AnsService {
 		// TODO Auto-generated method stub
 		return dao.replyUpdateOk(no);
 	}
+	@Override
+	public int getLv(int no) {
+		// TODO Auto-generated method stub
+		return dao.getLv(no);
+	}
+	@Override
+	public int ansDel(int no) {
+		// TODO Auto-generated method stub
+		return dao.ansDel(no);
+	}
+	@Override
+	public int ansDelUp(int no) {
+		// TODO Auto-generated method stub
+		return dao.ansDelUp(no);
+	}
 	
 }

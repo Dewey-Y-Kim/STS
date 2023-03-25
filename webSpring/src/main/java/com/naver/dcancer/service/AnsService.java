@@ -15,4 +15,7 @@ public interface AnsService {
 	public int replyInsert(AnswerDTO dto);
 	public AnswerDTO replySelect(int no);
 	public int replyUpdateOk(int no);
+	public int getLv(int no);
+	public int ansDel(int no);
+	public int ansDelUp(int no);
 }
