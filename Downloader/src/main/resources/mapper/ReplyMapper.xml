@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.dcancer.dao.ReplyDAO">
+	<insert id="replyInsert">
+		insert into replyboard(no, replyno, id, reply, ip) values(${no} ,reply_sq.nextval, #{id},#{reply} ,#{ip})
+	</insert>
+	<select id="replyListsel" resultType="com.naver.dcancer.dto.ReplyDTO">
+		select replyno, no, reply, id, writedate from replyboard where no=${param1} order by replyno desc
+	</select>
+	<update id="replyUpdate">
+		update replyboard set reply=#{reply} where replyno=${replyNo} and id=#{id}
+	</update>
+	<delete id="replyDel">
+		delete from replyboard where replyno=${param1} and id=#{param2}
+	</delete>
+</mapper>

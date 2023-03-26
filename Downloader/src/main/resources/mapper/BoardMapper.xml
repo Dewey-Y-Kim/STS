@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.dcancer.dao.BoardDAO">
+	<insert id="boardInsert">
+		insert into board(no, title, content, id, ip) values(Board_Sq.nextval, #{title}, #{content}, #{id}, #{ip})
+	</insert>
+	<select id="boardCnt" resultType="int">
+		select count(b.no) totalRec from board b join regist r on b.id=r.id
+		<if test = "searchWord!=null">
+			where ${searchKey} like '%${searchWord}%'
+		</if>
+	</select>
+	<select id="pageSelect" resultType="com.naver.dcancer.dto.BoardDTO">
+		select * from
+		(select * from
+		(select b.no, b.title, r.name, b.id, b.hit, to_char(b.writedate,'MM-DD HH:MI') writedate from board b join regist r on b.id = r.id
+		<if test="searchWord!=null">
+		and ${searchKey} like '%${searchWord}%'
+		</if>
+		 order by b.no desc) 
+		<![CDATA[where rownum<=${onePageRec}*${nowPage} order by no asc]]>)
+		<choose>
+		<when test="nowPage!=totalPage">  
+		<![CDATA[where rownum<=${onePageRec} order by no desc]]>
+		</when>
+		<when test="nowPage==totalPage">
+		<![CDATA[where rownum<=${lastPageRec} order by no desc]]>
+		</when>
+		</choose>	
+	</select>
+	<select id="contentSelect" resultType="com.naver.dcancer.dto.BoardDTO">
+		select b.no, b.title, b.content, r.name, b.id, b.hit, to_char(b.writedate,'MM-DD HH:MI') writedate from board b join regist r on b.id = r.id where b.no=${param1}
+	</select>
+	<select id="editSelect" resultType="com.naver.dcancer.dto.BoardDTO">
+		select no, title, content from board where no=${param1}
+	</select>
+	<update id="contentUpdate" parameterType="com.naver.dcancer.dto.BoardDTO">
+		update board set title=#{title}, content=#{content} where no=${no} and id=#{id}
+	</update>
+	<delete id="delRecord">
+		delete from board where no=${param1} and id=#{param2} 
+	</delete>
+	<update id="hitCount">
+		update board set hit=hit+1 where no=${param1}
+	</update>
+	<delete id="boardDel">
+		delete from board where no=${no} and id=#{id} 
+	</delete>
+	<delete id="MultiDel">
+		delete from board  
+		<foreach item="no" collection="list" open="where no in (" separator="," close=")">
+		#{no}
+		</foreach>
+	</delete>
+</mapper>
