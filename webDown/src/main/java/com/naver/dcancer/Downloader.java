@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("down")
 public class Downloader {
 	@GetMapping("Frm")
-	public ModelAndView Intro() {
+	public ModelAndView Intro(HttpServletRequest request) {
 		ModelAndView mav= new ModelAndView();
 		mav.setViewName("Down/InputFrm");
 		return mav;
@@ -29,6 +29,7 @@ public class Downloader {
 	@PostMapping("startDown")
 	public ModelAndView inputData(String model,String color, String ImgUrl,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		
 		String zipfile="";
 		if(model!=null && ImgUrl!=null) {
 		//기본주소와 파일명 분리
@@ -40,12 +41,14 @@ public class Downloader {
 		String ext=filename.substring(point+1);
 		filename=filename.substring(0,point);
 		filename=filename.substring(0,filename.length()-3);
-		//String realpath=Downloader(color, path,filename,ext, model,request);
-		// zipfile=zipper(model,color,realpath);
+		String realpath=Downloader(color, path,filename,ext, model,request);
+		String zippath=request.getSession().getServletContext().getRealPath("/resources");
+		zipfile=zipper(model,color,realpath,zippath);
 		System.out.println("Path="+path);
 		System.out.println("filename:"+filename);
 		System.out.println("Ext:"+ext);
 		}
+		
 		zipfile="/Users/dewey/git_Mac/STS/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/webDown/resource/asgga/asgga(ag).zip";
 		mav.setViewName("Down/result");
 		mav.addObject("path",zipfile);
@@ -78,14 +81,16 @@ public class Downloader {
 		}catch(Exception e) {e.printStackTrace();};
 		return realpath;
 	}
-	public String zipper(String model,String color,String path) {
+	public String zipper(String model,String color,String path,String zippath) {
 		String realpath=path.substring(0,path.indexOf(color));
+		
 		System.out.println("[zipper]"+realpath);
 		File zip;
 		if(color!=null) {
-			zip=new File(realpath,model+"("+color+").zip");
+			zip=new File(zippath,model+"("+color+").zip");
 		}else {
-			zip=new File(realpath,model+".zip");	
+			zip=new File(zippath,model+".zip");
+			
 		}
 		byte[] buf= new byte[1024];
 		try {
