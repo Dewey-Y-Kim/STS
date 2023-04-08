@@ -23,8 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class cfr_Recognition {
-	String clientId = "qpstwad3s8";//애플리케이션 클라이언트 아이디값";
-	String clientSecret = "a5MizXVZoGdlwmiAzdzKlEpE1FbKgfOsfVsWb8yB";//애플리케이션 클라이언트 시크릿값";
+	String clientId = "";//애플리케이션 클라이언트 아이디값";
+	String clientSecret = "";//애플리케이션 클라이언트 시크릿값";
 	
 	//cfr_recognition_frm 이동
 	@GetMapping("/cfr_recognition")
