@@ -19,35 +19,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.naver.dcancer.DTO.LogDTO;
+import com.naver.dcancer.DTO.LoginDTO;
 import com.naver.dcancer.Service.LoginService;
 
 /**
  * Handles requests for the application home page.
  */
-@RestController
+@Controller
 public class HomeController {
 	@Autowired
 	LoginService service;
 	
-	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String home() {
-		return "home";
-	}
-	
-	@PostMapping("logresult")
-	public ModelAndView Login(String empno, String pwd,HttpSession session) {
+	@GetMapping("/")
+	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView();
-		LogDTO result = service.Login(empno, pwd);
-		session.setAttribute("LogId", result.getCampName());
-		mav.addObject("result",result);
-		if(result.getAuth()==4||result.getAuth()==3) {
-			//본사
-			mav.setViewName("");
-		}else if(result.getAuth()==1){
-			mav.setViewName("");
-		}
+		
+		mav.setViewName("home");
 		return mav;
 	}
-	
 }

@@ -1,12 +1,18 @@
 package com.naver.dcancer.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
-public class LogDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class LoginDTO {
 	private String code;
 	private String campName;
-	private String empno;
+	private int empno;
 	private String tel;
 	private String fax;
 	private String bussinessNo;

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.naver.dcancer.DAO.LoginDAO;
-import com.naver.dcancer.DTO.LogDTO;
+import com.naver.dcancer.DTO.LoginDTO;
 
 @Service
 public class LoginServiceImpl implements LoginService{
@@ -12,8 +12,9 @@ public class LoginServiceImpl implements LoginService{
 	LoginDAO dao;
 
 	@Override
-	public LogDTO Login(String empno, String pwd) {
-		return dao.Login(empno, pwd);
+	public LoginDTO login(int empno, String pwd) {
+		return dao.login(empno, pwd);
 	}
+
 	
 }

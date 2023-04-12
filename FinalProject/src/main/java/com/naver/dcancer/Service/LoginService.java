@@ -1,7 +1,7 @@
 package com.naver.dcancer.Service;
 
-import com.naver.dcancer.DTO.LogDTO;
+import com.naver.dcancer.DTO.LoginDTO;
 
 public interface LoginService {
-	public LogDTO Login(String empno,String pwd);
+	public LoginDTO login(int empno,String pwd);
 }
