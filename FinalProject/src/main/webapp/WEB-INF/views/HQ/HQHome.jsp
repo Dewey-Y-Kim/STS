@@ -6,23 +6,14 @@
 <meta charset="UTF-8">
 <title>insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"  href="/dcancer/inc/style.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="/dcancer/inc/script.js"></script>
 </head>
 <body>
-<header>
-	<img src="/resources/sky001"/>
-	<div class="Logo">
-		<a href="/dcancer/">MC</a>
-	</div>
-	<div class="menu">
-		<ul>
-			  <li>check1</li>
-			  <li>check2</li>
-		</ul>
-	</div>
-</header>
-<div id="wrap">
+<div class="container">
+<div class="mt-4 p-5 bg-primary text-white rounded">
+
+</div>
+</div>
+</body>
