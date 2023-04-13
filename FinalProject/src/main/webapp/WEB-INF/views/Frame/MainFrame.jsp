@@ -21,11 +21,6 @@
 		});	
 	})
 </script>
-<style>
-	.main{
-	background-color: #ddd;
-	}
-</style>
 <section id="section">
         <div class="body">
             <div class="left_submenu">

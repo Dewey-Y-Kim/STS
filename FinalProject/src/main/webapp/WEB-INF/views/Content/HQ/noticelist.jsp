@@ -14,26 +14,41 @@
 	width : 100%;
 	overflow : scroll;
 	}
+	.noticelist>ul{
+
+	}
 	.noticelist>ul>li{
-	width : 20%;
+	width : 8%;
+	float : left;
+	text-align : center;
+	}
+	.noticelist>ul>li:nth-child(2){
+	width : 75%;
 	}
 </style>
 </head>
 <body>
-<div class="noticelist mt-4 p-5 bg-primary text-white rounded">
+<div class="noticelist rounded">
 	<ul>
 		<li>번호</li>
 		<li>제목</li>
 		<li>날짜</li>
 		<li>게시자</li>
-		<li>삭제</li>
 	</ul>
+	<hr>
+	<c:forEach var="notice" items="${noticelist}">
+	<a href="HQ/noticeView/${notice.no}">
 	<ul>
-		<li>번호</li>
-		<li>제목</li>
-		<li>날짜</li>
-		<li>게시자</li>
-		<li>삭제</li>
+		<li>${notice.no } </li>
+		<li>${notice.title }</li>
+		<li>${notice.writeDate }</li>
+		<li>${notice.writer }</li>
 	</ul>
+	</a>
+	</c:forEach>
+	<div>
+		<button>이전</button>
+		<button>다음</button>
+	</div>
 </div>
 </body>
