@@ -15,7 +15,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
 				HttpSession session = request.getSession();
 				String auth=(String)session.getAttribute("auth");
 				String code=(String)session.getAttribute("code");
-				if(code!=null&&auth!=null) {
+				if(code!=null||auth!=null) {
 					return true;
 				}
 				response.sendRedirect("home");

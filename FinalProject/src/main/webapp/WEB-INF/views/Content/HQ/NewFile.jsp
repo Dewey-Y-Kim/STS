@@ -9,31 +9,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<Style>
-#mainframe{
-	border :1px solid gray;
-	width : 100%;
-}
-#mainframe div{
-	border : 1px solid lightblue;
-	width:48%;
-	margin: 1%;
-}
-</Style>
 </head>
 <body>
-<div id="mainframe">
-	<div>
-		Camp search
-	</div>
-	<div>
-		graph
-	</div>
-	<div>
-		today	
-	</div>
-	<div>
-		notice
-	</div>
+<div class="container">
+<div class="mt-4 p-5 bg-primary text-white rounded">
+
+</div>
 </div>
 </body>

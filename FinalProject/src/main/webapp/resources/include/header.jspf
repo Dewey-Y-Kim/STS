@@ -10,17 +10,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- <script type="text/javascript" src="/dcancer/inc/script.js"></script> -->
+<script type="text/javascript" src="/dcancer/config/script.js"></script>
 <script>
 	$(function(){
 		$('document').ready(function(){
-			if(${auth}==null || ${auth}==""){
+			if(${auth==null} || ${auth==""}){
 				$('.logo a').attr('href',"/")
-				console.log('authfail');
 			}
-			if(${auth}!=null && ${auth}!=""){
+			if(${auth!=null} && ${auth!=""}){
 				$('.logo a').attr('diable',true)
-				console.log('authOk');
 			}
 		});
 	});
@@ -28,19 +26,17 @@
 </head>
 <body>
 <header>
-	<div class="Logo">
+	<div class="Logo" style="background-image:'resources/img/sky_01.jpg'">
 		<a href=""><img class="logo logoimg"src="resources/img/eye-Logo.svg"/></a>
+		<c:if test="${auth!=null}">
+		<div class="logo-btn-menu menu btn-group">
+			  <button id='campSellgraph' type="button" class="logo-btn btn btn-outline-dark">매장별 매출현황</button>
+			  <button type="button" class="logo-btn btn btn-outline-dark">Samsung</button>
+			  <button type="button" class="logo-btn btn btn-outline-dark">Sony</button>
+		</div>
+	</c:if>
 	</div>
 	
-	<c:if test="${code}!=null">
-	<div class="menu">
-		<ul>
-			  <li>check1</li>
-			  <li>check2</li>
-			  <div style="">${campName}점</div>
-		</ul>
-		
-	</div>
-	</c:if>
+	
 </header>
 <div id="wrap">

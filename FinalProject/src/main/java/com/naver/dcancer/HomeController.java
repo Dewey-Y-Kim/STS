@@ -34,7 +34,7 @@ public class HomeController {
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("home");
+		mav.setViewName("Frame/home");
 		return mav;
 	}
 }

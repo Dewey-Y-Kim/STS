@@ -4,36 +4,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>insert title here</title>
+<title>NoticeList</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<Style>
-#mainframe{
-	border :1px solid gray;
+<style>
+	.noticelist{
 	width : 100%;
-}
-#mainframe div{
-	border : 1px solid lightblue;
-	width:48%;
-	margin: 1%;
-}
-</Style>
+	overflow : scroll;
+	}
+	.noticelist>ul>li{
+	width : 20%;
+	}
+</style>
 </head>
 <body>
-<div id="mainframe">
-	<div>
-		Camp search
-	</div>
-	<div>
-		graph
-	</div>
-	<div>
-		today	
-	</div>
-	<div>
-		notice
-	</div>
+<div class="noticelist mt-4 p-5 bg-primary text-white rounded">
+	<ul>
+		<li>번호</li>
+		<li>제목</li>
+		<li>날짜</li>
+		<li>게시자</li>
+		<li>삭제</li>
+	</ul>
+	<ul>
+		<li>번호</li>
+		<li>제목</li>
+		<li>날짜</li>
+		<li>게시자</li>
+		<li>삭제</li>
+	</ul>
 </div>
 </body>

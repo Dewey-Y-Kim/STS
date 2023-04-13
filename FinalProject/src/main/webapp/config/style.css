@@ -38,12 +38,14 @@ header {
 	margin:0 auto;
 	align-items: center;
 }
-.btn{
-	height: 100px;
+.side-btn{
+	height: 80px;
 }
+
 .main{
 	width:88%;
 }
+
 #section{
 	height:80%;
 }
@@ -54,7 +56,7 @@ header {
 	clear:left;
 	min-height : 20%;
 }
-.left_bottom{
+.left_buttom{
 	position:relative;
 }
 #adminMenu,#HqMenu{
@@ -70,4 +72,11 @@ body{
 }
 #footer{
 	height:100px;
+}
+.logo-btn-menu{
+	margin-top:3%;
+	width:90%;
+}
+.logo-btn{
+	width : 30%;
 }

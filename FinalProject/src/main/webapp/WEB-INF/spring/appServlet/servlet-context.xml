@@ -27,7 +27,7 @@
 	
 	<mvc:interceptors>
 	 	<mvc:interceptor>
-	 		<mvc:mapping path="/dcancer/*"/>
+	 		<mvc:mapping path="/dcancer/**"/>
 	 		<beans:bean class="com.naver.dcancer.Interceptor"/>
 	 	</mvc:interceptor>
 	 </mvc:interceptors>

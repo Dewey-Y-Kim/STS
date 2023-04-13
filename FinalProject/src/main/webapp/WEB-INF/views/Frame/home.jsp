@@ -22,7 +22,7 @@
 <body>
 <form id='loginFrm' method='post' action="<%=request.getContextPath() %>/LoginOk">
 		 <div class="input-group">
-			<input type='text' class="form-control" id='empno' name='empno' placeHolder="ID" value="46"/>
+			<input type='text' class="form-control" id='empno' name='empno' placeHolder="ID" value="24"/>
 		</div>
 		 <div class="input-group">
 			<input type='password' class="form-control" id='pwd' name='pwd' placeHolder="PassWord" value="12345"/>

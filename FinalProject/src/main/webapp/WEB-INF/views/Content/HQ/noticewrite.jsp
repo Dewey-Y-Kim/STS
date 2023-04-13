@@ -9,31 +9,30 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<Style>
-#mainframe{
-	border :1px solid gray;
-	width : 100%;
-}
-#mainframe div{
-	border : 1px solid lightblue;
-	width:48%;
-	margin: 1%;
-}
-</Style>
+
+<script>
+	$("#noticefrm").submit(function(){
+		event.preventDefault();
+		if($("#title").val()==""||$("#title").val()==null{
+			alert("제목이 없습니다.");
+			return false;
+		}
+		if($("#title").val()==""||$("#title").val()==null{
+			alert("제목이 없습니다.");
+			return false;
+		}
+		return true;
+	})
+</script>
 </head>
 <body>
-<div id="mainframe">
-	<div>
-		Camp search
-	</div>
-	<div>
-		graph
-	</div>
-	<div>
-		today	
-	</div>
-	<div>
-		notice
-	</div>
+<div class="container">
+<div class="mt-4 p-5 bg-primary text-white rounded">
+	<form id="noticefrm"method='post'>
+		<input id='title' name='title' maxlength="200"/>
+		<textarea id='content' name='content' rows="100" cols="200"></textarea>
+		<button></button>
+	</form>
+</div>
 </div>
 </body>
