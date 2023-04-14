@@ -28,11 +28,10 @@ header {
 	width : 60%;
 	margin-left:80%;
 }
-
-.body div{
-	float:left;
+.bodypart{
 	min-height: 80%;
 }
+
 .left_submenu, .right_submenu{
 	width: 6%;
 }
@@ -71,9 +70,12 @@ header {
 #adminMenu{
 	padding-top: 30px;
 }
-body{
+.bodypart{
 	height: 100%;
 	width :100% auto;
+}
+.bodypart>div{
+	float:left;
 }
 #footer{
 	height:100px;
