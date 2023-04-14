@@ -13,6 +13,7 @@ public class LoginDTO {
 	private String code;
 	private String campName;
 	private int empno;
+	private String ename;
 	private String tel;
 	private String fax;
 	private String bussinessNo;

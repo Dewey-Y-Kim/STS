@@ -25,33 +25,27 @@ public class LoginCTL {
 		LoginDTO result = service.login(empno, pwd);
 		System.out.println(result.toString());
 		if(result!=null) {
-			mav.setViewName("Frame/LoginResult");
+			mav.setViewName("LoginResult");
+			session.setAttribute("result", result);
 			session.setAttribute("campName", result.getCampName());
+			session.setAttribute("ename",result.getEname());
 			session.setAttribute("code", result.getCode());
 			session.setAttribute("auth", result.getAuth());
+			
+			switch((Integer)session.getAttribute("auth")) {
+			case 2 : session.setAttribute("codeData", "Camp");mav.addObject("codeData","Camp");break;
+			case 3: case 4: session.setAttribute("codeData", "HQ");mav.addObject("codeData","HQ");break;
+			}
 			System.out.println(result.getAuth());
 			session.setAttribute("LoginStatus", 'Y');
 		}
 		return mav;
 	}
-	@GetMapping("Frm")
-	public ModelAndView Frm(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("ChkPoint");
-		int auth = (Integer)session.getAttribute("auth");
-		System.out.println("[frm]auth:"+auth);
-		switch(auth) {
-			case 2 : mav.addObject("codeData","Camp");break;
-			case 3: case 4: mav.addObject("codeData","HQ");break;
-		}
-		
-		mav.setViewName("Frame/MainFrame");
-		return mav;
-	}
 	@GetMapping("/{path}/main")
-	public ModelAndView FrmStart(@PathVariable("path") String path) {
+	public ModelAndView Frm(@PathVariable("path")String path,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("Content/"+path+"/main");
+		mav.addObject("codeData",session.getAttribute("codeData"));
+		mav.setViewName(path+"/main");
 		return mav;
 	}
 }
