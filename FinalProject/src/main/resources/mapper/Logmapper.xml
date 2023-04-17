@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.dcancer.DAO.LoginDAO">
+	<select id="login" resultType="com.naver.dcancer.DTO.LoginDTO">
+		select e.empno, e.ename, c.code, c.campName, c.tel, c.fax, e.auth from empInfo e join campinfo c on c.code=e.code where e.empno=#{param1}and e.pwd=${param2}
+	</select>
+	
+</mapper>

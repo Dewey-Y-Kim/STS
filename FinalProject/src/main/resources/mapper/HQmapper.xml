@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.dcancer.DAO.HQDAO">
+	<select id="noticeList" resultType="com.naver.dcancer.DTO.NoticeDTO">
+		select no, title, e.ename writer, writeDate from noticeBBS n join empInfo e on n.empno = e.empno   
+	</select>
+	<select id="noticeView" resultType="com.naver.dcancer.DTO.NoticeDTO">
+		select no, title, e.ename writer, content, writeDate from noticeBBS n join empInfo e on n.empno = e.empno where no=${param1}
+	</select>
+	<insert id="noticeInsert">
+		insert into noticebbs(no, empno, title, content) values(notice_sq.nextval, ${empno}, #{title}, #{content})
+	</insert>
+</mapper>

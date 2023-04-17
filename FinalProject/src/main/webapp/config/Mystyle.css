@@ -1,0 +1,89 @@
+@charset "UTF-8";
+*{
+	padding:0;
+	margin:0;
+}
+ul,li{
+	list-style:none;
+}
+header {
+	background-image:/resources/img/sky_001.jpg;
+
+}
+
+.logoimg{
+	height:100px;
+}
+#loginFrm {
+	float : right;
+	width : 40%;
+	margin-top:25%;
+	margin-right:0%;
+}
+#loginFrm div {
+	width:40%;
+	float: none;
+}
+#loginFrm button{
+	width : 60%;
+	margin-left:80%;
+}
+.bodypart{
+	min-height: 80%;
+}
+
+.left_submenu, .right_submenu{
+	width: 6%;
+}
+#left_menu{
+	margin:0 auto;
+	align-items: center;
+}
+.side-btn{
+	height: 80px;
+}
+
+#mainframe{
+	width:88%;
+	min-height:550px;
+}
+#wrap{
+	clear:both;
+}
+#section{
+	height:80%;
+}
+#header{
+	min-height:30px;
+}
+#footer{
+	clear:left;
+	min-height : 20%;
+}
+.left_buttom{
+	position:relative;
+}
+#adminMenu,#HqMenu{
+	align-items: center;
+	min-width: 100px;
+}
+#adminMenu{
+	padding-top: 30px;
+}
+.bodypart{
+	height: 100%;
+	width :100% auto;
+}
+.bodypart>div{
+	float:left;
+}
+#footer{
+	height:100px;
+}
+.logo-btn-menu{
+	margin-top:3%;
+	width:90%;
+}
+.logo-btn{
+	width : 30%;
+}
