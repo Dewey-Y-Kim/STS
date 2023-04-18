@@ -15,4 +15,5 @@ public class NoticeDTO {
 	private String writeDate;
 	private String content;
 	private int empno;
+	private int hit;
 }

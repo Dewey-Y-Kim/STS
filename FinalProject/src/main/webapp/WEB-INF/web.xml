@@ -55,11 +55,5 @@
 		<filter-name>SpringEncodeFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<mvc:interceptors>
-	 	<mvc:interceptor>
-	 		<mvc:mapping path="/dcancer/HQ/"/>
-	 		<mac:mapping path="/dcancer/Camp" />
-	 		<beans:bean class="com.naver.dcancer.Interceptor"/>
-	 	</mvc:interceptor>
-	 </mvc:interceptors>
+	
 </web-app>

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.dcancer.DTO.LoginDTO;
 import com.naver.dcancer.DTO.NoticeDTO;
+import com.naver.dcancer.DTO.pagingVO;
 import com.naver.dcancer.Service.HQService;
 
 @Controller
@@ -21,24 +22,24 @@ public class HQBtnCTL {
 	@Autowired
 	HQService service;
 	@GetMapping("HQ/noticelist")
-	public ModelAndView noticelist(HttpSession session) {
+	public ModelAndView noticelist(HttpSession session,pagingVO vo) {
 		ModelAndView mav = new ModelAndView();
-		List<NoticeDTO> list = service.noticeList();
-		System.out.println(list.toString()+"\t"+list.size());
+		List<NoticeDTO> list = service.noticeList(vo);
 		String ename = (String)session.getAttribute("ename");
 		mav.addObject("ename", ename);
-		mav.addObject("list", list);
+		mav.addObject("noticelist", list);
 		mav.setViewName("HQ/noticelist");
-		
+		vo.setTotalLine(service.pagingData());
+		mav.addObject("vo",vo);
 		return mav;
 	}
 	@GetMapping("noticeView/{no}")
-	public ModelAndView noticeView(@PathVariable("no") int no) {
+	public ModelAndView noticeView(@PathVariable("no") int no, pagingVO vo) {
 		ModelAndView mav= new ModelAndView();
 		mav.setViewName("HQ/noticeView");
 		NoticeDTO dto=service.noticeView(no);
 		mav.addObject("dto", dto);
-		
+		mav.addObject("vo",vo);
 		return mav;
 	}
 	

@@ -3,8 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.dcancer.DAO.HQDAO">
+	<select id="pagingData" resultType="int">
+		select count(no) totalLine from noticeBBS
+	</select>
 	<select id="noticeList" resultType="com.naver.dcancer.DTO.NoticeDTO">
-		select no, title, e.ename writer, writeDate from noticeBBS n join empInfo e on n.empno = e.empno   
+		
+		select * from
+		(select * from
+		(select no, title, e.ename writer, to_char(writedate,'YY-MM-DD') writedate from noticeBBS n join empInfo e on n.empno = e.empno
+		 order by no desc) 
+		<![CDATA[where rownum<=${linePerPage}*${nowPage} order by no asc]]>)
+		<choose>
+		<when test="nowPage!=totalPage">  
+		<![CDATA[where rownum<=${linePerPage} order by no desc]]>
+		</when>
+		<when test="nowPage==totalPage">
+		<![CDATA[where rownum<=${lastPageLine} order by no desc]]>
+		</when>
+		</choose>   
 	</select>
 	<select id="noticeView" resultType="com.naver.dcancer.DTO.NoticeDTO">
 		select no, title, e.ename writer, content, writeDate from noticeBBS n join empInfo e on n.empno = e.empno where no=${param1}

@@ -15,7 +15,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
 				HttpSession session = request.getSession();
 				String logStatus = (String)session.getAttribute("LoginStatus");
 				System.out.println(logStatus);
-				if(logStatus=="Y") {
+				if(logStatus=="Y"||logStatus != null) {
 					return true;
 				}
 				response.sendRedirect("/dcancer/");

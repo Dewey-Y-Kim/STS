@@ -9,16 +9,36 @@
 
 	}
 	.noticelist>ul>li{
-	width : 8%;
-	float : left;
-	text-align : center;
-	 
+		width : 7%;
+		float : left;
+		text-align : center;
+		height: 30px;
+	}
+	#no {
+	}
+	#subject {
+		text-align: left;
 	}
 	.noficelist>ul>li:first-child{
-	width :2%;
+		width :0.5%;
 	}
 	.noticelist>ul>li:nth-child(3){
-	width : 68%;
+		width : 64%;
+	}
+	.noticeline li:nth-child(2){
+		text-align:left;
+		background-color:red;
+	}
+	.pagingline {
+		margin : auto;
+		width :80%;
+	}
+	.pagingline li{
+		margin : 1%;
+		float : left;
+		width : 10%;
+		text-align : center;
+		line-height : 20px;
 	}
 	.inputbox:ep(0){
 		width:30%;
@@ -26,29 +46,19 @@
 	.inputbox:eq(1){
 		width:30%;
 	}
-	.pagingbox{
+	.pagingbox ul{
 	margin:0 auto;
+	float :left;
+	clear : both;
 	}
 	.writeForm{
 	display:none;
 	}
-	#container {
-		width: 80%;
-		margin: 20px auto;
-	}
-	.ck-editor__editable[role="textbox"] {
-		/* editing area */
-		min-height: 200px;
-	}
-	.ck-content .image {
-		/* block images */
-		max-width: 80%;
-		margin: 20px auto;
-	}
-	.writeFrm>ul>li{
-	width:40%;
-	}
+	
 </style>
+<script type="text/javascript" src="/dcancer/config/MyCK.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/super-build/ckeditor.js"></script>
+<link rel="stylesheet"  href="/dcancer/config/MyCK.css" type="text/css"/>
 <script>
 $(function(){
 	$('.writebtn').click(function(){
@@ -57,19 +67,15 @@ $(function(){
 		$('.writeForm').css('display','block');
 		EditorStart('editor');
 	});
-	
-
-
 });
 </script>
-</head>
-<body>
+<main class="main_frm container-fluid">
 <div class="noticelist rounded">
 		<c:if test="${auth>2}">
 		<button class='writebtn'>write</button><br/>
 		</c:if>
 	<ul>
-		<li></li>
+		<li>□</li>
 		<li>번호</li>
 		<li>제목</li>
 		<li>날짜</li>
@@ -77,20 +83,45 @@ $(function(){
 		<li>확인</li>
 	</ul>
 	<c:forEach var="notice" items="${noticelist}">
-	<a href="HQ/noticeView/${notice.no}">
-	<ul>
+	<ul class = "noticeLine">
 		<li><input type=checkbox class="" value="${notice.no }"/></li>
-		<li>${notice.no } </li>
-		<li>${notice.title }</li>
+		<li id="no">${notice.no } </li>
+		<li id="subject"><a href="HQ/noticeView/${notice.no}&nowPage=${vo.nowPage}">${notice.title }</a></li>
 		<li>${notice.writeDate }</li>
 		<li>${notice.writer }</li>
 		<li>${notice.hit }</li>
 	</ul>
-	</a>
+	
 	</c:forEach>
 	<div class='pagingbox'>
-		<button>이전</button>
-		<button>다음</button>
+		<input id='nowPage' type='hidden' value='${vo.nowPage }'/>
+		<ul class='pagingline'>
+			<c:if test="${vo.idxPage==1 }">
+			<li></li>
+			</c:if>
+			<c:if test="${vo.idxPage!=1 }">
+			<li><a href="noticelist?nowPage=${vo.idxPage-vo.pagingCnt}">prev</a></li>
+			</c:if>
+			<!-- 페이지이동 -->
+			
+			<c:forEach var="page" begin="${vo.idxPage}" end="${vo.idxPage+vo.pagingCnt-1 }">
+				<c:if test="${page<=vo.totalPage}">
+					<c:if test="${page == vo.nowPage }">
+						<li style="background:lightblue;">
+					</c:if>
+					<c:if test="${page != vo.nowPage }">
+						<li>
+					</c:if>
+					<a href="noticelist?nowPage=${page}">${page }</a> </li>
+				</c:if>
+			</c:forEach>
+			<c:if test="${vo.idxPage eq vo.lastIdxPage}">
+			<li></li>
+			</c:if>
+			<c:if test="${vo.idxPage ne vo.lastIdxPage}">
+			<li><a href="noticelist?nowPage=${vo.idxPage+vo.pagingCnt }">next</a></li>
+			</c:if>
+		</ul>
 	</div>
 </div>
 <div class='writeForm'>
@@ -113,149 +144,8 @@ $(function(){
 </form>
 </div>
 
-<script>
-function EditorStart(id){
-    // This sample still does not showcase all CKEditor 5 features (!)
-    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
-    CKEDITOR.ClassicEditor.create(document.getElementById(id), {
-//https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
-toolbar: {
-items: [
-'exportPDF','exportWord', '|',
-'findAndReplace', 'selectAll', '|',
-'heading', '|',
-'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
-'bulletedList', 'numberedList', 'todoList', '|',
-'outdent', 'indent', '|',
-'undo', 'redo',
-'-',
-'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
-'alignment', '|',
-'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-'textPartLanguage', '|',
-'sourceEditing'
-],
-shouldNotGroupWhenFull: true
-},
-//Changing the language of the interface requires loading the language file using the <script> tag.
-//language: 'es',
-list: {
-properties: {
-styles: true,
-startIndex: true,
-reversed: true
-}
-},
-//https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
-heading: {
-options: [
-{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-{ model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-{ model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-]
-},
-//https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-placeholder: 'Welcome to CKEditor 5!',
-//https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
-fontFamily: {
-options: [
-'default',
-'Arial, Helvetica, sans-serif',
-'Courier New, Courier, monospace',
-'Georgia, serif',
-'Lucida Sans Unicode, Lucida Grande, sans-serif',
-'Tahoma, Geneva, sans-serif',
-'Times New Roman, Times, serif',
-'Trebuchet MS, Helvetica, sans-serif',
-'Verdana, Geneva, sans-serif'
-],
-supportAllValues: true
-},
-//https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
-fontSize: {
-options: [ 10, 12, 14, 'default', 18, 20, 22 ],
-supportAllValues: true
-},
-//Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
-//https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
-htmlSupport: {
-allow: [
-{
-    name: /.*/,
-    attributes: true,
-    classes: true,
-    styles: true
-}
-]
-},
-//Be careful with enabling previews
-//https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
-htmlEmbed: {
-showPreviews: true
-},
-//https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
-link: {
-decorators: {
-addTargetToExternalLinks: true,
-defaultProtocol: 'https://',
-toggleDownloadable: {
-    mode: 'manual',
-    label: 'Downloadable',
-    attributes: {
-download: 'file'
-    }
-}
-}
-},
-//https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
-mention: {
-feeds: [
-{
-    marker: '@',
-    feed: [
-'@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
-'@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
-'@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
-'@sugar', '@sweet', '@topping', '@wafer'
-    ],
-    minimumCharacters: 1
-}
-]
-},
-//The "super-build" contains more premium features that require additional configuration, disable them below.
-//Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
-removePlugins: [
-// These two are commercial, but you can try them out without registering to a trial.
-// 'ExportPdf',
-// 'ExportWord',
-'CKBox',
-'CKFinder',
-'EasyImage',
-// This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
-// https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
-// Storing images as Base64 is usually a very bad idea.
-// Replace it on production website with other solutions:
-// https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
-// 'Base64UploadAdapter',
-'RealTimeCollaborativeComments',
-'RealTimeCollaborativeTrackChanges',
-'RealTimeCollaborativeRevisionHistory',
-'PresenceList',
-'Comments',
-'TrackChanges',
-'TrackChangesData',
-'RevisionHistory',
-'Pagination',
-'WProofreader',
-// Careful, with the Mathtype plugin CKEditor will not load when loading this sample
-// from a local file system (file://) - load this site via HTTP server if you enable MathType
-'MathType'
-]
-    });
-}
-</script>
+</main>
+<jsp:include page="/resources/include/SideMenu/HQSideL.jsp" />
+<c:if test="${auth==4}">
+	<jsp:include page="/resources/include/SideMenu//HQSideR.jsp"></jsp:include>
+</c:if>

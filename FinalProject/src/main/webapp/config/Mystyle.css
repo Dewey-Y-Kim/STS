@@ -24,6 +24,11 @@ header {
 	width:40%;
 	float: none;
 }
+.left_menu {
+  /* 좌측에 네비게이션을 놓습니다. */
+  order: -1;
+ background: blue; 
+}
 #loginFrm button{
 	width : 60%;
 	margin-left:80%;
@@ -49,6 +54,9 @@ header {
 }
 #wrap{
 	clear:both;
+	min-height:100%;
+	display: flex;
+    flex: 1;
 }
 #section{
 	height:80%;
