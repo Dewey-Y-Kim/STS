@@ -86,7 +86,7 @@ $(function(){
 	<ul class = "noticeLine">
 		<li><input type=checkbox class="" value="${notice.no }"/></li>
 		<li id="no">${notice.no } </li>
-		<li id="subject"><a href="HQ/noticeView/${notice.no}&nowPage=${vo.nowPage}">${notice.title }</a></li>
+		<li id="subject"><a href="noticeView?no=${notice.no}&nowPage=${vo.nowPage}">${notice.title }</a></li>
 		<li>${notice.writeDate }</li>
 		<li>${notice.writer }</li>
 		<li>${notice.hit }</li>

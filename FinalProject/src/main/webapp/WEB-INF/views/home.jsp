@@ -28,8 +28,3 @@
 			</ul>
 	</form>
 </main>
-<nav class="left_menu">
-	nav
-</nav>
-<aside class="right_menu">
-</aside>

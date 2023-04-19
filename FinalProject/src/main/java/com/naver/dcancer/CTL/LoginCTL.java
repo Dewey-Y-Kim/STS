@@ -26,7 +26,7 @@ public class LoginCTL {
 		System.out.println(result.toString());
 		if(result!=null) {
 			mav.setViewName("LoginResult");
-			session.setAttribute("LoginResult", result);
+			session.setAttribute("empno", empno);
 			session.setAttribute("campName", result.getCampName());
 			session.setAttribute("ename",result.getEname());
 			session.setAttribute("code", result.getCode());
@@ -37,7 +37,7 @@ public class LoginCTL {
 			case 2 : session.setAttribute("codeData", "Camp");mav.addObject("codeData","Camp");break;
 			case 3: case 4: session.setAttribute("codeData", "HQ");mav.addObject("codeData","HQ");break;
 			}
-			System.out.println(result.getAuth());
+			System.out.println(session.getAttribute("empno"));
 			
 		}
 		return mav;

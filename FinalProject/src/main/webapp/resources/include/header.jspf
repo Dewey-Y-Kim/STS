@@ -42,7 +42,7 @@
 		<div class="logo-btn-menu menu btn-group">
 			  <button id='campSellgraph' type="button" class="logo-btn btn btn-outline-dark">매장별 매출현황</button>
 			  <button type="button" class="logo-btn btn btn-outline-dark">Samsung</button>
-			  <button type="button" class="logo-btn btn btn-outline-dark">Sony</button>
+			  <a href="<%=request.getContextPath()%>/logout"><button type="button" class="logo-btn btn btn-outline-dark">LogOut</button></a>
 		</div>
 	</c:if>
 	</div>

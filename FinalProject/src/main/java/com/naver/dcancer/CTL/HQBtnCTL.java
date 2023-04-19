@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.dcancer.DTO.LoginDTO;
 import com.naver.dcancer.DTO.NoticeDTO;
+import com.naver.dcancer.DTO.SellerDTO;
 import com.naver.dcancer.DTO.pagingVO;
 import com.naver.dcancer.Service.HQService;
 
@@ -25,20 +26,20 @@ public class HQBtnCTL {
 	public ModelAndView noticelist(HttpSession session,pagingVO vo) {
 		ModelAndView mav = new ModelAndView();
 		List<NoticeDTO> list = service.noticeList(vo);
-		String ename = (String)session.getAttribute("ename");
-		mav.addObject("ename", ename);
 		mav.addObject("noticelist", list);
 		mav.setViewName("HQ/noticelist");
 		vo.setTotalLine(service.pagingData());
 		mav.addObject("vo",vo);
 		return mav;
 	}
-	@GetMapping("noticeView/{no}")
-	public ModelAndView noticeView(@PathVariable("no") int no, pagingVO vo) {
-		ModelAndView mav= new ModelAndView();
-		mav.setViewName("HQ/noticeView");
-		NoticeDTO dto=service.noticeView(no);
-		mav.addObject("dto", dto);
+	@GetMapping("HQ/Sellerlist")
+	public ModelAndView sellerList(HttpSession session,pagingVO vo) {
+		ModelAndView mav = new ModelAndView();
+		List<SellerDTO> list = service.sellerList(vo);
+		System.out.println(((SellerDTO)list.get(1)).toString());
+		mav.addObject("sellerlist", list);
+		mav.setViewName("HQ/Sellerlist");
+		vo.setTotalLine(service.pagingData());
 		mav.addObject("vo",vo);
 		return mav;
 	}

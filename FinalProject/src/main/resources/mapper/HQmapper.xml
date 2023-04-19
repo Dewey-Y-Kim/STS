@@ -6,11 +6,13 @@
 	<select id="pagingData" resultType="int">
 		select count(no) totalLine from noticeBBS
 	</select>
+	<update id="hitupdate">
+		update ${bbs} set hit=hit+1 where no=${no}
+	</update>
 	<select id="noticeList" resultType="com.naver.dcancer.DTO.NoticeDTO">
-		
 		select * from
 		(select * from
-		(select no, title, e.ename writer, to_char(writedate,'YY-MM-DD') writedate from noticeBBS n join empInfo e on n.empno = e.empno
+		(select no, title, e.ename writer, to_char(writedate,'YY-MM-DD') writedate,hit from noticeBBS n join empInfo e on n.empno = e.empno
 		 order by no desc) 
 		<![CDATA[where rownum<=${linePerPage}*${nowPage} order by no asc]]>)
 		<choose>
@@ -23,9 +25,31 @@
 		</choose>   
 	</select>
 	<select id="noticeView" resultType="com.naver.dcancer.DTO.NoticeDTO">
-		select no, title, e.ename writer, content, writeDate from noticeBBS n join empInfo e on n.empno = e.empno where no=${param1}
+		select no, title, e.ename writer, n.empno, content, writeDate from noticeBBS n join empInfo e on n.empno = e.empno where no=${param1}
 	</select>
 	<insert id="noticeInsert">
-		insert into noticebbs(no, empno, title, content) values(notice_sq.nextval, ${empno}, #{title}, #{content})
+		insert into noticeBBS(no, empno, title, content) values(notice_sq.nextval, ${empno}, #{title},#{content})
 	</insert>
+	<update id="noticeUpdate">
+		update noticeBBS set title=#{title}, content=#{content} where no=${no} and empno=${empno}
+	</update>
+	<delete id="noticeDelete">
+		delete from noticeBBS where no=${no}
+	</delete>
+	<select id="sellerList" resultType="com.naver.dcancer.DTO.SellerDTO">
+		
+		select * from
+		(select * from
+		(select sellercode, sellerceo, sellername, sellerno, sellertel, sellerfax from sellerinfo
+		 order by sellercode desc) 
+		<![CDATA[where rownum<=${linePerPage}*${nowPage} order by sellercode asc]]>)
+		<choose>
+		<when test="nowPage!=totalPage">  
+		<![CDATA[where rownum<=${linePerPage} order by sellercode desc]]>
+		</when>
+		<when test="nowPage==totalPage">
+		<![CDATA[where rownum<=${lastPageLine} order by sellercode desc]]>
+		</when>
+		</choose>   
+	</select>
 </mapper>

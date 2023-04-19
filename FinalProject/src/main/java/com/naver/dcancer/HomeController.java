@@ -37,4 +37,11 @@ public class HomeController {
 		mav.setViewName("home");
 		return mav;
 	}
+	@GetMapping("logout")
+	public ModelAndView logOut(HttpSession session) {
+		session.invalidate();
+		ModelAndView mav= new ModelAndView();
+		mav.setViewName("home");
+		return mav;
+	}
 }

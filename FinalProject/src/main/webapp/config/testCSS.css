@@ -17,9 +17,12 @@
 
 .left_menu, .right_menu {
   /* 12em은 열의 너비입니다. */
-  flex: 0 0 7%;
+  flex: 0 0 50px;
 }
 .header {
+}
+.side-btn{
+	width : 15px;
 }
 .left_menu {
   /* 좌측에 네비게이션을 놓습니다. */
