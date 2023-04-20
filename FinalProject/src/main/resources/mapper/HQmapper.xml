@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.dcancer.DAO.HQDAO">
 	<select id="pagingData" resultType="int">
-		select count(no) totalLine from noticeBBS
+		select count(${data}) totalLine from ${bbs}
 	</select>
 	<update id="hitupdate">
 		update ${bbs} set hit=hit+1 where no=${no}
@@ -52,4 +52,18 @@
 		</when>
 		</choose>   
 	</select>
+	<update id="sellerUpdate">
+		update sellerInfo set sellerceo = #{sellerceo}, sellername= #{sellername}, sellertel = #{sellertel}, sellerfax=#{sellerfax} where sellercode = ${sellercode}
+	</update>
+	<insert id="sellerInsert">
+		insert into sellerInfo(sellercode, sellername, sellerceo, sellertel, sellerfax, sellerno) values (seller_sq.nextval, #{sellername}, #{sellerceo}, #{sellertel}, #{sellerfax},#{sellerno})
+	</insert>
+	<delete id="sellerDel">
+		delete from sellerInfo where sellercode=#{sellercode}
+	</delete>
+	<select id="sellerInfo" resultType="com.naver.dcancer.DTO.SellerDTO">
+		select sellername,sellercode from sellerInfo
+	</select>
+	<insert id="goodinsert">
+	</insert>
 </mapper>

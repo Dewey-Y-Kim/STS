@@ -28,7 +28,7 @@ public class HQBtnCTL {
 		List<NoticeDTO> list = service.noticeList(vo);
 		mav.addObject("noticelist", list);
 		mav.setViewName("HQ/noticelist");
-		vo.setTotalLine(service.pagingData());
+		vo.setTotalLine(service.pagingData("noticebbs","no"));
 		mav.addObject("vo",vo);
 		return mav;
 	}
@@ -39,9 +39,22 @@ public class HQBtnCTL {
 		System.out.println(((SellerDTO)list.get(1)).toString());
 		mav.addObject("sellerlist", list);
 		mav.setViewName("HQ/Sellerlist");
-		vo.setTotalLine(service.pagingData());
+		vo.setTotalLine(service.pagingData("sellerInfo","sellercode"));
 		mav.addObject("vo",vo);
+		mav.addObject("auth",session.getAttribute("auth"));
+		System.out.println(session.getAttribute("auth"));
 		return mav;
 	}
+	@GetMapping("HQ/Brandlist")
+	public ModelAndView brandSector(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		List<SellerDTO> sell=service.sellerInfo();
+		mav.addObject("seller",sell);
+		mav.addObject("auth",session.getAttribute("auth"));
+		mav.setViewName("HQ/Brandlist");
+		return mav;
+	}
+	
+	
 	
 }

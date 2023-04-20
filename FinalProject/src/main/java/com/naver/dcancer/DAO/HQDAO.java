@@ -6,10 +6,11 @@ import org.apache.ibatis.annotations.Param;
 
 import com.naver.dcancer.DTO.NoticeDTO;
 import com.naver.dcancer.DTO.SellerDTO;
+import com.naver.dcancer.DTO.goodDTO;
 import com.naver.dcancer.DTO.pagingVO;
 
 public interface HQDAO {
-	public int pagingData();
+	public int pagingData(@Param("bbs") String bbs,@Param("data") String data);
 	public int hitupdate(@Param("no")int no, @Param("bbs")String bbs);
 	//notice
 	public List<NoticeDTO> noticeList(pagingVO vo);
@@ -19,4 +20,10 @@ public interface HQDAO {
 	public int noticeDelete(int no);
 	//seller
 	public List<SellerDTO> sellerList(pagingVO vo);
+	public int sellerUpdate(SellerDTO dto);
+	public int sellerInsert(SellerDTO dto);
+	public int sellerDel(@Param("sellercode")String sellercode);
+	//Brand
+	public List<SellerDTO> sellerInfo();
+	public int goodinsert(goodDTO dto);
 }

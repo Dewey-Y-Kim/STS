@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.naver.dcancer.DAO.HQDAO;
 import com.naver.dcancer.DTO.NoticeDTO;
 import com.naver.dcancer.DTO.SellerDTO;
+import com.naver.dcancer.DTO.goodDTO;
 import com.naver.dcancer.DTO.pagingVO;
 
 @Service
@@ -17,8 +18,8 @@ public class HQServiceImpl implements HQService{
 	HQDAO dao;
 	
 	@Override
-	public int pagingData() {
-		return dao.pagingData();
+	public int pagingData(String bbs,String data) {
+		return dao.pagingData(bbs, data);
 	}
 	@Override
 	public int hitupdate(int no, String bbs) {
@@ -59,6 +60,31 @@ public class HQServiceImpl implements HQService{
 		// TODO Auto-generated method stub
 		return dao.sellerList(vo);
 	}
-
+	@Override
+	public int sellerUpdate(SellerDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.sellerUpdate(dto);
+	}
+	@Override
+	public int sellerInsert(SellerDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.sellerInsert(dto);
+	}
+	@Override
+	public int sellerDel(String sellercode) {
+		// TODO Auto-generated method stub
+		return dao.sellerDel(sellercode);
+	}
+	@Override
+	public List<SellerDTO> sellerInfo() {
+		// TODO Auto-generated method stub
+		return dao.sellerInfo();
+	}
+	@Override
+	public int goodinsert(goodDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.goodinsert(dto);
+	}
+	
 	
 }
