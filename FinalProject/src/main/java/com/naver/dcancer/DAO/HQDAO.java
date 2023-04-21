@@ -24,6 +24,8 @@ public interface HQDAO {
 	public int sellerInsert(SellerDTO dto);
 	public int sellerDel(@Param("sellercode")String sellercode);
 	//Brand
-	public List<SellerDTO> sellerInfo();
-	public int goodinsert(goodDTO dto);
+	public List<goodDTO> goodlist(pagingVO vo);
+	public List<SellerDTO> sellerInfo();// 셀러 선택창
+	public int lastGoodNo();
+	public int goodinsert(List<goodDTO> list);
 }

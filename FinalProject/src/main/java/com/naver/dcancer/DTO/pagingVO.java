@@ -13,18 +13,25 @@ public class pagingVO {
 	private int idxPage=(nowPage-1)/pagingCnt * pagingCnt +1;
 	private int lastIdxPage; // 마지막 페이지의 인덱스페이지
 	
+	//Search
+	private String searchKey;
+	private String searchWord;
+
+	@Override
+	public String toString() {
+		return "pagingVO [totalPage=" + totalPage + ", nowPage=" + nowPage + ", totalLine=" + totalLine
+				+ ", linePerPage=" + linePerPage + ", pagingCnt=" + pagingCnt + ", lastPage=" + lastPage
+				+ ", lastPageLine=" + lastPageLine + ", idxPage=" + idxPage + ", lastIdxPage=" + lastIdxPage
+				+ ", searchKey=" + searchKey + ", searchWord=" + searchWord + "]";
+	}
+	
 	public int getPagingCnt() {
 		return pagingCnt;
 	}
 	public void setPagingCnt(int pagingCnt) {
 		this.pagingCnt = pagingCnt;
 	}
-	@Override
-	public String toString() {
-		return "pagingVO [totalPage=" + totalPage + ", nowPage=" + nowPage + ", totalLine=" + totalLine
-				+ ", linePerPage=" + linePerPage + ", pagingCnt=" + pagingCnt + ", lastPage=" + lastPage
-				+ ", lastPageLine=" + lastPageLine + ", idxPage=" + idxPage + ", lastIdxPage=" + lastIdxPage + "]";
-	}
+	
 	public int getTotalPage() {
 		return totalPage;
 	}
@@ -38,6 +45,18 @@ public class pagingVO {
 	public void setNowPage(int nowPage) {
 		this.nowPage = nowPage;
 		this.idxPage= (nowPage-1)/pagingCnt * pagingCnt +1;
+	}
+	public String getSearchKey() {
+		return searchKey;
+	}
+	public void setSearchKey(String searchKey) {
+		this.searchKey = searchKey;
+	}
+	public String getSearchWord() {
+		return searchWord;
+	}
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
 	}
 	public int getTotalLine() {
 		return totalLine;

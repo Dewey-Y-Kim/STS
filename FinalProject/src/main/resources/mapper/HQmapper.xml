@@ -64,6 +64,31 @@
 	<select id="sellerInfo" resultType="com.naver.dcancer.DTO.SellerDTO">
 		select sellername,sellercode from sellerInfo
 	</select>
-	<insert id="goodinsert">
+	<select id="lastGoodNo" resultType="int">
+		select max(goodno) goodno from (select count(goodno) goodno from goodinfo union (select goodno from (select goodno from goodinfo order by goodno desc) where rownum=1))
+	</select>
+	<insert id="goodinsert" parameterType="java.util.List">
+		<foreach item="good" collection="list" separator=" " open="insert all" close="select * from dual">
+		 	into goodInfo(GOODNO, SELLERCODE, classifyno, name ,model, buyprice, sellprice) 
+		 	values(${good.goodno}, #{good.Sellercode}, #{good.classifyno}, #{good.name} ,#{good.model}, ${good.buyprice}, ${good.sellprice})
+		</foreach>
 	</insert>
+	<select id="goodlist" resultType="com.naver.dcancer.DTO.goodDTO">
+		select * from
+		(select * from
+		(select distinct name, g.sellercode, sellername, classifyno, buyprice, sellprice from goodinfo g join sellerinfo s on g.sellercode=s.sellercode 
+		<if test="searchWord!=null">
+		and ${searchKey} like '%${searchWord}%'
+		</if>
+		order by sellername desc) 
+		<![CDATA[where rownum<=${linePerPage}*${nowPage} order by sellercode asc]]>)
+		<choose>
+		<when test="nowPage!=totalPage">  
+		<![CDATA[where rownum<=${linePerPage} order by sellercode desc]]>
+		</when>
+		<when test="nowPage==totalPage">
+		<![CDATA[where rownum<=${lastPageLine} order by sellercode desc]]>
+		</when>
+		</choose>
+	</select>
 </mapper>

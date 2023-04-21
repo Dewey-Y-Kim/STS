@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.naver.dcancer.DTO.LoginDTO;
 import com.naver.dcancer.DTO.NoticeDTO;
 import com.naver.dcancer.DTO.SellerDTO;
+import com.naver.dcancer.DTO.goodDTO;
 import com.naver.dcancer.DTO.pagingVO;
 import com.naver.dcancer.Service.HQService;
 
@@ -46,11 +47,14 @@ public class HQBtnCTL {
 		return mav;
 	}
 	@GetMapping("HQ/Brandlist")
-	public ModelAndView brandSector(HttpSession session) {
+	public ModelAndView brandSector(HttpSession session, pagingVO vo) {
 		ModelAndView mav = new ModelAndView();
 		List<SellerDTO> sell=service.sellerInfo();
 		mav.addObject("seller",sell);
+		List<goodDTO> list = service.goodlist(vo);
+		mav.addObject("goodlist",list);
 		mav.addObject("auth",session.getAttribute("auth"));
+		mav.addObject("vo", vo);
 		mav.setViewName("HQ/Brandlist");
 		return mav;
 	}

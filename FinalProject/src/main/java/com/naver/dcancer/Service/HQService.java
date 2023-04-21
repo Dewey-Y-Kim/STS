@@ -26,6 +26,8 @@ public interface HQService {
 	public int sellerDel(@Param("sellercode")String sellercode);
 	
 	//Brand
+	public List<goodDTO> goodlist(pagingVO vo);
 	public List<SellerDTO> sellerInfo();
-	public int goodinsert(goodDTO dto);
+	public int lastGoodNo();
+	public int goodinsert(List<goodDTO> list);
 }

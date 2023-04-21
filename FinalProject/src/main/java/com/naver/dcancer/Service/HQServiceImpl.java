@@ -80,10 +80,21 @@ public class HQServiceImpl implements HQService{
 		// TODO Auto-generated method stub
 		return dao.sellerInfo();
 	}
+	
 	@Override
-	public int goodinsert(goodDTO dto) {
+	public int goodinsert(List<goodDTO> list) {
 		// TODO Auto-generated method stub
-		return dao.goodinsert(dto);
+		return dao.goodinsert(list);
+	}
+	@Override
+	public int lastGoodNo() {
+		// TODO Auto-generated method stub
+		return dao.lastGoodNo();
+	}
+	@Override
+	public List<goodDTO> goodlist(pagingVO vo) {
+		// TODO Auto-generated method stub
+		return dao.goodlist(vo);
 	}
 	
 	
