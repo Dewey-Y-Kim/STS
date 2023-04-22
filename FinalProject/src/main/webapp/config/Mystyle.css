@@ -40,6 +40,14 @@ header {
 .left_submenu, .right_submenu{
 	width: 6%;
 }
+.right_menu{
+	order : 2
+	
+}
+.main_frm {
+  flex: 1;
+  padding : 1%;
+}
 #left_menu{
 	margin:0 auto;
 	align-items: center;

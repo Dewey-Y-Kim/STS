@@ -67,16 +67,19 @@
 	<select id="lastGoodNo" resultType="int">
 		select max(goodno) goodno from (select count(goodno) goodno from goodinfo union (select goodno from (select goodno from goodinfo order by goodno desc) where rownum=1))
 	</select>
+	<select id="lastBrandcode" resultType="int">
+		select max(brandcode) brandcode from (select count(brandcode) brandcode from (select distinct brandcode from goodinfo) union (select brandcode from (select brandcode from goodinfo order by brandcode desc) where rownum=1))
+	</select>
 	<insert id="goodinsert" parameterType="java.util.List">
 		<foreach item="good" collection="list" separator=" " open="insert all" close="select * from dual">
-		 	into goodInfo(GOODNO, SELLERCODE, classifyno, name ,model, buyprice, sellprice) 
-		 	values(${good.goodno}, #{good.Sellercode}, #{good.classifyno}, #{good.name} ,#{good.model}, ${good.buyprice}, ${good.sellprice})
+		 	into goodInfo(GOODNO, SELLERCODE, classifyno, name ,model, buyprice, sellprice, brandcode) 
+		 	values(${good.goodno}, #{good.Sellercode}, #{good.classifyno}, #{good.name} ,#{good.model}, ${good.buyprice}, ${good.sellprice}, ${good.brandcode})
 		</foreach>
 	</insert>
 	<select id="goodlist" resultType="com.naver.dcancer.DTO.goodDTO">
 		select * from
 		(select * from
-		(select distinct name, g.sellercode, sellername, classifyno, buyprice, sellprice from goodinfo g join sellerinfo s on g.sellercode=s.sellercode 
+		(select distinct name, brandcode, g.sellercode, sellername, classifyno, buyprice, sellprice from goodinfo g join sellerinfo s on g.sellercode=s.sellercode 
 		<if test="searchWord!=null">
 		and ${searchKey} like '%${searchWord}%'
 		</if>
@@ -91,4 +94,10 @@
 		</when>
 		</choose>
 	</select>
+	<delete id="brandDel">
+		delete from goodInfo where brandcode in 
+		<foreach collection="array" item="no" index="idx" separator="," open="(" close=")">
+			${no[idx]}
+		</foreach>
+	</delete>
 </mapper>

@@ -96,6 +96,16 @@ public class HQServiceImpl implements HQService{
 		// TODO Auto-generated method stub
 		return dao.goodlist(vo);
 	}
+	@Override
+	public int lastBrandcode() {
+		// TODO Auto-generated method stub
+		return dao.lastBrandcode();
+	}
+	@Override
+	public int goodDel(int[] delArray) {
+		// TODO Auto-generated method stub
+		return dao.goodDel(delArray);
+	}
 	
 	
 }

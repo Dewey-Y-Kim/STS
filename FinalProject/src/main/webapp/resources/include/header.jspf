@@ -14,6 +14,9 @@
 <!-- <link rel="stylesheet"  href="/dcancer/config/Mystyle.css" type="text/css"/>  -->
 <link rel="stylesheet" href="/dcancer/config/testCSS.css" type="text/css"/>
 <script>
+	$(window).on('load', function () {
+	    $("#loadingwindow").hide();
+	});
 	$(function(){
 		$('document').ready(function(){
 			if(${auth==null} || ${auth==""}){
@@ -37,7 +40,7 @@
 <body class="body">
 <header>
 	<div class="Logo">
-		<a href="main"><img class="logo logoimg"src="http://localhost:8081/dcancer/resources/img/eye-Logo.svg"/></a>
+		<a href="main"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.svg"/></a>
 		<c:if test="${auth!=null}">
 		<div class="logo-btn-menu menu btn-group">
 			  <button id='campSellgraph' type="button" class="logo-btn btn btn-outline-dark">매장별 매출현황</button>
@@ -51,3 +54,6 @@
 </header>
 
 <div class="wrap">
+<!-- <div id="loadingwindow">
+	<div class="spinner-border text-info"></div>
+</div> -->

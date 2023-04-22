@@ -1,4 +1,4 @@
-package com.naver.dcancer.CTL;
+package com.naver.dcancer.CTL.HQ;
 
 import java.nio.charset.Charset;
 

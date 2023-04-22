@@ -13,20 +13,28 @@
 .main_frm {
   flex: 1;
   padding : 1%;
+  min-width : 82%;
 }
 
-.left_menu, .right_menu {
+.left_menu{
   /* 12em은 열의 너비입니다. */
   flex: 0 0 9%;
 }
+.right_menu{
+	flex: 0 0 9%;	
+} 
 .header {
 }
 .side-btn{
-	width : 8%;
+	width : 9%;
+	height :80px;
 }
 .left_menu {
   /* 좌측에 네비게이션을 놓습니다. */
   order: -1;
+}
+.right_menu {
+	flex: 2;
 }
 .logoimg{
 	height:100px;
@@ -34,4 +42,25 @@
 
 ul, li {
 	list-style-type: none;
+}
+
+<!-- loading -->
+#loadingwindow {
+	width: 720px;
+	height: 1024px;
+	top: 0;
+	left: 0;
+	position: relative;
+	display: block;
+	opacity: 0.8;
+	background: gray;
+	z-index: 99;
+	text-align: center;
+}
+
+#loadingwindow > div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
 }

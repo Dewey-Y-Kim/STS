@@ -1,4 +1,4 @@
-package com.naver.dcancer.CTL;
+package com.naver.dcancer.CTL.HQ;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,6 @@ public class HQBtnCTL {
 		vo.setTotalLine(service.pagingData("sellerInfo","sellercode"));
 		mav.addObject("vo",vo);
 		mav.addObject("auth",session.getAttribute("auth"));
-		System.out.println(session.getAttribute("auth"));
 		return mav;
 	}
 	@GetMapping("HQ/Brandlist")
@@ -58,7 +57,12 @@ public class HQBtnCTL {
 		mav.setViewName("HQ/Brandlist");
 		return mav;
 	}
-	
+	@GetMapping("HQ/Coupon")
+	public ModelAndView Coupon(HttpSession session, pagingVO vo) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("HQ/coupon");
+		return mav;
+	}
 	
 	
 }

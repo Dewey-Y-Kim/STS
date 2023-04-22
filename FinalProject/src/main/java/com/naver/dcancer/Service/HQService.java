@@ -29,5 +29,7 @@ public interface HQService {
 	public List<goodDTO> goodlist(pagingVO vo);
 	public List<SellerDTO> sellerInfo();
 	public int lastGoodNo();
+	public int lastBrandcode();
 	public int goodinsert(List<goodDTO> list);
+	public int goodDel(int[] delArray);
 }
