@@ -94,10 +94,12 @@
 		</when>
 		</choose>
 	</select>
-	<delete id="brandDel">
+	<delete id="goodDel">
 		delete from goodInfo where brandcode in 
-		<foreach collection="array" item="no" index="idx" separator="," open="(" close=")">
-			${no[idx]}
+		<foreach collection="delno" item="no" index="idx" separator="," open="(" close=")">
+			${no}
 		</foreach>
 	</delete>
+	
+	
 </mapper>

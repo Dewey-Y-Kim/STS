@@ -54,13 +54,16 @@
 	.writeForm{
 	display:none;
 	}
-	
+	.noticeLine:hover li { 
+		background: gray;
+	}
 </style>
 <script type="text/javascript" src="/dcancer/config/MyCK.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/super-build/ckeditor.js"></script>
 <link rel="stylesheet"  href="/dcancer/config/MyCK.css" type="text/css"/>
 <script>
 $(function(){
+	// $(noticeLine).hover{	}
 	$('.writebtn').click(function(){
 		console.log('click');
 		$('.noticelist').css('display','none');

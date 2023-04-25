@@ -102,7 +102,7 @@ public class HQServiceImpl implements HQService{
 		return dao.lastBrandcode();
 	}
 	@Override
-	public int goodDel(int[] delArray) {
+	public int goodDel(List<String> delArray) {
 		// TODO Auto-generated method stub
 		return dao.goodDel(delArray);
 	}

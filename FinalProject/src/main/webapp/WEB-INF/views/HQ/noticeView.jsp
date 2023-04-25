@@ -28,6 +28,7 @@
 	.ck.ck-editor {
 	display:none;
 	}
+	
 </style>
 <script type="text/javascript" src="/dcancer/config/MyCK.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/super-build/ckeditor.js"></script>

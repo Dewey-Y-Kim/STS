@@ -31,5 +31,5 @@ public interface HQService {
 	public int lastGoodNo();
 	public int lastBrandcode();
 	public int goodinsert(List<goodDTO> list);
-	public int goodDel(int[] delArray);
+	public int goodDel(List<String> delArray);
 }
