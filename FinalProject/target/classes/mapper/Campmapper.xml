@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.dcancer.DAO.CampDAO">
+	<select id="customSelect" resultType="com.naver.dcancer.DTO.customDTO">
+		 select * from
+		(select * from
+		 (select CUSTOMNO, c.name, c.birth, c.email, c.addr, c.tel, c.gender, c.memo, c.registdate, cam.campname, c.code from customInfo c join campInfo cam on c.code = cam.code
+		<if test="searchWord!=null">
+		and ${searchKey} like '%${searchWord}%'
+		</if>
+		 order by CUSTOMNO desc)
+		 <![CDATA[where rownum<=${linePerPage}*${nowPage} order by CUSTOMNO asc]]>)
+		<choose>
+		<when test="nowPage!=totalPage">  
+		<![CDATA[where rownum<=${linePerPage} order by CUSTOMNO desc]]>
+		</when>
+		<when test="nowPage==totalPage">
+		<![CDATA[where rownum<=${lastPageLine} order by CUSTOMNO desc]]>
+		</when>
+		</choose> 
+	</select>
+</mapper>
