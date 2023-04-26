@@ -6,7 +6,7 @@
 	<select id="customSelect" resultType="com.naver.dcancer.DTO.customDTO">
 		 select * from
 		(select * from
-		 (select CUSTOMNO, c.name, c.birth, c.email, c.addr, c.tel, c.gender, c.memo, c.registdate, cam.campname, c.code from customInfo c join campInfo cam on c.code = cam.code
+		 (select CUSTOMNO, c.name, c.birth, c.email, c.addr1, c.addr2, c.tel, c.gender, c.registdate, cam.campname, c.code from customInfo c join campInfo cam on c.code = cam.code
 		<if test="searchWord!=null">
 		and ${searchKey} like '%${searchWord}%'
 		</if>
@@ -21,4 +21,18 @@
 		</when>
 		</choose> 
 	</select>
+	<select id="optDataSelect" resultType="com.naver.dcancer.DTO.OptDTO">
+		select RSph, RCyl, RAxis, RAdd, LSph, LCyl, LAxis, LAdd, pd, registDate from OptometryRegistry order by registdate desc 
+	</select>
+	<select id="customFinder" resultType="com.naver.dcancer.DTO.customDTO">
+		select * from customInfo where name = #{name} and tel = #{tel} and code = ${code}
+	</select>
+	<insert id="addCustomData">
+		insert into CustomInfo(customNo, name, birth, gender, tel, email, addr1, addr2, code) 
+		values(custom_sq.nextval, #{name}, #{birth}, #{gender}, #{tel}, #{email}, #{addr1}, #{addr2}, ${code})
+	</insert>
+	<insert id="addOptData">
+		insert into OptometryRegistry(Optometryno, customNo, Rsph, rcyl, raxis, radd, lsph, lcyl, laxis, ladd, pd, memo)
+		values( opt_sq.nextval, ${customNo}, ${RSph}, ${RCyl}, ${RAxis}, ${RAdd}, ${LSph}, ${LCyl}, ${LAxis}, ${LAdd}, ${pd}, #{memo})
+	</insert>
 </mapper>

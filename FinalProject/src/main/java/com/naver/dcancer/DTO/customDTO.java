@@ -1,12 +1,14 @@
 package com.naver.dcancer.DTO;
 
+import java.util.Arrays;
+
 public class customDTO {
 	private int customNo;
 	private String name;
 	private String birth;
 	private String email;
-	private String addr;
-	private String address;
+	private String addr1;
+	private String addr2;
 	private String gender;
 	private String code;
 	private String tel;
@@ -15,6 +17,13 @@ public class customDTO {
 	private String tel3;
 	private String campname;
 	
+	
+	@Override
+	public String toString() {
+		return "customDTO [customNo=" + customNo + ", name=" + name + ", birth=" + birth + ", email=" + email
+				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", gender=" + gender + ", code=" + code + ", tel=" + tel
+				+ ", tel1=" + tel1 + ", tel2=" + tel2 + ", tel3=" + tel3 + ", campname=" + campname + "]";
+	}
 	public int getCustomNo() {
 		return customNo;
 	}
@@ -39,17 +48,18 @@ public class customDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getAddr() { //전체주소
-		return addr;
+	
+	public String getAddr1() {
+		return addr1;
 	}
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
 	}
-	public String getAddress() { //상세주소
-		return address;
+	public String getAddr2() {
+		return addr2;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
 	public String getGender() {
 		return gender;
@@ -68,24 +78,27 @@ public class customDTO {
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
-		String[] teldivide= tel.split(".");
+		String[] teldivide = new String[3]; 
+		teldivide= (this.tel).split("-");
+		System.out.println(Arrays.toString(teldivide));
 		tel1=teldivide[0];
 		tel2=teldivide[1];
 		tel3=teldivide[2];
+		System.out.println("[dtoTel]"+this.tel+"\t"+teldivide[0]+"\t"+teldivide[1]+"\t"+teldivide[2]);
 	}
 	public String getTel1() {
 		return tel1;
 	}
 	public void setTel1(String tel1) {
 		this.tel1 = tel1;
-		tel = tel1+"."+tel2+"."+tel3;
+		tel = tel1+"-"+tel2+"-"+tel3;
 	}
 	public String getTel2() {
 		return tel2;
 	}
 	public void setTel2(String tel2) {
 		this.tel2 = tel2;
-		tel = tel1+"."+tel2+"."+tel3;
+		tel = tel1+"-"+tel2+"-"+tel3;
 	}
 	public String getTel3() {
 		return tel3;
@@ -93,7 +106,7 @@ public class customDTO {
 	}
 	public void setTel3(String tel3) {
 		this.tel3 = tel3;
-		tel = tel1+"."+tel2+"."+tel3;
+		tel = tel1+"-"+tel2+"-"+tel3;
 	}
 	public String getCampname() {
 		return campname;
