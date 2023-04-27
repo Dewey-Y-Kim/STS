@@ -6,11 +6,11 @@
 	<select id="customSelect" resultType="com.naver.dcancer.DTO.customDTO">
 		 select * from
 		(select * from
-		 (select CUSTOMNO, c.name, c.birth, c.email, c.addr1, c.addr2, c.tel, c.gender, c.registdate, cam.campname, c.code from customInfo c join campInfo cam on c.code = cam.code
+		 (select c.CUSTOMNO, c.name, c.birth, c.email, c.addr1, c.addr2, c.tel, c.gender, c.registdate, c.code from customInfo c
 		<if test="searchWord!=null">
-		and ${searchKey} like '%${searchWord}%'
+		where ${searchKey} like '%${searchWord}%'
 		</if>
-		 order by CUSTOMNO desc)
+		 order by c.CUSTOMNO desc)
 		 <![CDATA[where rownum<=${linePerPage}*${nowPage} order by CUSTOMNO asc]]>)
 		<choose>
 		<when test="nowPage!=totalPage">  
@@ -22,17 +22,26 @@
 		</choose> 
 	</select>
 	<select id="optDataSelect" resultType="com.naver.dcancer.DTO.OptDTO">
-		select RSph, RCyl, RAxis, RAdd, LSph, LCyl, LAxis, LAdd, pd, registDate from OptometryRegistry order by registdate desc 
+		select customNo, RSph, RCyl, RAxis, RAdd, LSph, LCyl, LAxis, LAdd, pd, registDate from OptometryRegistry  where customNo = ${no} order by registdate desc 
 	</select>
-	<select id="customFinder" resultType="com.naver.dcancer.DTO.customDTO">
+	<select id="customfinder" resultType="com.naver.dcancer.DTO.customDTO">
 		select * from customInfo where name = #{name} and tel = #{tel} and code = ${code}
+	</select>
+	<select id="customfind" resultType="com.naver.dcancer.DTO.customDTO">
+		select customNo, name, to_char(birth,'YYYY-MM-DD') birth, email, addr1, addr2, gender, code, tel from customInfo where customNo=${customNo}
 	</select>
 	<insert id="addCustomData">
 		insert into CustomInfo(customNo, name, birth, gender, tel, email, addr1, addr2, code) 
-		values(custom_sq.nextval, #{name}, #{birth}, #{gender}, #{tel}, #{email}, #{addr1}, #{addr2}, ${code})
+		values(custom_sq.nextval, #{name}, #{birth,jdbcType=varchar}, #{gender,jdbcType=varchar}, #{tel}, #{email,jdbcType=varchar}, #{addr1,jdbcType=varchar}, #{addr2,jdbcType=varchar}, ${code})
+		<selectKey keyProperty="customNo" resultType="int" order="AFTER">
+			select custom_sq.currval from dual
+		</selectKey>
 	</insert>
 	<insert id="addOptData">
-		insert into OptometryRegistry(Optometryno, customNo, Rsph, rcyl, raxis, radd, lsph, lcyl, laxis, ladd, pd, memo)
-		values( opt_sq.nextval, ${customNo}, ${RSph}, ${RCyl}, ${RAxis}, ${RAdd}, ${LSph}, ${LCyl}, ${LAxis}, ${LAdd}, ${pd}, #{memo})
+		insert into OptometryRegistry(Optometryno, customNo, Rsph, rcyl, raxis, lsph, lcyl, laxis, pd, radd, ladd, memo)
+		values( opt_sq.nextval, ${customNo}, ${RSph}, ${RCyl}, ${RAxis}, ${LSph}, ${LCyl}, ${LAxis}, ${pd}, ${RAdd}, ${LAdd}, #{memo,jdbcType=VARCHAR})
+		<selectKey keyProperty="registDate" resultType="String" order="AFTER">
+			select to_Char(sysdate,'YYYY-MM-DD') registDate from dual
+		</selectKey>
 	</insert>
 </mapper>

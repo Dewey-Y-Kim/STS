@@ -48,4 +48,10 @@ public class CampServiceImpl implements CampService {
 		return dao.customfinder(name, tel, code);
 	}
 
+	@Override
+	public customDTO customfind(int no) {
+		// 고객번호로 검색
+		return dao.customfind(no);
+	}
+	
 }

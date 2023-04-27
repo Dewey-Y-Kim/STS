@@ -42,6 +42,14 @@ public class customCTL {
 		System.out.println(list);
 		return list;
 	}
+	@PostMapping("customSetter")
+	public customDTO customSetter(@RequestParam("no")int no) {
+		customDTO dto = service.customfind(no);
+		System.out.println(dto.toString());
+		return dto;
+	}
+	//실패 제거
+	/* [customDTO [customNo=2, name=손놈1호, birth=1900-01-01 00:00:00, email=sj@gmail.com, addr1=강변북로, addr2=2길, gender=M, code=0, tel=010-4243-4243, tel1=010, tel2=4243, tel3=4243, campname=본사]]
 	@PostMapping(value="addressFind",produces = "Application/text;charset=UTF-8")
 	public String addressFind(@RequestParam("keyword")String keyword,pagingVO addrpaging){
 		String currentPage = String.valueOf(addrpaging.getNowPage()); 
@@ -74,39 +82,84 @@ public class customCTL {
 		 // response.getWriter().write(sb.toString());
 		return result;
 	}
+	*/
+	
 	@PostMapping("optData")
 	public List<OptDTO> optDatacall(int customNo){
+		System.out.println(customNo);
 		List<OptDTO> list = service.optDataSelect(customNo);
 		
 		return list;
 	}
 	@PostMapping("addcustomInfo")
-	public String register(HttpSession session, customDTO dto) {
-		int result=-1;
+	public int register(HttpSession session, customDTO dto) {
 		
 		dto.setCode((String)session.getAttribute("code"));
 		System.out.println(dto.toString());
-		service.addCustomData(dto);
-		customDTO resDTO = service.customfinder(dto.getName(),dto.getTel(),dto.getCampname());
-		String res;
-		if(result==0) {
-			res="failed";
-		}else {
-			//본래는 고객번호만 넣어줘도 되나, 차후 업데이트를 위해 dto를 json화 해서 보냄
-			JsonObject json = new JsonObject();
-			json.addProperty("customNo", resDTO.getCustomNo());
-			json.addProperty("name", resDTO.getName());
-			json.addProperty("birth", resDTO.getBirth());
-			json.addProperty("email", resDTO.getEmail());
-			json.addProperty("addr1", resDTO.getAddr1());
-			json.addProperty("addr2", resDTO.getAddr2());
-			json.addProperty("gender", resDTO.getGender());
-			json.addProperty("code", resDTO.getCode());
-			json.addProperty("tel1", resDTO.getTel1());
-			json.addProperty("tel2", resDTO.getTel2());
-			json.addProperty("tel3", resDTO.getTel3());
-			res=json.toString();
+		int result =service.addCustomData(dto);
+		System.out.println(dto);
+		return dto.getCustomNo();
+	}
+	@SuppressWarnings("null")
+	@PostMapping("addOptData")
+	public String addOptData (String RSph,
+								String RCyl,
+								String RAxis,
+								String RAdd,
+								String LSph,
+								String LCyl,
+								String LAxis,
+								String LAdd,
+								String pd,
+								int customNo,
+								String memo ) {
+		OptDTO dto = new OptDTO();
+		if (RSph != null && !RSph.equals("")) {
+			dto.setRSph(Double.parseDouble(RSph));
 		}
-		return res;
+		if (RCyl != null && !RCyl.equals("")) {
+			dto.setRCyl(Double.parseDouble(RCyl));
+		}
+		if (RAxis != null && !RAxis.equals("")){
+			dto.setRAxis(Integer.parseInt(RAxis));
+		}
+		if (RAdd !=null && !RAdd.equals("")) {
+			dto.setRAdd(Double.parseDouble(RAdd));
+		}
+		if (LSph !=null && !LSph.equals("")) {
+			dto.setLSph(Double.parseDouble(LSph));
+		}
+		if (LCyl != null && !LCyl.equals("")) {
+			dto.setRCyl(Double.parseDouble(LCyl));
+		}
+		if (LAxis != null && !LAxis.equals("")){
+			dto.setRAxis(Integer.parseInt(LAxis));
+		}
+		if (LAdd !=null && !LAdd.equals("")) {
+			dto.setRAdd(Double.parseDouble(LAdd));
+		}
+		if (pd != null && !pd.equals("")) {
+			dto.setPd(Double.parseDouble(pd));
+		}
+		if ( customNo !=0 ) {
+			dto.setCustomNo(customNo);
+		}
+		int result = service.addOptData(dto);
+		JsonObject json = new JsonObject();
+		if(result > 0) {
+			json.addProperty("memo", memo);
+			json.addProperty("pd", pd);
+			json.addProperty("LSph", LSph);
+			json.addProperty("LCyl", LCyl);
+			json.addProperty("LAxis", LAxis);
+			json.addProperty("LAdd", LAdd);
+			json.addProperty("RSph", RSph);
+			json.addProperty("RCyl", RCyl);
+			json.addProperty("RAxis", RAxis);
+			json.addProperty("RAdd", RAdd);
+			json.addProperty("customNo",customNo);
+			json.addProperty("registDate", dto.getRegistDate());
+		}
+		return json.toString();
 	}
 }

@@ -13,5 +13,6 @@ public interface CampService {
 	public List<OptDTO> optDataSelect(int customNo);
 	public int addCustomData(customDTO custom);
 	public int addOptData(OptDTO opt);
-	public customDTO customfinder(@Param("name")String name, @Param("tel") String tel, @Param("code") String code);;
+	public customDTO customfinder(@Param("name")String name, @Param("tel") String tel, @Param("code") String code);
+	public customDTO customfind(@Param("no")int no);
 }
