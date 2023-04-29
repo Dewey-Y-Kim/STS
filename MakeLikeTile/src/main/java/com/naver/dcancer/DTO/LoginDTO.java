@@ -13,9 +13,13 @@ public class LoginDTO {
 	private String code;
 	private String campName;
 	private int empno;
-	private String ename;
 	private String tel;
 	private String fax;
 	private String bussinessNo;
 	private int auth;
+	private String ename;
+	public String getEname() {
+		// TODO Auto-generated method stub
+		return ename;
+	}
 }

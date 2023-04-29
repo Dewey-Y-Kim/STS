@@ -12,9 +12,9 @@
 </head>
 <body>
 <div>
-	<button class='edit' value="수정"></button><button class='del' value="삭제"></button>
+	<button id="수정"></button><button id="삭제"></button>
 	<form method="post" name="boardEdit">
-		<input type="hidden" name=no value="${dto.no}" >
+		<input type="text" name=no value="${dto.no}" hidden>
 		<div class="input-group mb-3">
 		  <span class="input-group-text">제목</span>
 		  <input type="text" class="form-control" name="title" value="${dto.title }">

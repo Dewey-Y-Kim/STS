@@ -35,7 +35,7 @@
 	<!-- include -->
 	<jsp-config>
 		<jsp-property-group>
-		<url-pattern>/WEB-INF/views/*</url-pattern>
+		<url-pattern>/WEB-INF/views/Frame/*</url-pattern>
 			<include-prelude>/resources/include/header.jspf</include-prelude>
 			<include-coda>/resources/include/footer.jspf</include-coda>
 		</jsp-property-group>

@@ -7,10 +7,9 @@ ul,li{
 	list-style:none;
 }
 header {
-	background-image:/resources/img/sky_001.jpg;
+	background-image:	resources/img/sky_001.jpg;
 
 }
-
 .logoimg{
 	height:100px;
 }
@@ -22,16 +21,16 @@ header {
 }
 #loginFrm div {
 	width:40%;
-	float: none;
 }
 #loginFrm button{
 	width : 60%;
 	margin-left:80%;
 }
-.bodypart{
+
+.body div{
+	float:left;
 	min-height: 80%;
 }
-
 .left_submenu, .right_submenu{
 	width: 6%;
 }
@@ -43,13 +42,10 @@ header {
 	height: 80px;
 }
 
-#mainframe{
+.main{
 	width:88%;
-	min-height:550px;
 }
-#wrap{
-	clear:both;
-}
+
 #section{
 	height:80%;
 }
@@ -70,12 +66,9 @@ header {
 #adminMenu{
 	padding-top: 30px;
 }
-.bodypart{
+body{
 	height: 100%;
 	width :100% auto;
-}
-.bodypart>div{
-	float:left;
 }
 #footer{
 	height:100px;
