@@ -40,13 +40,16 @@
 <body class="body">
 <header>
 	<div class="Logo">
-		<a href="main"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.svg"/></a>
+		<c:if test="${auth==null}">
+			<a href="<%=request.getContextPath()%>"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.svg"/></a>
+		</c:if>
 		<c:if test="${auth!=null}">
-		<div class="logo-btn-menu menu btn-group">
-			  <button id='campSellgraph' type="button" class="logo-btn btn btn-outline-dark">매장별 매출현황</button>
-			  <button type="button" class="logo-btn btn btn-outline-dark">Samsung</button>
-			  <a href="<%=request.getContextPath()%>/logout"><button type="button" class="logo-btn btn btn-outline-dark">LogOut</button></a>
-		</div>
+			<a href="main"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.svg"/></a>
+			<div class="logo-btn-menu menu btn-group">
+				  <button id='campSellgraph' type="button" class="logo-btn btn btn-outline-dark">매장별 매출현황</button>
+				  <button type="button" class="logo-btn btn btn-outline-dark">Samsung</button>
+				  <a href="<%=request.getContextPath()%>/logout"><button type="button" class="logo-btn btn btn-outline-dark">LogOut</button></a>
+			</div>
 	</c:if>
 	</div>
 	

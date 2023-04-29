@@ -102,17 +102,7 @@ public class customCTL {
 	}
 	@SuppressWarnings("null")
 	@PostMapping("addOptData")
-	public String addOptData (String RSph,
-								String RCyl,
-								String RAxis,
-								String RAdd,
-								String LSph,
-								String LCyl,
-								String LAxis,
-								String LAdd,
-								String pd,
-								int customNo,
-								String memo ) {
+	public String addOptData (String RSph, String RCyl,	String RAxis, String RAdd, String LSph, String LCyl, String LAxis, String LAdd, String pd, int customNo, String memo ) {
 		OptDTO dto = new OptDTO();
 		if (RSph != null && !RSph.equals("")) {
 			dto.setRSph(Double.parseDouble(RSph));

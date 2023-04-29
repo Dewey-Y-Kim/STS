@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.naver.dcancer.DAO.CampDAO;
 import com.naver.dcancer.DTO.OptDTO;
+import com.naver.dcancer.DTO.SellDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
 
@@ -52,6 +53,20 @@ public class CampServiceImpl implements CampService {
 	public customDTO customfind(int no) {
 		// 고객번호로 검색
 		return dao.customfind(no);
+	}
+	//매출등록
+	@Override
+	public List<SellDTO> selledList(String code, String date) {
+		// 매장, 지정일에 따른 판매내역 list로
+		return dao.selledList(code, date);
+	}
+
+	@Override
+	public List<SellDTO> selledData(String code, String date) {
+		// TODO Auto-generated method stub
+		List<SellDTO> list=dao.selledData(code, date);
+		System.out.println("[SelledData] list:"+list);
+		return list;
 	}
 	
 }

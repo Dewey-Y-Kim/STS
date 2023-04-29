@@ -125,11 +125,16 @@ main{
 			// 025 -1.00 -100
 			let num = $(this).val();
 			if( num > 20 || num < -20) {
-				$(this).val( (num/100).toFixed(2) );
-			}else {
-				// alert('유효한 값이 아닙니다.'); 표시할 수 있으나.......... 솔직히 어지간한 안경사는 그럴일이 없다고함... 본인생각도동일.....
+					$(this).val( (num/100).toFixed(2) ); //+-20 이상 124 -> 1.24
+			}else { // 20이내....
+					$(this).val(((100*$(this).val())/100).toFixed(2)); // -1 -1.00
+			}
+			num = $(this).val()
+			if ( num % 0.25 != 0 ){
+				alert('유효한 값인지 확인을 부탁드립니다.');
 			}
 		});
+		
 		$(document).on('click',".modal_selectbox input[type=button]",function(){
 			console.log($(this).attr('class'));	
 		});
@@ -186,6 +191,7 @@ main{
 				}
 			});
 		});
+	
 	});
 	// 검색버튼
 	function btn_search(){
@@ -276,7 +282,7 @@ main{
 					tag+='<span class="input-group-text">PD : '+data.pd+'</span>';
 					tag += '<span class="input-group-text">Sph</span><span class="input-group-text">Cyl</span><span class="input-group-text">Axis</span><span class="input-group-text">ADD</span></div><div class="line d-flex flex-fill flex-row">';
 					tag += '<div class="flex-fill row input-group"><span class="input-group-text diopt_in">OD</span>';
-					tag +='<span class="input-group-text diopt_in">'+data.rsph+'</span>'; 
+					tag +='<span class="input-group-text diopt_in">'+(data.rsph/100*100)+'</span>'; 
 					tag += '<span class="input-group-text diopt_in">'+data.rcyl+'</span>';
 					tag += '<span class="input-group-text diopt_in">'+data.raxis+'</span>';
 					tag += '<span class="input-group-text diopt_in">'+data.radd+'</span></div></div>';
@@ -424,8 +430,8 @@ main{
 			<div class="d-flex flex-column">
 				<div class="d-flex justify-content-end">
 					<div class="input-group" style="width:20%;">
-					<span class="input-group-text" style="width:50px">PD</span>
-					<input type="text" class="form-control diopt_in" name="pd" placeHolder = "pd"/>	
+					<span class="input-group-text" style="width:100px">PD(mm)</span>
+					<input type="text" class="form-control diopt_in" name="pd"/>	
 					</div>
 				</div>
 				<div class="line d-flex flex-fill flex-row">
@@ -438,7 +444,7 @@ main{
 					<div class="flex-fill row">
 						<span>Cyl</span></div>
 					<div class="flex-fill row">
-						<span>Axi</span>
+						<span>Axis</span>
 					</div>
 					<div class="flex-fill row">
 						<span>ADD</span>
@@ -447,19 +453,19 @@ main{
 				<div class="line d-flex flex-fill flex-row">
 					<div class="flex-fill row input-group diopt_box">
 						<span class="input-group-text diopt_in">OD</span>
-						<input type="text" class="form-control diopter diopt_in" name="RSph" placeHolder = "Sph"/> 
-						<input type="text" class="form-control diopter diopt_in" name="RCyl" placeHolder = "Cyl"/>
-						<input type="text" class="form-control diopt_in" name="RAxis" placeHolder = "Axis"/>
-						<input type="text" class="form-control diopter diopt_in" name="RAdd" placeHolder = "Add"/>
+						<input type="number" class="form-control diopter diopt_in" name="RSph" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/> 
+						<input type="number" class="form-control diopter diopt_in" name="RCyl" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
+						<input type="text" class="form-control diopt_in" name="RAxis" />
+						<input type="number" class="form-control diopter diopt_in" name="RAdd" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
 					</div>
 				</div>
 				<div class="line d-flex flex-fill flex-row">
 					<div class="flex-fill row input-group diopt_box">
 						<span class="input-group-text diopt_in">OS</span>
-						 <input type="text" class="form-control diopter diopt_in" name="LSph" placeHolder = "Sph"/> 
-						<input type="text" class="form-control diopter diopt_in" name="LCyl" placeHolder = "Cyl"/>
-						<input type="text" class="form-control diopt_in" name="LAxis" placeHolder = "Axis" />
-						<input type="text" class="form-control diopter diopt_in" name="LAdd" placeHolder = "Add" />
+						 <input type="number" class="form-control diopter diopt_in" name="LSph" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/> 
+						<input type="number" class="form-control diopter diopt_in" name="LCyl" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
+						<input type="text" class="form-control diopt_in" name="LAxis"/>
+						<input type="number" class="form-control diopter diopt_in" name="LAdd" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000" />
 					</div>
 				</div>
 				<textarea rows="" cols="" id="memo" name="memo"></textarea>

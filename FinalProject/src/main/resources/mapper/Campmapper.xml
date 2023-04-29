@@ -44,4 +44,14 @@
 			select to_Char(sysdate,'YYYY-MM-DD') registDate from dual
 		</selectKey>
 	</insert>
+	<select id="selledList" resultType="com.naver.dcancer.DTO.SellDTO">
+		select distinct s.sellNo, s.empno, s.sellstatus, to_char(selldate,'YYYY-MM-DD HH24:MI:SS') selldate, e.ename
+		from sellInfo s join empInfo e on e.empno=s.empno
+		where s.code=${code} and to_char(s.sellDate,'YYYY-MM-DD')=#{date} order by s.sellNo
+	</select>
+	<select id="selledData" resultType="com.naver.dcancer.DTO.SellDTO">
+		select s.sellNo, s.goodNo, s.qtt, s.realPrice, g.model
+		from sellInfo s join goodinfo g on s.goodNo=g.goodNo
+		where s.code=${code} and to_char(s.sellDate,'YYYY-MM-DD')=#{date} order by s.sellNo
+	</select>
 </mapper>
