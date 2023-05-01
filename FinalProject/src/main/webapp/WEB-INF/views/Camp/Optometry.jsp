@@ -173,6 +173,33 @@ main{
 				}
 			})
 		});
+		//고객 등록
+		// $(document).on('click','.modal_close',function(){
+			
+		$('.modal_close').click(function(){
+			$("#custom_submit_btn").css('display','block');
+		});
+		
+		//고객 정보 등록
+		$("#custom_submit_btn").click(function(){
+			var data = $("#regist_Frm").serialize();
+			var url = "addcustomInfo";
+			$.ajax({
+				url:url,
+				data:data,
+				type:'post',
+				success:function(result){
+					if(result!=null){
+						console.log(result);
+						$(".customNo").val(result);
+						$("#opto_submit_btn").css("display","block");
+					}
+				},error:function(e){
+					console.log(e.responseText);
+					alert('등록실패');
+				}
+			});
+		});
 		//검안 등록
 		$("#opto_submit_btn").click(function(){
 			event.preventDefault();
@@ -184,7 +211,9 @@ main{
 				data:data,
 				type:"post",
 				success:function(result){
-					console.log(result);
+					
+					alert("등록되었습니다.");
+					
 					//결과 입력창에 출력
 				},error:function(e){
 					console.log("failed");
@@ -229,7 +258,7 @@ main{
 						
 						tag += '</div>';
 					});
-					$('.modal-content').html(tag);
+					$('.modal-body').html(tag);
 					$('#custom_modal').modal('show');
 				}else{
 					// $("#regist_btn").attr("onclick", "regist()");
@@ -243,24 +272,6 @@ main{
 		});	
 	}
 	
-	//고객 정보 등록
-	function regist(){
-		var data = $("#regist_Frm").serialize();
-		var url = "addcustomInfo";
-		$.ajax({
-			url:url,
-			data:data,
-			type:'post',
-			success:function(result){
-				if(result>0){
-					btn_search();
-				}
-			},error:function(e){
-				console.log(e.responseText);
-				alert('등록실패');
-			}
-		});
-	}
 	//고객정보 결정시 검안정보 출력
 	function optdata(){
 		console.log("customNo:"+$('#customNo').val())
@@ -341,10 +352,10 @@ main{
 		*/
 	
 </script>
-<main class=main_frm>
-	<form id = "regist_Frm">
-		<!-- 고객창 -->
-		<div id="inputbox">
+	<main class=main_frm>
+		<form id = "regist_Frm">
+			<!-- 고객창 -->
+			<div id="inputbox">
 				<div class="d-flex justify-content-end">
 					<div class="d-flex">
 						<input type="button" class="btn btn-outline-primary" id="opto_submit_btn" value="검안등록"/>
@@ -482,18 +493,13 @@ main{
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header ">
-	       	<!-- 
-	       	<div id="customList" style='width:100%;'> 
-	       	
-	       	</div>
-	       	 -->
-	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+			  <h4 class="modal-title">고객검색</h4>
+			  <button type="button" class="btn btn-danger modal_close" data-bs-dismiss="modal">Close</button>
 	      </div>
-	      <div class="modal-body chk1" id="chk1"> bod1</div>
-	      <div class="modal-body chk2" id="chk2"> bod2</div>
-	      <div class="modal-body chk3" id="chk3"> bod3</div>
-	      <div class="modal-body chk5" id="chk5"> bod5</div>
-		  <!-- <div class="modal-footer">footer</div>  -->	
+	      <div class="modal-body chk1" id="chk1"> </div>
+		  <div class="modal-footer">
+        	<button type="button" class="btn btn-danger modal_close" data-bs-dismiss="modal">Close</button>
+      	  </div>	
 	    </div>
 	  </div>
 	</div> 

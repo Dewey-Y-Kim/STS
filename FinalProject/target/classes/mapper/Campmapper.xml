@@ -32,14 +32,14 @@
 	</select>
 	<insert id="addCustomData">
 		insert into CustomInfo(customNo, name, birth, gender, tel, email, addr1, addr2, code) 
-		values(custom_sq.nextval, #{name}, #{birth,jdbcType=varchar}, #{gender,jdbcType=varchar}, #{tel}, #{email,jdbcType=varchar}, #{addr1,jdbcType=varchar}, #{addr2,jdbcType=varchar}, ${code})
+		values(custom_sq.nextval, #{name}, #{birth,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{tel}, #{email,jdbcType=VARCHAR}, #{addr1,jdbcType=VARCHAR}, #{addr2,jdbcType=VARCHAR}, ${code})
 		<selectKey keyProperty="customNo" resultType="int" order="AFTER">
 			select custom_sq.currval from dual
 		</selectKey>
 	</insert>
 	<insert id="addOptData">
-		insert into OptometryRegistry(Optometryno, customNo, Rsph, rcyl, raxis, lsph, lcyl, laxis, pd, radd, ladd, memo)
-		values( opt_sq.nextval, ${customNo}, ${RSph}, ${RCyl}, ${RAxis}, ${LSph}, ${LCyl}, ${LAxis}, ${pd}, ${RAdd}, ${LAdd}, #{memo,jdbcType=VARCHAR})
+		insert into OptometryRegistry(Optometryno, customNo, Rsph, rcyl, raxis, lsph, lcyl, laxis, pd, radd, ladd, memo, sellno)
+		values( opt_sq.nextval, ${customNo}, ${RSph}, ${RCyl}, ${RAxis}, ${LSph}, ${LCyl}, ${LAxis}, ${pd}, ${RAdd}, ${LAdd}, #{memo,jdbcType=VARCHAR}, ${sellNo})
 		<selectKey keyProperty="registDate" resultType="String" order="AFTER">
 			select to_Char(sysdate,'YYYY-MM-DD') registDate from dual
 		</selectKey>
@@ -53,5 +53,22 @@
 		select s.sellNo, s.goodNo, s.qtt, s.realPrice, g.model
 		from sellInfo s join goodinfo g on s.goodNo=g.goodNo
 		where s.code=${code} and to_char(s.sellDate,'YYYY-MM-DD')=#{date} order by s.sellNo
+	</select>
+	<update id="selldataUpdate">
+		update sellInfo set customNo=${customNo}, promiseDate=#{promiseDate}, sellStatus=#{sellStatus} where sellNo=${sellNo}
+	</update>
+	<select id="soldDay" resultType="com.naver.dcancer.DTO.soldDTO">
+		select campname, sum from (
+		select code,sum(qtt*realprice) sum from 
+		sellInfo where to_char(selldate,'YYYY-MM-DD')=
+	
+		to_char(Sysdate,'YYYY-MM-DD') 
+	
+		group by code) s join campInfo c on c.code=s.code order by c.code;
+	</select>
+	<select id='soldBetween' resultType="com.naver.dcancer.DTO.soldDTO">
+		select campname, sum from 
+			(select code,sum(qtt*realprice) sum from sellInfo where selldate BETWEEN to_date('23-04-20') and sysdate group by code) s 
+				join campInfo c on c.code=s.code order by c.code;
 	</select>
 </mapper>

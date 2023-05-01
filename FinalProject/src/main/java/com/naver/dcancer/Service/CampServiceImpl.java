@@ -68,5 +68,11 @@ public class CampServiceImpl implements CampService {
 		System.out.println("[SelledData] list:"+list);
 		return list;
 	}
+
+	@Override
+	public int selldataUpdate(OptDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.selldataUpdate(dto);
+	}
 	
 }

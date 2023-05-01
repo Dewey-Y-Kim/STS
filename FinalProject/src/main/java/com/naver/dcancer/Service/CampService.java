@@ -21,4 +21,5 @@ public interface CampService {
 	//매출등록 판매내역을 전산화 update 위주
 	public List<SellDTO> selledList(String code, String date);
 	public List<SellDTO> selledData(String code, String date);
+	public int selldataUpdate(OptDTO dto);
 }

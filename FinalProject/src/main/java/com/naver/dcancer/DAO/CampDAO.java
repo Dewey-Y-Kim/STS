@@ -22,5 +22,6 @@ public interface CampDAO {
 	public List<SellDTO> selledList(@Param("code") String code, @Param("date") String date);
 		// 판매내역 리스트
 	public List<SellDTO> selledData(@Param("code") String code, @Param("date") String date);
-	
+		// sellInfo 업데이트
+	public int selldataUpdate(OptDTO dto);
 }

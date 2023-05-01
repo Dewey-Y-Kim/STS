@@ -12,7 +12,11 @@ public class OptDTO {
 	private int LAxis;
 	private double LAdd;
 	private double pd;
-	private double customNo;
+	private int customNo;
 	private String registDate;
 	private String memo;
+	//selldata Update
+	private String sellNo;
+	private String promiseDate;
+	private String sellStatus;
 }

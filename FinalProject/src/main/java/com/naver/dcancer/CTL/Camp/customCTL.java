@@ -152,4 +152,12 @@ public class customCTL {
 		}
 		return json.toString();
 	}
+	@GetMapping("Optometry")
+	public ModelAndView search() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("Camp/Optometry");
+		return mav;
+	}
+	
+	
 }
