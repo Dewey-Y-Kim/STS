@@ -8,6 +8,7 @@ import com.naver.dcancer.DTO.OptDTO;
 import com.naver.dcancer.DTO.SellDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
+import com.naver.dcancer.DTO.soldDTO;
 
 public interface CampService {
 	//검안등록
@@ -22,4 +23,8 @@ public interface CampService {
 	public List<SellDTO> selledList(String code, String date);
 	public List<SellDTO> selledData(String code, String date);
 	public int selldataUpdate(OptDTO dto);
+	
+	//soldDay
+	public List<soldDTO> soldDay(@Param("date") String date);
+	public List<soldDTO> soldBetween(@Param("startDate") String startDate,@Param("endDate") String endDate);
 }

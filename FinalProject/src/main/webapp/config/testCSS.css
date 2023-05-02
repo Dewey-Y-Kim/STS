@@ -4,7 +4,10 @@
   min-height: 100vh;
   flex-direction: column;
 }
-
+.main_frm{
+	overflow:scroll;
+	max-height:800px;
+}
 .wrap {
   display: flex;
   flex: 1;

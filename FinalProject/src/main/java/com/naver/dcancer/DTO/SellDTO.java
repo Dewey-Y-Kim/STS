@@ -2,12 +2,11 @@ package com.naver.dcancer.DTO;
 
 import lombok.Data;
 
-@Data
 public class SellDTO {
 	String customNo;
 	String sellNo; //동시 판매내역 idx
 	String SellDate;
-	String PromiseDate;
+	String promiseDate;
 	int qtt;
 	String empNo;
 	String ename;
@@ -16,4 +15,84 @@ public class SellDTO {
 	String code; // 판매매장
 	int realPrice; //판매가
 	String model; //모델명
+	int optResult; // 검안결과 저장여부 0: 등록 x 1:검안완료
+	public String getCustomNo() {
+		return customNo;
+	}
+	public void setCustomNo(String customNo) {
+		this.customNo = customNo;
+	}
+	public String getSellNo() {
+		return sellNo;
+	}
+	public void setSellNo(String sellNo) {
+		this.sellNo = sellNo;
+	}
+	public String getSellDate() {
+		return SellDate;
+	}
+	public void setSellDate(String sellDate) {
+		SellDate = sellDate;
+	}
+	public String getPromiseDate() {
+		return promiseDate;
+	}
+	public void setPromiseDate(String promiseDate) {
+		this.promiseDate = promiseDate;
+		sellStatus="1";
+	}
+	public int getQtt() {
+		return qtt;
+	}
+	public void setQtt(int qtt) {
+		this.qtt = qtt;
+	}
+	public String getEmpNo() {
+		return empNo;
+	}
+	public void setEmpNo(String empNo) {
+		this.empNo = empNo;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+	public String getSellStatus() {
+		return sellStatus;
+	}
+	public void setSellStatus(String sellStatus) {
+		this.sellStatus = sellStatus;
+	}
+	public String getGoodNo() {
+		return goodNo;
+	}
+	public void setGoodNo(String goodNo) {
+		this.goodNo = goodNo;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public int getRealPrice() {
+		return realPrice;
+	}
+	public void setRealPrice(int realPrice) {
+		this.realPrice = realPrice;
+	}
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public int getOptResult() {
+		return optResult;
+	}
+	public void setOptResult(int optResult) {
+		this.optResult = optResult;
+	}
 }

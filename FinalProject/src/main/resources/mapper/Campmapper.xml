@@ -45,7 +45,7 @@
 		</selectKey>
 	</insert>
 	<select id="selledList" resultType="com.naver.dcancer.DTO.SellDTO">
-		select distinct s.sellNo, s.empno, s.sellstatus, to_char(selldate,'YYYY-MM-DD HH24:MI:SS') selldate, e.ename
+		select distinct customNo, s.sellNo, s.empno, s.sellstatus, to_char(selldate,'YYYY-MM-DD') selldate, e.ename, optResult
 		from sellInfo s join empInfo e on e.empno=s.empno
 		where s.code=${code} and to_char(s.sellDate,'YYYY-MM-DD')=#{date} order by s.sellNo
 	</select>
@@ -55,20 +55,17 @@
 		where s.code=${code} and to_char(s.sellDate,'YYYY-MM-DD')=#{date} order by s.sellNo
 	</select>
 	<update id="selldataUpdate">
-		update sellInfo set customNo=${customNo}, promiseDate=#{promiseDate}, sellStatus=#{sellStatus} where sellNo=${sellNo}
+		update sellInfo set customNo=${customNo}, <if test="promiseDate!=null">promiseDate=#{promiseDate,jdbcType=VARCHAR}, </if>sellStatus=#{sellStatus}, optResult=1 where sellNo=${sellNo}
 	</update>
 	<select id="soldDay" resultType="com.naver.dcancer.DTO.soldDTO">
-		select campname, sum from (
-		select code,sum(qtt*realprice) sum from 
-		sellInfo where to_char(selldate,'YYYY-MM-DD')=
-	
-		to_char(Sysdate,'YYYY-MM-DD') 
-	
-		group by code) s join campInfo c on c.code=s.code order by c.code;
+		select campname, sum, sellNo, round(sum/sellNo,-2) avg from (
+		select code,sum(qtt*realprice) sum, count(sellNo) sellNo from 
+		sellInfo where to_char(selldate,'YYYY-MM-DD')=#{date} 
+		group by code) s join campInfo c on c.code=s.code order by c.code
 	</select>
 	<select id='soldBetween' resultType="com.naver.dcancer.DTO.soldDTO">
-		select campname, sum from 
-			(select code,sum(qtt*realprice) sum from sellInfo where selldate BETWEEN to_date('23-04-20') and sysdate group by code) s 
-				join campInfo c on c.code=s.code order by c.code;
+		select campname, sum, sellNo, round(sum/sellNo,-2) avg from 
+			(select code,sum(qtt*realprice) sum, count(sellNo) sellNo from sellInfo where selldate BETWEEN #{startDate} and #{endDate} group by code) s 
+				join campInfo c on c.code=s.code order by c.code
 	</select>
 </mapper>

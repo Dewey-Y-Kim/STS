@@ -12,6 +12,7 @@ import com.naver.dcancer.DTO.OptDTO;
 import com.naver.dcancer.DTO.SellDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
+import com.naver.dcancer.DTO.soldDTO;
 
 @Service
 public class CampServiceImpl implements CampService {
@@ -73,6 +74,18 @@ public class CampServiceImpl implements CampService {
 	public int selldataUpdate(OptDTO dto) {
 		// TODO Auto-generated method stub
 		return dao.selldataUpdate(dto);
+	}
+
+	@Override
+	public List<soldDTO> soldDay(String date) {
+		// TODO Auto-generated method stub
+		return dao.soldDay(date);
+	}
+
+	@Override
+	public List<soldDTO> soldBetween(String startDate, String endDate) {
+		// TODO Auto-generated method stub
+		return dao.soldBetween(startDate, endDate);
 	}
 	
 }

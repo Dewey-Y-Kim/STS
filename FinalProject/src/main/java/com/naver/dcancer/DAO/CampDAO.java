@@ -8,6 +8,7 @@ import com.naver.dcancer.DTO.OptDTO;
 import com.naver.dcancer.DTO.SellDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
+import com.naver.dcancer.DTO.soldDTO;
 
 public interface CampDAO {
 	public List<customDTO> customSelect(pagingVO vo);
@@ -24,4 +25,7 @@ public interface CampDAO {
 	public List<SellDTO> selledData(@Param("code") String code, @Param("date") String date);
 		// sellInfo 업데이트
 	public int selldataUpdate(OptDTO dto);
+	//전체매장 매출확인
+	public List<soldDTO> soldDay(@Param("date") String date);
+	public List<soldDTO> soldBetween(@Param("startDate") String startDate,@Param("endDate") String endDate);
 }

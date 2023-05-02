@@ -3,10 +3,7 @@
 
 
 <style>
-.main_frm{
-	overflow:scroll;
-	max-height:800px;
-}
+
 #Sell_list{
 	width : 90%;
 	margin : 5%;
@@ -87,6 +84,7 @@ margin-right: 20px;
 	margin : 1%;
 	resize : none;
 }
+.sellLine()
 </style>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script>
@@ -109,6 +107,7 @@ margin-right: 20px;
 				}
 			}
 		});
+		
 		//전화번호에서 엔터키 누르면 검색
 		$(document).on('keyup','.telIn',function(){
 		//$(".telIn").keyup(function(){
@@ -165,15 +164,18 @@ margin-right: 20px;
 			//console.log(id.prev().child('class=[no]').val());
 			inputbox_open(id,sellno);
 		});
+		
 		// inputbox x 클릭시 닫힘
 		$(document).on('click','.detail-close',function(){
 			$(this).closest('.input_box').html("");
 		});
+		
 		// promiseDate 입력시 form 값 변환
-		$(document).on('change','',function(){
-			$('.promiseDate').val($("#promiseDate").val());
+		$(document).on('change','#promiseDate',function(){
+			$('.sellStatus').val($("#promiseDate").val("1"));
 		});
 		
+		$(document).on('change',)
 		//modal 선택시
 		$(document).on('click',".modal-body",function(){
 			$.ajax({
@@ -204,18 +206,16 @@ margin-right: 20px;
 				}
 			})
 		});
+		
 		// 검색버튼
-		function btn_search(){
-			console.log("버튼클릭");
-			if($("#registed").val()=='N'){
-				if($('#name').val()!=""){
-					search("name",$("#name").val());
-					}
-				if($('#tel3').val()!=""){
-					search("tel",$("#tel3").val());
-				}
+		$(document).on('click','#regist_btn',function(){
+			if($('#name').val()!=""){
+				search("name",$("#name").val());
 			}
-		};
+			if($('#tel3').val()!=""){
+				search("tel",$("#tel3").val());
+			}
+		});
 		//검색
 		function search(searchKey,searchWord){
 			var data = {searchKey: searchKey,searchWord: searchWord}
@@ -285,23 +285,31 @@ margin-right: 20px;
 		
 		//$("#opto_submit_btn").click(function(){
 		$(document).on('click','#opto_submit_btn',function(){
-			console.log('chk');
 			event.preventDefault();
+			var chk_this=$(this);
 			var url="updateOptData";
 			var data = $("#opt_frm").serialize();
-			console.log(data);
 			$.ajax({
 				url:url,
 				data:data,
 				type:"post",
 				success:function(result){
+					$(chk_this).closest(".input_box").prev().find("input[class=registed]").val("1");
+					$(chk_this).closest(".input_box").prev().find(".no").css("background","#ddd");
 					console.log(result);
 					//결과 입력창에 출력
+					var json=JSON.parse(result);
+					console.log(result);
+					$(chk_this).find('.no').css("background","#ddd");
+					$('.input_box').html("");
+					
+					console.log(chk_this);
 				},error:function(e){
 					console.log("failed");
 				}
 			});
 		});
+		$(document).on('change','.')
 	});
 		
 	// 검색버튼
@@ -358,13 +366,13 @@ margin-right: 20px;
 	//input_box open
 	function inputbox_open(path,sellNo,customNo){
 		var tag="";
-		tag += '<div class ="roll_box" style="margin-top:1%;">';
-		tag += '<form id = "regist_Frm"><div id="inputbox"><div class="d-flex justify-content-between" style="margin-bottom:1%;"><div class="input-group" style="width:25%;"><span class="input-group-text">예정일</span><input type="date" class="form-control" id="promiseDate"/></div><div id="btn_box"><div class="d-flex justify-content-end"><div class="d-flex">';
+		tag += '<div class="roll_box" id="roll_box" style="margin-top:1%;">';
+		tag += '<form id = "regist_Frm"><div id="inputbox"><div class="d-flex justify-content-between" style="margin-bottom:1%;"><div class="input-group" style="width:25%;"><span class="input-group-text">예정일</span><input type="date" class="form-control" id="promiseDate"/><input type="hidden" id="sellStatus" name="sellSataus" value="0"/></div><div id="btn_box"><div class="d-flex justify-content-end"><div class="d-flex">';
 		tag += '<input type="button" class="btn btn-outline-primary" id="opto_submit_btn" value="검안등록"/>';
 		tag += '<input type="button" class="btn btn-outline-success" id="custom_submit_btn" value="고객등록"/>';
 		tag += '<input type="button" class="btn btn-outline-info" id="regist_btn" value="검색" onclick="btn_search()">';
 		tag += '<input type="button" class="btn-close detail-close"></div></div>'
-		tag += '<input type="hidden" id="registed" value="N"/></div></div>';
+		tag += '</div></div>';
 		tag += '<div class="line d-flex flex-fill justify-content-between customInfo customInfoFirst">';
 		tag += '<div class="input-group flex-fill column" id="customNo_box" Style="width:25%"><span class="input-group-text">고객번호</span><input type="text" class="form-control customIn customNo" id="customNo" value="" readonly/></div>';
 		tag += '<div class="input-group  column" id="namebox" Style="width:28%;">';
@@ -442,8 +450,13 @@ margin-right: 20px;
 		</div>
 		<c:forEach var="list" items="${selledList}">
 			<div class="d-flex sellLine line justify-content-between">
-				<input type="hidden" value="${list.sellNo}" class="class_sellNo">			
-				<div class="no col-menu">${list.sellNo}</div>
+				<input type="hidden" value="${list.sellNo}" class="class_sellNo">
+				<input type="hidden" class="registed" id="registed_${list.sellNo}" value="${optResult}" >
+				<div class="no col-menu"
+					<c:if test="${optResult!=0}">
+						style="background:#ddd"
+					</c:if>
+				>${list.sellNo}</div>
 				<div class="d-flex flex-column data-Line data-Line-inner">
 				<c:forEach var="data" items="${selledData }">
 				<div class="d-flex flex-row">
@@ -454,6 +467,7 @@ margin-right: 20px;
 							<div class="column col-price">${data.realPrice*data.qtt} </div>
 						</c:if>
 				</div>
+				
 				</c:forEach>
 				</div>
 				<div class="seller col-menu">${list.ename }</div>
