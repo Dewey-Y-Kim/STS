@@ -2,13 +2,16 @@ package com.naver.dcancer.Service;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Param;
 
 import com.naver.dcancer.DTO.OptDTO;
 import com.naver.dcancer.DTO.SellDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
+import com.naver.dcancer.DTO.refundDTO;
 import com.naver.dcancer.DTO.soldDTO;
+import com.naver.dcancer.DTO.brokenDTO;
 
 public interface CampService {
 	//검안등록
@@ -27,4 +30,13 @@ public interface CampService {
 	//soldDay
 	public List<soldDTO> soldDay(@Param("date") String date);
 	public List<soldDTO> soldBetween(@Param("startDate") String startDate,@Param("endDate") String endDate);
+
+	//bokenList
+	public List<brokenDTO> brokenList();
+	public List<brokenDTO> brokenFind(String searchWord);
+	public int brokenInsert(brokenDTO dto);
+	
+	public List<refundDTO> refundList();
+	public List<refundDTO> refundFind(@Param("searchWord") String searchWord);
+	public int refundInsert(refundDTO dto);
 }

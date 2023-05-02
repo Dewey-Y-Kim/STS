@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 import com.naver.dcancer.DTO.OptDTO;
 import com.naver.dcancer.DTO.SellDTO;
+import com.naver.dcancer.DTO.brokenDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
+import com.naver.dcancer.DTO.refundDTO;
 import com.naver.dcancer.DTO.soldDTO;
 
 public interface CampDAO {
@@ -28,4 +30,14 @@ public interface CampDAO {
 	//전체매장 매출확인
 	public List<soldDTO> soldDay(@Param("date") String date);
 	public List<soldDTO> soldBetween(@Param("startDate") String startDate,@Param("endDate") String endDate);
+	
+	//파손렌즈
+	public List<brokenDTO> brokenList();
+	public List<brokenDTO> brokenFind(@Param("searchWord") String searchWord);
+	public int brokenInsert(brokenDTO dto);
+	
+	//반품
+	public List<refundDTO> refundList();
+	public List<refundDTO> refundFind(@Param("searchWord") String searchWord);
+	public int refundInsert(refundDTO dto);
 }

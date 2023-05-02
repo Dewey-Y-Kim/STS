@@ -7,7 +7,7 @@
 	<button id='Selldata' class="side-btn btn btn-outline-primary">매출등록</button>
 	<button id='CampSell' class="side-btn btn btn-outline-primary">매장별<br/>매출</button>
 	<button id='brokenlens' class="side-btn btn btn-outline-danger">파기</button>
-	<button id='repond' class="side-btn btn btn-outline-danger">반품</button>
+	<button id='refund' class="side-btn btn btn-outline-danger">반품</button>
 </nav>
 
 <aside class="right_menu btn-group-vertical">

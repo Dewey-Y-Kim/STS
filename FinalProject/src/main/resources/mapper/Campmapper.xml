@@ -63,9 +63,33 @@
 		sellInfo where to_char(selldate,'YYYY-MM-DD')=#{date} 
 		group by code) s join campInfo c on c.code=s.code order by c.code
 	</select>
-	<select id='soldBetween' resultType="com.naver.dcancer.DTO.soldDTO">
+	<select id="soldBetween" resultType="com.naver.dcancer.DTO.soldDTO">
 		select campname, sum, sellNo, round(sum/sellNo,-2) avg from 
 			(select code,sum(qtt*realprice) sum, count(sellNo) sellNo from sellInfo where selldate BETWEEN #{startDate} and #{endDate} group by code) s 
 				join campInfo c on c.code=s.code order by c.code
 	</select>
+	<select id="brokenList" resultType="com.naver.dcancer.DTO.brokenDTO">
+		select brokenNo, g.goodno, qtt, registDate, g.model from brokenList b join goodinfo g on g.goodno=b.goodno where registdate between TRUNC(SYSDATE, 'MM') and sysdate order by brokenNo
+	</select>
+	<select id="brokenFind" resultType="com.naver.dcancer.DTO.brokenDTO">
+		select goodNo, model, sellername from goodInfo g join sellerInfo s on g.sellercode=s.sellercode where upper(model) like upper('%${searchWord}%') order by goodNo
+	</select>
+	<insert id="brokenInsert">
+		insert into brokenlist(brokenNo, goodNo, qtt) values(broken_sq.nextval, ${goodNo}, ${qtt})
+		<selectKey keyProperty='brokenNo,registdate' resultType="com.naver.dcancer.DTO.brokenDTO">
+			select broken_sq.currval, to_char(sysdate,'YYYY-MM-DD') registDate from dual
+		</selectKey>
+	</insert>
+	<select id="refundList" resultType="com.naver.dcancer.DTO.brokenDTO">
+		select refundNo, g.goodno, qtt, registDate, g.model from refundList r join goodinfo g on g.goodno=r.goodno where registdate between TRUNC(SYSDATE, 'MM') and sysdate order by refundNo
+	</select>
+	<select id="refundFind" resultType="com.naver.dcancer.DTO.brokenDTO">
+		select goodNo, model, sellername from goodInfo g join sellerInfo s on g.sellercode=s.sellercode where upper(model) like upper('%${searchWord}%') order by goodNo
+	</select>
+	<insert id="refundInsert">
+		insert into refundlist(refundNo, goodNo, qtt) values(refund_sq.nextval, ${goodNo}, ${qtt})
+		<selectKey keyProperty='refundNo,registdate' resultType="com.naver.dcancer.DTO.refundDTO">
+			select refund_sq.currval, to_char(sysdate,'YYYY-MM-DD') registDate from dual
+		</selectKey>
+	</insert>
 </mapper>

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.naver.dcancer.DAO.CampDAO;
 import com.naver.dcancer.DTO.OptDTO;
 import com.naver.dcancer.DTO.SellDTO;
+import com.naver.dcancer.DTO.brokenDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
+import com.naver.dcancer.DTO.refundDTO;
 import com.naver.dcancer.DTO.soldDTO;
 
 @Service
@@ -86,6 +88,42 @@ public class CampServiceImpl implements CampService {
 	public List<soldDTO> soldBetween(String startDate, String endDate) {
 		// TODO Auto-generated method stub
 		return dao.soldBetween(startDate, endDate);
+	}
+
+	@Override
+	public List<brokenDTO> brokenList() {
+		// TODO Auto-generated method stub
+		return dao.brokenList();
+	}
+
+	@Override
+	public List<brokenDTO> brokenFind(String searchWord) {
+		// TODO Auto-generated method stub
+		return dao.brokenFind(searchWord);
+	}
+
+	@Override
+	public int brokenInsert(brokenDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.brokenInsert(dto);
+	}
+
+	@Override
+	public List<refundDTO> refundList() {
+		// TODO Auto-generated method stub
+		return dao.refundList();
+	}
+
+	@Override
+	public List<refundDTO> refundFind(String searchWord) {
+		// TODO Auto-generated method stub
+		return dao.refundFind(searchWord);
+	}
+
+	@Override
+	public int refundInsert(refundDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.refundInsert(dto);
 	}
 	
 }
