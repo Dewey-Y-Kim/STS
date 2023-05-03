@@ -13,6 +13,7 @@ import com.naver.dcancer.DTO.SellDTO;
 import com.naver.dcancer.DTO.brokenDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
+import com.naver.dcancer.DTO.promiseDTO;
 import com.naver.dcancer.DTO.refundDTO;
 import com.naver.dcancer.DTO.soldDTO;
 
@@ -124,6 +125,18 @@ public class CampServiceImpl implements CampService {
 	public int refundInsert(refundDTO dto) {
 		// TODO Auto-generated method stub
 		return dao.refundInsert(dto);
+	}
+
+	@Override
+	public List<promiseDTO> promisedBuyer(String date) {
+		// TODO Auto-generated method stub
+		return dao.promisedBuyer(date);
+	}
+
+	@Override
+	public List<promiseDTO> promisedData(String date) {
+		// TODO Auto-generated method stub
+		return dao.promisedData(date);
 	}
 	
 }

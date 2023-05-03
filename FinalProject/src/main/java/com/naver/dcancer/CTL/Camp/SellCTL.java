@@ -93,6 +93,7 @@ public class SellCTL {
 		if ( sellNo != null && !sellNo.equals("") ) {
 			dto.setSellNo(sellNo);
 		}
+		
 		System.out.println(sellDate);
 		if ( promiseDate !=null && !promiseDate.equals("") ) {
 			//DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -110,6 +111,8 @@ public class SellCTL {
 			System.out.println(sellDate);
 			dto.setPromiseDate(promiseDate);
 		}
+		System.out.println("[promisedate]"+dto.getPromiseDate());
+		System.out.println("[promise]"+promiseDate);
 		int result = service.addOptData(dto);
 		JsonObject json = new JsonObject();
 		if(result > 0) {

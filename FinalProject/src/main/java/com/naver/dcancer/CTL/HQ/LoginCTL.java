@@ -1,5 +1,9 @@
 package com.naver.dcancer.CTL.HQ;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +14,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.naver.dcancer.DTO.LoginDTO;
+import com.naver.dcancer.DTO.soldDTO;
+import com.naver.dcancer.Service.CampService;
 import com.naver.dcancer.Service.LoginService;
 
 @Controller
 public class LoginCTL {
 	@Autowired
 	LoginService service;
+	@Autowired
+	CampService camp;
 	
 	@PostMapping("LoginOk")
 	public ModelAndView Login(int empno, String pwd,HttpSession session) {
@@ -38,7 +48,6 @@ public class LoginCTL {
 			case 3: case 4: session.setAttribute("codeData", "HQ");mav.addObject("codeData","HQ");break;
 			}
 			System.out.println(session.getAttribute("empno"));
-			
 		}
 		return mav;
 	}
@@ -47,6 +56,25 @@ public class LoginCTL {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("codeData",session.getAttribute("codeData"));
 		mav.setViewName(path+"/main");
+		
+		//graph data Only sum
+		LocalDate now= LocalDate.now();
+		DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String date=now.format(form);
+		List<soldDTO> list = camp.soldDay(date);
+		JsonArray jsonArr = new JsonArray();
+		JsonObject camp = new JsonObject();
+		JsonObject sum = new JsonObject();
+		for (soldDTO dto:list) {
+			JsonObject json = new JsonObject();
+			json.addProperty("camp", dto.getCampname());
+			json.addProperty("sum", dto.getSum());
+			jsonArr.add(json);
+		}
+		mav.addObject("date",date);
+		mav.addObject("list",list);
+		mav.addObject("json",jsonArr.toString());
+		
 		return mav;
 	}
 }

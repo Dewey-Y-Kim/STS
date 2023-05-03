@@ -92,4 +92,12 @@
 			select refund_sq.currval, to_char(sysdate,'YYYY-MM-DD') registDate from dual
 		</selectKey>
 	</insert>
+	<select id="promisedBuyer" resultType="com.naver.dcancer.DTO.promiseDTO">
+		select distinct s.customNo, c.name, c.tel, s.sellNo, to_char(s.sellDate,'YYYY-MM-DD') selldate from sellInfo s join customInfo c on s.customNo=c.customNo 
+			where to_char(promisedate,'YYYY-MM-DD') = #{date} order by sellno
+	</select>
+	<select id="promisedData" resultType="com.naver.dcancer.DTO.promiseDTO">
+		select s.sellNo, s.qtt, s.goodno, g.model, s.realprice from sellInfo s join goodInfo g on s.goodno=g.goodNo 
+			where to_char(promisedate,'YYYY-MM-DD') = #{date} order by sellno
+	</select>
 </mapper>

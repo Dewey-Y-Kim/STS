@@ -26,29 +26,30 @@
 				$('.logo a').attr('diable',true)
 			}
 		});
-	});
-
-	
-	$(function(){
 		$('.side-btn').click(function(){
 			var filename=$(this).attr('id');
-			location.href= filename;
-		});	
+			location.href=filename;
+		});
+		$("#campSellgraph").click(function(){
+			location.href="<%=request.getContextPath()%>/graph";
+		});
 	});
 	</script>
 </head>
 <body class="body">
 <header>
-	<div class="Logo">
+	<div class="Logo d-flex justify-content-between">
+		
 		<c:if test="${auth==null}">
-			<a href="<%=request.getContextPath()%>"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.svg"/></a>
+			<div><a href="<%=request.getContextPath()%>"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.svg"/></a></div>
 		</c:if>
 		<c:if test="${auth!=null}">
 			<a href="main"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.svg"/></a>
-			<div class="logo-btn-menu menu btn-group">
-				  <button id='campSellgraph' type="button" class="logo-btn btn btn-outline-dark">매장별 매출현황</button>
-				  <button type="button" class="logo-btn btn btn-outline-dark">Samsung</button>
-				  <a href="<%=request.getContextPath()%>/logout"><button type="button" class="logo-btn btn btn-outline-dark">LogOut</button></a>
+			<div class="logo-btn-menu menu align-self-center" style="margin-left :30px;">
+				  <!-- <button id='campSellgraph' type="button" class="logo-btn btn btn-outline-dark">매장별 매출현황</button> -->
+				  <a href="<%=request.getContextPath()%>/logout">
+				  	<button type="button" class="logo-btn btn btn-outline-dark">LogOut</button>
+				  </a>
 			</div>
 	</c:if>
 	</div>

@@ -9,6 +9,7 @@ import com.naver.dcancer.DTO.SellDTO;
 import com.naver.dcancer.DTO.brokenDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
+import com.naver.dcancer.DTO.promiseDTO;
 import com.naver.dcancer.DTO.refundDTO;
 import com.naver.dcancer.DTO.soldDTO;
 
@@ -40,4 +41,7 @@ public interface CampDAO {
 	public List<refundDTO> refundList();
 	public List<refundDTO> refundFind(@Param("searchWord") String searchWord);
 	public int refundInsert(refundDTO dto);
+	
+	public List<promiseDTO> promisedBuyer(@Param("date")String date);
+	public List<promiseDTO> promisedData(@Param("date")String date);
 }

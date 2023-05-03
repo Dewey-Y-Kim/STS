@@ -171,8 +171,8 @@ margin-right: 20px;
 		});
 		
 		// promiseDate 입력시 form 값 변환
-		$(document).on('change','#promiseDate',function(){
-			$('.sellStatus').val($("#promiseDate").val("1"));
+		$(document).on('change','#promise',function(){
+			$('.promiseDate').val($("#promise").val());
 		});
 		
 		$(document).on('change',)
@@ -367,7 +367,7 @@ margin-right: 20px;
 	function inputbox_open(path,sellNo,customNo){
 		var tag="";
 		tag += '<div class="roll_box" id="roll_box" style="margin-top:1%;">';
-		tag += '<form id = "regist_Frm"><div id="inputbox"><div class="d-flex justify-content-between" style="margin-bottom:1%;"><div class="input-group" style="width:25%;"><span class="input-group-text">예정일</span><input type="date" class="form-control" id="promiseDate"/><input type="hidden" id="sellStatus" name="sellSataus" value="0"/></div><div id="btn_box"><div class="d-flex justify-content-end"><div class="d-flex">';
+		tag += '<form id = "regist_Frm"><div id="inputbox"><div class="d-flex justify-content-between" style="margin-bottom:1%;"><div class="input-group" style="width:25%;"><span class="input-group-text">예정일</span><input type="date" class="form-control" id="promise"/><input type="hidden" id="sellStatus" name="sellSataus" value="0"/></div><div id="btn_box"><div class="d-flex justify-content-end"><div class="d-flex">';
 		tag += '<input type="button" class="btn btn-outline-primary" id="opto_submit_btn" value="검안등록"/>';
 		tag += '<input type="button" class="btn btn-outline-success" id="custom_submit_btn" value="고객등록"/>';
 		tag += '<input type="button" class="btn btn-outline-info" id="regist_btn" value="검색" onclick="btn_search()">';

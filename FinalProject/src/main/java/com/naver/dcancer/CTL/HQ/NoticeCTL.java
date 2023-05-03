@@ -29,9 +29,8 @@ public class NoticeCTL {
 	@PostMapping("HQ/noticeinsert")
 	public ModelAndView noticeInsert(NoticeDTO dto,HttpSession session) {
 		String respon = "";
-		LoginDTO logdto = (LoginDTO) session.getAttribute("LoginResult");
-		dto.setEmpno(logdto.getEmpno());
-		
+		int empno = (Integer) session.getAttribute("empno");
+		dto.setEmpno(empno);
 		System.out.println("[noticeInsert]:"+dto.toString());
 		int resultnum=service.noticeInsert(dto);
 		System.out.println(resultnum);
