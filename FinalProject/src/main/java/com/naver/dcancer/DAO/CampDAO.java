@@ -14,6 +14,7 @@ import com.naver.dcancer.DTO.refundDTO;
 import com.naver.dcancer.DTO.soldDTO;
 
 public interface CampDAO {
+	public int pagingData(String bbs, String data);
 	public List<customDTO> customSelect(pagingVO vo);
 	public List<OptDTO> optDataSelect(@Param("no")int customNo);
 	public int addCustomData(customDTO custom);
@@ -42,6 +43,9 @@ public interface CampDAO {
 	public List<refundDTO> refundFind(@Param("searchWord") String searchWord);
 	public int refundInsert(refundDTO dto);
 	
+	//약속
 	public List<promiseDTO> promisedBuyer(@Param("date")String date);
 	public List<promiseDTO> promisedData(@Param("date")String date);
+	
+	public List<promiseDTO> promiseToday(@Param("code")int code, @Param("now") String now);
 }

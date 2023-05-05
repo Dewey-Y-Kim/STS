@@ -39,6 +39,7 @@ public class scheduleCTL {
 		mav.addObject("data",data);
 		mav.addObject("date", date);
 		
+		System.out.println(data);
 		return mav;
 	}
 	
@@ -46,7 +47,7 @@ public class scheduleCTL {
 	public String promise(@RequestParam("date") String date) {
 		List<promiseDTO>list = service.promisedBuyer(date);
 		List<promiseDTO>data = service.promisedData(date);
-		
+		System.out.println("[promise.data]"+data);
 		
 		JsonArray json = new JsonArray();
 		for(int i = 0; i<list.size(); i++) {
@@ -65,6 +66,7 @@ public class scheduleCTL {
 					jdata.addProperty("model", data.get(j).getModel());
 					jdata.addProperty("qtt", data.get(j).getQtt());
 					jdata.addProperty("price", data.get(j).getRealprice());
+					jdata.addProperty("priceStr", data.get(j).getRealpriceStr());
 					jarr.add(jdata);
 				}
 				

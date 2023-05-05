@@ -1,12 +1,12 @@
 package com.naver.dcancer.DAO;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.naver.dcancer.DTO.LoginDTO;
 
 public interface LoginDAO {
 	public LoginDTO login(int empno,String pwd);
-	/*
-	 * <select id="Login" resultType="LogDTO">
-	 * select c.code, c.campName, c.tel, c.fax, e.auth from empInfo e join campinfo c on c.code=e.code where e.empno=${param1} and e.pwd=${param2}
-	 * </select>
-	 */
+	
+	public String getNoticeContent(@Param("no") String no);
+	
 }

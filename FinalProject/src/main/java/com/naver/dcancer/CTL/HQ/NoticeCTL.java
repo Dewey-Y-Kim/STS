@@ -27,21 +27,26 @@ public class NoticeCTL {
 	HQService service;
 	
 	@PostMapping("HQ/noticeinsert")
-	public ModelAndView noticeInsert(NoticeDTO dto,HttpSession session) {
+	public ResponseEntity<String> noticeInsert(NoticeDTO dto,HttpSession session,pagingVO vo) {
 		String respon = "";
 		int empno = (Integer) session.getAttribute("empno");
 		dto.setEmpno(empno);
-		System.out.println("[noticeInsert]:"+dto.toString());
-		int resultnum=service.noticeInsert(dto);
-		System.out.println(resultnum);
-		ModelAndView mav = new ModelAndView();
-		if(resultnum>0) {
-			mav.setViewName("HQ/noticelist");
-		}else {
-			mav.setViewName("../msgToss");
-			mav.addObject("msg","공지사항 등록에 실패하였습니다.");
+		String htmltag="<script>";
+		try {
+			htmltag+="location.href='noticelist';";
+			int resultnum=service.noticeInsert(dto);
+		}catch(Exception e) {
+			e.printStackTrace();
+			htmltag += "alert('글이 등록되지 않았습니다.');";
+			htmltag += "history.back();";
 		}
-		return mav;
+		htmltag +="</script>";
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
+		headers.add("Content-type", "text/html; charset=UTF-8");
+		
+		return new ResponseEntity<String>(htmltag,headers,HttpStatus.OK); 
+		
 	}
 	@GetMapping("HQ/noticeView")
 	public ModelAndView noticeView(HttpSession session,int no, pagingVO vo) {

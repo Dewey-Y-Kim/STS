@@ -20,7 +20,7 @@
 		width :100%;
 	}
 	.caro_btn{
-		min-height : 650px;
+		min-height : 600px;
 		border:none;
 		color : none;
 	}
@@ -33,7 +33,9 @@
 		flex:0 0 3%;
 		order : 2;
 	}
-	
+	.titlebox{
+		margin-top : 1%;
+	}
 	.startDate{
 		display:none;
 	}
@@ -52,15 +54,19 @@
 	}
 	.name{
 		width : 25%;
+		text-align:center;
 	}
 	.sum{
-		width : 25%; 
+		width : 25%;
+		text-align:right; 
 	}
 	.no{
 		width : 25%;
+		text-align :center;
 	}
 	.avg{
 		width : 25%;
+		text-align : center;
 	}
 	
 	#list_box .line:nth-child(2n+1){
@@ -68,6 +74,13 @@
 	}
 	#callSold{
 		width:100%;
+	}
+	#chartType{
+		width : 10%;
+		margin-right : 5%;
+	}
+	#graph{
+	display: inline;
 	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
@@ -173,9 +186,9 @@
 					$(Jsondata).each(function(idx,list){
 						tag += '<div class="line d-flex">';
 						tag += '<div class="name">'+list.camp+'</div>';
-						tag +='<div class="sum">'+list.sum+'</div>';
+						tag +='<div class="sum">'+list.sumStr+'</div>';
 						tag +='<div class="no">'+list.sellNo+'</div>';
-						tag +='<div class="avg">'+list.avg+'</div></div>';
+						tag +='<div class="avg">'+list.avgStr+'</div></div>';
 					});
 					$('#list_box').html(tag);
 					/*
@@ -267,8 +280,8 @@
 				<div class="carousel-inner caro">
 					<div class="carousel-item active list">
 							<!-- list Style -->
-							<div class="container box">
-								<div class="line d-flex">
+							<div class="container box titlebox">
+								<div class="line d-flex title bg-secondary text-white h3">
 									<div class="name">
 										매장
 									</div>
@@ -282,32 +295,34 @@
 										객단가(KPW)
 									</div>
 								</div>
-								<div id="list_box">
+								<div id="list_box" class="h5">
 									<c:forEach var="item" items="${list}">
 										<div class="line d-flex">
 											<div class="name">
 												${item.campname }
 											</div>
 											<div class="sum">
-												${item.sum }
+												${item.sumStr}
 											</div>
 											<div class="no">
 												${item.sellNo }
 											</div>
 											<div class="avg">
-												${item.avg }
+												${item.avgStr}
 											</div>
 										</div>
 									</c:forEach>
 								</div>
 							</div>
 				    </div>
-					<div class="carousel-item canvas">
+					<div class="carousel-item canvas ">
 						<!-- graph Style -->
+						<div class="container" style="height:60%;">
 						<canvas id="graph">
 						</canvas>
-						<div>
-							<select id="chartType">
+						</div>
+						<div id="graphBox" class="d-flex justify-content-end ">
+							<select id="chartType" select class="form-select">
 								<option value="sum">매출</option>
 								<option value="avg">객단가</option>
 								<option value="no">판매건수</option>

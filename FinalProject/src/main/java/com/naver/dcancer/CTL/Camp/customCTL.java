@@ -1,15 +1,9 @@
 package com.naver.dcancer.CTL.Camp;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.google.gson.JsonObject;
 import com.naver.dcancer.DTO.OptDTO;
-import com.naver.dcancer.DTO.addressDTO;
 import com.naver.dcancer.DTO.customDTO;
 import com.naver.dcancer.DTO.pagingVO;
 import com.naver.dcancer.Service.CampService;

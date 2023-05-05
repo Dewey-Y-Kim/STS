@@ -6,5 +6,7 @@
 	<select id="login" resultType="com.naver.dcancer.DTO.LoginDTO">
 		select e.empno, e.ename, c.code, c.campName, c.tel, c.fax, e.auth from empInfo e join campinfo c on c.code=e.code where e.empno=#{param1}and e.pwd=${param2}
 	</select>
-	
+	<select id="getNoticeContent" resultType="string">
+		select content from noticeBBS where no=${no}
+	</select>
 </mapper>

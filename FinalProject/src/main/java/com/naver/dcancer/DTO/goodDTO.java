@@ -1,6 +1,10 @@
 package com.naver.dcancer.DTO;
 
+import java.text.DecimalFormat;
 
+import lombok.ToString;
+
+@ToString
 public class goodDTO {
 	private int goodno;
 	private String Sellercode;
@@ -16,7 +20,25 @@ public class goodDTO {
 	private double sphEnd;
 	private double cylStart=0;
 	private double cylEnd;
+	private String buyStr;
+	private String sellStr;
 	
+	DecimalFormat price = new DecimalFormat("###,###");
+	
+	public String getBuyStr() {
+		return buyStr;
+	}
+	public void setBuyStr(String buyStr) {
+		this.buyStr = buyStr;
+		buyprice=Integer.parseInt(buyStr.replaceAll(",", ""));
+	}
+	public String getSellStr() {
+		return sellStr;
+	}
+	public void setSellStr(String sellStr) {
+		this.sellStr = sellStr;
+		sellprice = Integer.parseInt(sellStr.replaceAll(",", ""));
+	}
 	public int getGoodno() {
 		return goodno;
 	}
@@ -52,6 +74,14 @@ public class goodDTO {
 	}
 	public void setBuyprice(int buyprice) {
 		this.buyprice = buyprice;
+		buyStr= price.format(buyprice);
+	}
+	public int getSellprice() {
+		return sellprice;
+	}
+	public void setSellprice(int sellprice) {
+		this.sellprice = sellprice;
+		sellStr = price.format(sellprice);
 	}
 	public String getClassifyname() {
 		return classifyname;
@@ -68,12 +98,7 @@ public class goodDTO {
 			classifyno="4";
 		};
 	}
-	public int getSellprice() {
-		return sellprice;
-	}
-	public void setSellprice(int sellprice) {
-		this.sellprice = sellprice;
-	}
+	
 	public String getSellername() {
 		return Sellername;
 	}
@@ -130,14 +155,5 @@ public class goodDTO {
 			this.cylEnd = cylEnd;
 		}
 	}
-	@Override
-	public String toString() {
-		return "goodDTO [goodno=" + goodno + ", Sellercode=" + Sellercode + ", classifyno=" + classifyno
-				+ ", classifyname=" + classifyname + ", model=" + model + ", buyprice=" + buyprice + ", sellprice="
-				+ sellprice + ", Sellername=" + Sellername + ", name=" + name + ", brandcode=" + brandcode
-				+ ", sphStart=" + sphStart + ", sphEnd=" + sphEnd + ", cylStart=" + cylStart + ", cylEnd=" + cylEnd
-				+ "]";
-	}
-	
 	
 }

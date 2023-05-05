@@ -29,7 +29,8 @@ public class HQBtnCTL {
 		List<NoticeDTO> list = service.noticeList(vo);
 		mav.addObject("noticelist", list);
 		mav.setViewName("HQ/noticelist");
-		vo.setTotalLine(service.pagingData("noticebbs","no"));
+		int totalline= service.pagingData("noticebbs","no");
+		vo.setTotalLine(totalline);
 		mav.addObject("vo",vo);
 		return mav;
 	}

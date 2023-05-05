@@ -41,6 +41,8 @@ public class graphCTL {
 			json.addProperty("sum", dto.getSum());
 			json.addProperty("sellNo", dto.getSellNo());
 			json.addProperty("avg", dto.getAvg());
+			json.addProperty("sumStr", dto.getSumStr());
+			json.addProperty("avgStr", dto.getAvgStr());
 			jsonArr.add(json);
 		}
 		mav.addObject("date",date);
@@ -74,6 +76,8 @@ public class graphCTL {
 			json.addProperty("sum", dto.getSum());
 			json.addProperty("sellNo", dto.getSellNo());
 			json.addProperty("avg", dto.getAvg());
+			json.addProperty("sumStr", dto.getSumStr() );
+			json.addProperty("avgStr",dto.getAvgStr() );
 			jsonArr.add(json);
 		}
 		result =jsonArr.toString();

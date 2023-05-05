@@ -4,8 +4,15 @@
 main{
 	over-flow : scroll;
 }
+#main_body{
+	width : 80%;
+	margin : 0 auto;
+}
 .row{
 	width:20%;
+}
+#regist_btn{
+ margin-right :5%;
 }
 #custom_submit_btn{
 	display:none;
@@ -13,8 +20,14 @@ main{
 #opto_submit_btn{
 	display:none;
 }
-.customInfo {
-	margin: 1%;
+#namebox{
+	margin : 0 1% 0 1%;
+}
+#birthbox{
+	margin : 0 1% 0 1%;
+}
+.customInfo{
+	margin : 1% 0 1%;
 }
 .customIn{
 	width :100%;
@@ -47,9 +60,7 @@ main{
 .customInfoFirst>span{
 	width:5em;
 }
-.blank{
-	width:30px;
-}
+
 #birthbox{
 	width :5%;
 }
@@ -66,6 +77,9 @@ main{
 .diopt_in{
 	width:15%;
 }
+.dioptText{
+ width : 15%;
+}
 #memo{
 	max-width:800px;
 	height:80px;
@@ -79,6 +93,7 @@ main{
 #OptData span{
 	width :20%;
 }
+
 </style>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script>
@@ -353,142 +368,135 @@ main{
 	
 </script>
 	<main class=main_frm>
-		<form id = "regist_Frm">
-			<!-- 고객창 -->
-			<div id="inputbox">
-				<div class="d-flex justify-content-end">
-					<div class="d-flex">
-						<input type="button" class="btn btn-outline-primary" id="opto_submit_btn" value="검안등록"/>
-						<input type="button" class="btn btn-outline-success" id="custom_submit_btn" value="고객등록"/>
-						<input type="button" class="btn btn-outline-info" id="regist_btn" value="검색" onclick="btn_search()">
-						
-						<input type="hidden" id="registed" value="N"/>
+		<div id="main_body">
+			<form id = "regist_Frm">
+				<!-- 고객창 -->
+				<div id="inputbox">
+					<div class="d-flex justify-content-end">
+						<div class="d-flex">
+							<input type="button" class="btn btn-outline-primary" id="opto_submit_btn" value="검안등록"/>
+							<input type="button" class="btn btn-outline-success" id="custom_submit_btn" value="고객등록"/>
+							<input type="button" class="btn btn-outline-info" id="regist_btn" value="검색" onclick="btn_search()">
+							
+							<input type="hidden" id="registed" value="N"/>
+						</div>
+					</div>
+					<div class="line d-flex flex-fill justify-content-between customInfo customInfoFirst">
+						<div class="input-group flex-fill column" id="customNo_box" Style="width:10%">
+						    <span class="input-group-text">고객번호</span>
+						    <input type="text" class="form-control customIn customNo" id="customNo" value="" readonly/>
+						</div>
+						<div class="input-group  column" id="namebox" Style="width:25%;">
+						    <span class="input-group-text">이름</span>
+						    <input type="text" class="customIn form-control nameIn" id="name" name="name"/>
+						</div>
+						<div class="flex-fill column input-group" id="birthbox">
+							<span class="input-group-text">생년월일</span>
+							<input type="text" maxlenth="8" class="form-control customIn" id="birth" name="birth">
+						</div>
+						<div class="input-group-text flex-fill d-inline-flex form-switch column input-group genderbox">
+							<span class = "gender_box_font">남</span><input type="radio" name="gender" value="M"><span class = "gender_box_font">여</span><input type="radio" name="gender" value="F">
+						</div>
+					</div>
+					
+					<div class="line d-flex flex-fill flex-row customInfo customInfoSecond">
+						<div class="input-group flex-fill telbox">
+							<span class="input-group-text">전화번호</span>
+							<select name="tel1" class="form-select dropdown-toggle" style='border: 1px solid gray);'>
+								<option class="dropdown-item" value="010">010</option>
+								<option class="dropdown-item" value="02">02</option>
+				        		<option class="dropdown-item" value="031">031</option>
+				        		<option class="dropdown-item" value="032">032</option>
+				        		<option class="dropdown-item" value="033">033</option>
+				        		<option class="dropdown-item" value="041">041</option>
+				        		<option class="dropdown-item" value="042">042</option>
+				        		<option class="dropdown-item" value="043">043</option>
+				        		<option class="dropdown-item" value="044">044</option>
+				        		<option class="dropdown-item" value="051">051</option>
+				        		<option class="dropdown-item" value="052">052</option>
+				        		<option class="dropdown-item" value="053">053</option>
+				        		<option class="dropdown-item" value="054">054</option>
+				        		<option class="dropdown-item" value="055">055</option>
+				        		<option class="dropdown-item" value="061">061</option>
+				        		<option class="dropdown-item" value="062">062</option>
+				        		<option class="dropdown-item" value="063">063</option>
+				        		<option class="dropdown-item" value="064">064</option>
+				        	</select>
+							<span class="input-group-text">-</span>
+							<input type="text" name="tel2" class="form-control btn-light telbox" minlength="3" maxlength="4">
+							<span class="input-group-text">-</span>
+							<input type="text" id="tel3" name="tel3" class="form-control btn-light telbox telIn" minlength="3" maxlength="4">
+						</div>
+						<div class="flex-fill column input-group">
+							<span class="input-group-text">E-mail</span>
+							<input type="text" maxlenth="8" class="form-control customIn" id="email" name="email">
+						</div>
+					</div>
+					<div class="d-flex customInfo customInfothird">
+						<div class="flex-fill flex-row column input-group">
+							<span class="input-group-text">주소</span>
+							<input type="text" class="form-control customIn" id='addr1' name="addr1" readonly>
+							<input type="button" class ="btn btn-outline-info form-control" id="addr1_btn" value="검색" />
+							<input type="text" maxlenth="8" class="form-control customIn" name="addr2">
+						</div>
 					</div>
 				</div>
-				<div class="line d-flex flex-fill justify-content-between customInfo customInfoFirst">
-					<div class="input-group flex-fill column" id="customNo_box" Style="width:10%">
-					    <span class="input-group-text">고객번호</span>
-					    <input type="text" class="form-control customIn customNo" id="customNo" value="" readonly/>
+		</form>
+			<!-- 검안정보입력창 -->
+		<form id="opt_frm">
+			<div id="container" class="optolist">
+				<input type="hidden" name="customNo" class="customNo" value=""/>
+				<div class="d-flex flex-column">
+					<div class="d-flex justify-content-end">
+						<div class="input-group" style="width:20%;">
+						<span class="input-group-text" style="width:100px">PD(mm)</span>
+						<input type="text" class="form-control diopt_in" name="pd"/>	
+						</div>
 					</div>
-					<div class="blank" style="width:30px">
+					<div class="line d-flex flex-fill flex-row">
+						<div class="flex-fill row">
+							<span></span>
+						</div>
+						<div class="flex-fill row">
+							<span>Sph</span>
+						</div>
+						<div class="flex-fill row">
+							<span>Cyl</span></div>
+						<div class="flex-fill row">
+							<span>Axis</span>
+						</div>
+						<div class="flex-fill row">
+							<span>ADD</span>
+						</div>
 					</div>
-					<div class="input-group  column" id="namebox" Style="width:28%;">
-					    <span class="input-group-text">이름</span>
-					    <input type="text" class="customIn form-control nameIn" id="name" name="name"/>
+					<div class="line d-flex flex-row">
+						<div class="row input-group diopt_box flex-fill">
+							<span class="input-group-text diopt_in  dioptText">OD</span>
+							<input type="number" class="form-control diopter diopt_in" name="RSph" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/> 
+							<input type="number" class="form-control diopter diopt_in" name="RCyl" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
+							<input type="text" class="form-control diopt_in" name="RAxis" />
+							<input type="number" class="form-control diopter diopt_in" name="RAdd" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
+						</div>
 					</div>
-					<div class="blank">
+					<div class="line d-flex  flex-row">
+						<div class="row input-group diopt_box flex-fill">
+							<span class="input-group-text diopt_in dioptText">OS</span>
+							 <input type="number" class="form-control diopter diopt_in" name="LSph" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/> 
+							<input type="number" class="form-control diopter diopt_in" name="LCyl" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
+							<input type="text" class="form-control diopt_in" name="LAxis"/>
+							<input type="number" class="form-control diopter diopt_in" name="LAdd" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000" />
+						</div>
 					</div>
-					<div class="flex-fill column input-group" id="birthbox">
-						<span class="input-group-text">생년월일</span>
-						<input type="text" maxlenth="8" class="form-control customIn" id="birth" name="birth">
-					</div>
-					<div class="blank" style="width:30px">
-					</div>
-					<div class="input-group-text flex-fill d-inline-flex form-switch column input-group genderbox">
-						<span class = "gender_box_font">남</span><input type="radio" name="gender" value="M"><span class = "gender_box_font">여</span><input type="radio" name="gender" value="F">
-					</div>
-				</div>
-				
-				<div class="line d-flex flex-fill flex-row customInfo customInfoSecond">
-					<div class="input-group flex-fill telbox">
-						<span class="input-group-text">전화번호</span>
-						<select name="tel1" class="form-select dropdown-toggle" style='border: 1px solid gray);'>
-							<option class="dropdown-item" value="010">010</option>
-							<option class="dropdown-item" value="02">02</option>
-			        		<option class="dropdown-item" value="031">031</option>
-			        		<option class="dropdown-item" value="032">032</option>
-			        		<option class="dropdown-item" value="033">033</option>
-			        		<option class="dropdown-item" value="041">041</option>
-			        		<option class="dropdown-item" value="042">042</option>
-			        		<option class="dropdown-item" value="043">043</option>
-			        		<option class="dropdown-item" value="044">044</option>
-			        		<option class="dropdown-item" value="051">051</option>
-			        		<option class="dropdown-item" value="052">052</option>
-			        		<option class="dropdown-item" value="053">053</option>
-			        		<option class="dropdown-item" value="054">054</option>
-			        		<option class="dropdown-item" value="055">055</option>
-			        		<option class="dropdown-item" value="061">061</option>
-			        		<option class="dropdown-item" value="062">062</option>
-			        		<option class="dropdown-item" value="063">063</option>
-			        		<option class="dropdown-item" value="064">064</option>
-			        	</select>
-						<span class="input-group-text">-</span>
-						<input type="text" name="tel2" class="form-control btn-light telbox" minlength="3" maxlength="4">
-						<span class="input-group-text">-</span>
-						<input type="text" id="tel3" name="tel3" class="form-control btn-light telbox telIn" minlength="3" maxlength="4">
-					</div>
-					<div class="blank">
-					</div>
-					<div class="flex-fill column input-group">
-						<span class="input-group-text">E-mail</span>
-						<input type="text" maxlenth="8" class="form-control customIn" id="email" name="email">
-					</div>
-				</div>
-				<div class="d-flex customInfo customInfothird">
-					<div class="flex-fill flex-row column input-group">
-						<span class="input-group-text">주소</span>
-						<input type="text" class="form-control customIn" id='addr1' name="addr1" readonly>
-						<input type="button" class ="btn btn-outline-info form-control" id="addr1_btn" value="검색" />
-						<input type="text" maxlenth="8" class="form-control customIn" name="addr2">
-					</div>
-				</div>
+					<textarea rows="" cols="" id="memo" name="memo"></textarea>
+				</div> 
 			</div>
-	</form>
-		<!-- 검안정보입력창 -->
-	<form id="opt_frm">
-		<div id="container" class="optolist container">
-			<input type="hidden" name="customNo" class="customNo" value=""/>
-			<div class="d-flex flex-column">
-				<div class="d-flex justify-content-end">
-					<div class="input-group" style="width:20%;">
-					<span class="input-group-text" style="width:100px">PD(mm)</span>
-					<input type="text" class="form-control diopt_in" name="pd"/>	
-					</div>
-				</div>
-				<div class="line d-flex flex-fill flex-row">
-					<div class="flex-fill row">
-						<span></span>
-					</div>
-					<div class="flex-fill row">
-						<span>Sph</span>
-					</div>
-					<div class="flex-fill row">
-						<span>Cyl</span></div>
-					<div class="flex-fill row">
-						<span>Axis</span>
-					</div>
-					<div class="flex-fill row">
-						<span>ADD</span>
-					</div>
-				</div>
-				<div class="line d-flex flex-fill flex-row">
-					<div class="flex-fill row input-group diopt_box">
-						<span class="input-group-text diopt_in">OD</span>
-						<input type="number" class="form-control diopter diopt_in" name="RSph" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/> 
-						<input type="number" class="form-control diopter diopt_in" name="RCyl" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
-						<input type="text" class="form-control diopt_in" name="RAxis" />
-						<input type="number" class="form-control diopter diopt_in" name="RAdd" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
-					</div>
-				</div>
-				<div class="line d-flex flex-fill flex-row">
-					<div class="flex-fill row input-group diopt_box">
-						<span class="input-group-text diopt_in">OS</span>
-						 <input type="number" class="form-control diopter diopt_in" name="LSph" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/> 
-						<input type="number" class="form-control diopter diopt_in" name="LCyl" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000"/>
-						<input type="text" class="form-control diopt_in" name="LAxis"/>
-						<input type="number" class="form-control diopter diopt_in" name="LAdd" min="-10.00" max="10.00" step="0.25" placeHolder = "0.00 or 000" />
-					</div>
-				</div>
-				<textarea rows="" cols="" id="memo" name="memo"></textarea>
-			</div> 
+		</form>
+		<hr/>
+		<!-- 검안결과 표시 -->
+		<div id="OptData">
+				
 		</div>
-	</form>
-	<hr/>
-	<!-- 검안결과 표시 -->
-	<div id="OptData">
-			
-	</div>
-	
+	</div>	
 	<div class="modal" id="custom_modal">
 	  <div class="modal-dialog">
 	    <div class="modal-content">

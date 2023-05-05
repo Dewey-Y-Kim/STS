@@ -1,6 +1,5 @@
 package com.naver.dcancer.CTL.Camp;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.naver.dcancer.DTO.soldDTO;
@@ -42,6 +40,8 @@ public class CampDataCTL{
 			json.addProperty("sum", dto.getSum());
 			json.addProperty("sellNo", dto.getSellNo());
 			json.addProperty("avg", dto.getAvg());
+			json.addProperty("sumStr", dto.getSumStr());
+			json.addProperty("avgStr", dto.getAvgStr());
 			jsonArr.add(json);
 		}
 		mav.addObject("date",date);
@@ -73,6 +73,7 @@ public class CampDataCTL{
 			json.addProperty("sum", dto.getSum());
 			json.addProperty("sellNo", dto.getSellNo());
 			json.addProperty("avg", dto.getAvg());
+			json.addProperty("sumStr", dto.getAvgStr());
 			jsonArr.add(json);
 		}
 		result =jsonArr.toString();

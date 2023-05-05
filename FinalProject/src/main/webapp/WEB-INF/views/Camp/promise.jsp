@@ -10,6 +10,7 @@
 	#main_body{
 		width : 80%;
 		margin : 0 auto;
+		margin-top : 1%;
 	}
 	#dateIn{
 		width : 30%;
@@ -18,6 +19,8 @@
 		text-align: center;
 	}
 	#list_title{
+		margin-top : 1%;
+		border-radius : 5px;
 	}
 	.title_name{
 		width : 20%;
@@ -78,7 +81,7 @@
 							tag += '<div class="d-flex">'
 							tag += '<div class="item">'+data.model+'</div>';
 							tag += '<div class="qtt">'+data.qtt+'</div>';
-							tag += '<div class="price">'+data.price+'</div></div>';
+							tag += '<div class="price">'+data.priceStr+'</div></div>';
 						});
 						tag+= '</div></div>';
 					});
@@ -99,7 +102,7 @@
 			</div> 
 		</div>
 		
-		<div id="list_title" class="title list d-flex">
+		<div id="list_title" class="title list d-flex bg-secondary text-white h3">
 			<div class="title_name">고객명</div>
 			<div class="title_tel">전화번호</div>
 			<div class="title_selldate">판매일</div>
@@ -122,7 +125,7 @@
 						<div class="d-flex">
 							<div class="item">${data.model }</div>
 							<div class="qtt">${data.qtt }</div>
-							<div class="price">${data.realprice }</div>
+							<div class="price">${data.realpriceStr }</div>
 						</div>
 						</c:if>
 					</c:forEach>

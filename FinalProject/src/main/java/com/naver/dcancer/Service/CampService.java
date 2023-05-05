@@ -15,6 +15,7 @@ import com.naver.dcancer.DTO.soldDTO;
 import com.naver.dcancer.DTO.brokenDTO;
 
 public interface CampService {
+	public int pagingData(String bbs, String data);
 	//검안등록
 	public List<customDTO> customSelect(pagingVO vo);
 	public List<OptDTO> optDataSelect(int customNo);
@@ -45,4 +46,5 @@ public interface CampService {
 	// promise
 	public List<promiseDTO> promisedBuyer(String date);
 	public List<promiseDTO> promisedData(String date);
+	public List<promiseDTO> promiseToday(int code, String now);
 }

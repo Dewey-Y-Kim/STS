@@ -3,10 +3,14 @@
 
 
 <style>
-
+#main_body{
+	width : 80%;
+	margin : 0 auto;
+}
+#selldateBox{
+margin-bottom : 1%;
+}
 #Sell_list{
-	width : 90%;
-	margin : 5%;
 }
 .line{
 	width:100%;
@@ -14,6 +18,9 @@
 }
 .sellLine{
 	border:1px solid blue;
+	border-radius: 5px;
+}
+#sell-line-tltle{
 	border-radius: 5px;
 }
 .column{
@@ -84,7 +91,9 @@ margin-right: 20px;
 	margin : 1%;
 	resize : none;
 }
-.sellLine()
+.number{
+	text-align:right;
+}
 </style>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script>
@@ -400,7 +409,7 @@ margin-right: 20px;
 		
 		tag += '<div class="d-flex flex-column">';
 		tag += '<div class="d-flex justify-content-end">';
-		tag += '<div class="input-group" style="width:20%;">';
+		tag += '<div class="input-group" style="width:20%; margin-top:1%;">';
 		tag += '<span class="input-group-text" style="width:100px">PD(mm)</span>';
 		tag += '<input type="text" class="form-control diopt_in" name="pd"/>';	
 		tag += '</div></div>';
@@ -430,66 +439,68 @@ margin-right: 20px;
 	}
 
 </script>
-<main class=main_frm>
-	<div class="d-flex justify-content-end">
-		<div class="input-group" style="width:25%;">
-				<span class="input-group-text">판매일</span>
-				<input id="search_date" class="form-control" type="date" name="date" value="${sellDate }"/>
+<main class="main_frm container">
+	<div id="main_body">
+		<div class="d-flex justify-content-end">
+			<div class="input-group" id="selldateBox" style="width:25%;">
+					<span class="input-group-text">판매일</span>
+					<input id="search_date" class="form-control" type="date" name="date" value="${sellDate }"/>
+			</div>
 		</div>
-	</div>
-	<div id=Sell_list class="flex-column">
-		<div id="sell-line-tltle" class = "line d-flex d-inline-flex justify-content-between">
-				<div class="no col-menu">no</div>
-				<div class="d-flex flex-row data-Line">
-					<div class="column col-menu col-model">물품</div>
-					<div class="column col-menu col-qtt">수량</div>
-					<div class="column col-menu col-price">단가</div>
-					<div class="column col-menu col-sellprice">판매가</div>
-				</div>
-				<div class="seller col-menu">판매자</div>
-		</div>
-		<c:forEach var="list" items="${selledList}">
-			<div class="d-flex sellLine line justify-content-between">
-				<input type="hidden" value="${list.sellNo}" class="class_sellNo">
-				<input type="hidden" class="registed" id="registed_${list.sellNo}" value="${optResult}" >
-				<div class="no col-menu"
-					<c:if test="${optResult!=0}">
-						style="background:#ddd"
-					</c:if>
-				>${list.sellNo}</div>
-				<div class="d-flex flex-column data-Line data-Line-inner">
-				<c:forEach var="data" items="${selledData }">
-				<div class="d-flex flex-row">
-						<c:if test ="${list.sellNo == data.sellNo }">
-							<div class="column col-model">${data.model } <input type="hidden" value="${data.goodNo }"/></div>
-							<div class="column col-qtt">${data.qtt }</div>
-							<div class="column col-price">${data.realPrice} </div>
-							<div class="column col-price">${data.realPrice*data.qtt} </div>
+		<div id=Sell_list class="flex-column">
+			<div id="sell-line-tltle" class = "line d-flex d-inline-flex justify-content-between bg-secondary text-white h3">
+					<div class="no col-menu">no</div>
+					<div class="d-flex flex-row data-Line">
+						<div class="column col-menu col-model" style="text-align:left;">물품</div>
+						<div class="column col-menu col-qtt">수량</div>
+						<div class="column col-menu col-price number">단가</div>
+						<div class="column col-menu col-sellprice number">판매가</div>
+					</div>
+					<div class="seller col-menu">판매자</div>
+			</div>
+			<c:forEach var="list" items="${selledList}">
+				<div class="d-flex sellLine line justify-content-between">
+					<input type="hidden" value="${list.sellNo}" class="class_sellNo">
+					<input type="hidden" class="registed" id="registed_${list.sellNo}" value="${optResult}" >
+					<div class="no col-menu"
+						<c:if test="${optResult!=0}">
+							style="background:#ddd"
 						</c:if>
+					>${list.sellNo}</div>
+					<div class="d-flex flex-column data-Line data-Line-inner">
+					<c:forEach var="data" items="${selledData }">
+					<div class="d-flex flex-row">
+							<c:if test ="${list.sellNo == data.sellNo }">
+								<div class="column col-model">${data.model } <input type="hidden" value="${data.goodNo }"/></div>
+								<div class="column col-qtt">${data.qtt }</div>
+								<div class="column col-price">${data.realPriceStr} </div>
+								<div class="column col-price">${data.totalStr} </div>
+							</c:if>
+					</div>
+					
+					</c:forEach>
+					</div>
+					<div class="seller col-menu">${list.ename }</div>
 				</div>
-				
-				</c:forEach>
+				<div class='input_box' id ='inputbox_${list.sellNo}'>
 				</div>
-				<div class="seller col-menu">${list.ename }</div>
-			</div>
-			<div class='input_box' id ='inputbox_${list.sellNo}'>
-			</div>
-		</c:forEach>
+			</c:forEach>
+		</div>
 	</div>
-	<!-- The Modal -->
-	<div class="modal" id="custom_modal">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header ">
-			  <h4 class="modal-title">고객검색</h4>
-			  <button type="button" class="btn btn-danger modal_close" data-bs-dismiss="modal">Close</button>
-	      </div>
-	      <div class="modal-body chk1" id="chk1"></div>
-		  <div class="modal-footer">
-        	<button type="button" class="btn btn-danger modal_close" data-bs-dismiss="modal">Close</button>
-      	  </div>	
-	    </div>
-	  </div>
-	</div> 
+		<!-- The Modal -->
+		<div class="modal" id="custom_modal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header ">
+				  <h4 class="modal-title">고객검색</h4>
+				  <button type="button" class="btn btn-danger modal_close" data-bs-dismiss="modal">Close</button>
+		      </div>
+		      <div class="modal-body chk1" id="chk1"></div>
+			  <div class="modal-footer">
+	        	<button type="button" class="btn btn-danger modal_close" data-bs-dismiss="modal">Close</button>
+	      	  </div>	
+		    </div>
+		  </div>
+		</div>
 </main>
 <jsp:include page="/resources/include/SideMenu/CampSide.jsp" />

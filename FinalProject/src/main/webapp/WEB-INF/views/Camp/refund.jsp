@@ -4,6 +4,10 @@
 #main_Frm{
 	width:100%;
 }
+#btn_box{
+	margin : 1% 1% 1% 0;
+	
+}
 .list:nth-child(2n+1){
 	background: #ddd;
 }
@@ -36,6 +40,10 @@
 	width : 80%;
 	margin : 0 auto;
 }
+
+.line{
+	margin-bottom: 1%;
+}
 </style>
 
 <script>
@@ -58,7 +66,7 @@
 		});
 		//modal 선택시
 		$(document).on('click',".modelList",function(){
-			$("#model").val( $(this).find("div").attr('class') );
+			$("#model").val( $(this).find("div").attr('id') );
 			$('#goodNo').val( $(this).find('input').val() );
 			//모달닫기
 			$("#findmodal").modal('hide');
@@ -76,7 +84,7 @@
 			tag += '<input type="hidden" name="goodNo" id="goodNo" value="">';
 			tag += '<span class="input-group-text text">수량</span>';
 			tag += '<input type="number" class="form-control" step ="1" id="qtt" name="qtt"/>';
-			tag += '<input type="button" id="input_btn" class="btn btn-danger"value="파기등록"/>';
+			tag += '<input type="button" id="input_btn" class="btn btn-danger"value="반품등록"/>';
 			tag += '</div></form>';
 			$("#input").html(tag);
 		});
@@ -85,7 +93,7 @@
 		$(document).on('click','#input_btn',function(){
 			if( $('#qtt').val()!=0 && $('#qtt').val()!="" && $('#qtt').val()!=null ){
 				if(confirm('정말 등록하시겠습니까?')){
-					url ="brokenInsert";
+					url ="refundInsert";
 					data =$("#inputForm").serialize();
 					$.ajax({
 						url:url,
@@ -95,7 +103,7 @@
 							$(input).html("");
 							var tag=""
 							tag += '<div class="d-flex line list justify-content-between container">';
-							tag += '<div class="no">'+result.brokenNo+'</div>';
+							tag += '<div class="no">'+result.refundNo+'</div>';
 							tag += '<div class="model">'+result.model+'</div>';
 							tag += '<div class="qtt">'+result.qtt+'</div>';
 							tag += '<div class="date">'+result.registdate+'</div></div>';
@@ -112,7 +120,7 @@
 		var data = {searchWord: searchWord}
 		$.ajax({
 			data:data,
-			url:"brokenSearch",
+			url:"refundSearch",
 			dataType:"json",
 			type:"post",
 			success:function(result){
@@ -123,7 +131,7 @@
 					$(result).each(function(idx,data){
 						//d-flex flex-column
 						tag +='<div class="modelList d-flex justify-content-around">';
-						tag +='<div class="'+data.model+' modal_model">'+data.model+'<input type="hidden" value="'+data.goodNo+'"></div>';
+						tag +='<div class="modal_model" id="'+data.model+'">'+data.model+'<input type="hidden" value="'+data.goodNo+'"></div>';
 						tag +='<div class="dodal_name">'+data.sellername+'</div><hr/></div>';
 					});	
 					$('.modal-body').html(tag);
@@ -138,25 +146,27 @@
 <main id='main_Frm' class="container">
 	<div id='body'>
 		<div id='btn_box' class='d-flex justify-content-end'>
-			<div><input class='form-control' type="button" id="find" value="등록"/></div>
+			<div><input class='form-control btn-primary btn' type="button" id="find" value="등록"/></div>
 		</div>
 		<div id="brokenList" class='list flex-column container'>
-			<div class='title line d-flex justify-content-between container'>
+			<div class='title line d-flex justify-content-between container bg-secondary text-white h3'>
 				<div class="no">번호</div>
 				<div class="model">상품명</div>
 				<div class="qtt">수량</div>
 				<div class="date">등록일</div>
 			</div>
-			<c:forEach var='data' items='${list }'>
+			<div class="h5">
+			<c:forEach var='data' items='${refundlist }'>
 				<div class="d-flex line list justify-content-between container">
-					<div class="no">${data.brokenNo}</div>
+					<div class="no">${data.refundNo}</div>
 					<div class="model">${data.model }</div>
 					<div class="qtt">${data.qtt }</div>
 					<div class="date">${data.registdate }</div>
 				</div>
 			</c:forEach>
-			<div id="input">
 			</div>
+		</div>
+		<div id="input">
 		</div>		
 	</div>
 	
@@ -166,7 +176,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">파기등록</h4>
+        <h4 class="modal-title">반품등록</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 

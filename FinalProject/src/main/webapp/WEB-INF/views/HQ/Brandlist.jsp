@@ -15,7 +15,9 @@ position: relative;
 .section{
 min-height : 700px;
 }
-
+.good_line{
+	border-radius: 5px 5px 0 0;
+}
 .line{
 	width :100%;
 }
@@ -38,22 +40,28 @@ input[class=]
 	display:flex;
 	flex:1;
 	width : 94%;
-	min-height : 834px;
+	min-height : 700px;
 }
 #caro_body{
 	width :100%;
 }
 .caro_btn{
-	min-height : 834px;
+	min-height : 700px;
 }
 .caro_L_btn{
 	flex:0 0 3%;
 	order : -1;
-	min-height : 834px;
+	min-height : 700px;
 }
 .caro_R_btn{
 	flex:0 0 3%;
 	order : 2;
+}
+
+#goodlist{
+	width : 80%;
+	margin : 0 auto;
+
 }
 #goodInserter span{
 	width:200px;
@@ -198,6 +206,7 @@ input[class=]
 				}
 			});
 		});
+		
 	});
 	function listline(){
 		var tag="";
@@ -254,42 +263,45 @@ input[class=]
 			<!-- The slideshow/carousel -->
 				<div class="carousel-inner">
 					<div class="carousel-item active list">
+						<div id="goodlist">
 							<c:if test="${auth>2}">
-							<div class="d-flex flex-row-reverse" Style="margin-right:5%">
-								<input type="button" class='good_del_btn btn btn-outline-warning' value="삭제"/>
-							</div>
-							</c:if>
-						<div class = "d-flex line good_line">
-							<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">제품명</span></div>
-							<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">판매처</span></div>
-							<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">분류</span></div>
-							<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">구입가</span></div>
-							<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">판매가</span></div>
-							<div class="d-flex lasteditbox"><span class="text_tile"> </span></div>
-						</div>
-						<div class="d-flex listline flex-column" id="listline">
-							<c:forEach var="list" items="${goodlist}">
-								<div class="d-flex flex-fill line stat">
-									<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">${list.name}</span>
-									<input type="hidden" class='brandcode' name="brandcode" value="${list.brandcode }"/></div>
-									<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">${list.sellername}</span></div>
-									<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">${list.classifyname}</span></div>
-									<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">${list.buyprice}</span></div>
-									<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">${list.sellprice}</span></div>
+								<div class="d-flex flex-row-reverse" Style="margin-right:5%; margin-bottom:1%;">
+									<input type="button" class='good_del_btn btn btn-outline-warning' value="삭제"/>
 								</div>
-							</c:forEach>
-						</div>
-						<div id="searchSpace" class="d-flex flex-fill">
-							<form id="search_frm flex-fill" style="width: 80%;">
-								<div class="flex-wrap input-group flex-fill">
-									<select class="form-select " id="searchkey" name="searchKey">
-										<option value="sellername" selected>업체</option>
-										<option value="name">제품명</option>
-									</select>
-									<input type="text" class="form-control" id="searchWord" name="searchWord"/>
-									<button type="button" class="btn btn-info" id="search_btn">검색</button>
-								</div> 
-							</form>
+							</c:if>
+							<div class = "d-flex line good_line bg-secondary text-white h3">
+								<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">제품명</span></div>
+								<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">판매처</span></div>
+								<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">분류</span></div>
+								<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">구입가</span></div>
+								<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">판매가</span></div>
+								<div class="d-flex lasteditbox"><span class="text_tile"> </span></div>
+							</div>
+							<div class="d-flex listline flex-column" id="listline">
+								<c:forEach var="list" items="${goodlist}">
+									<div class="d-flex flex-fill line stat h6">
+										<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">${list.name}</span>
+										<input type="hidden" class='brandcode' name="brandcode" value="${list.brandcode }"/></div>
+										<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">${list.sellername}</span></div>
+										<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile">${list.classifyname}</span></div>
+										<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile price">${list.buyStr}</span></div>
+										<div class="d-flex flex-fill textbox flex-wrap text-center column"><span class="text_tile price">${list.sellStr}</span></div>
+									</div>
+									<hr>
+								</c:forEach>
+							</div>
+							<div id="searchSpace" class="d-flex flex-fill">
+								<form id="search_frm flex-fill" style="width: 80%;">
+									<div class="flex-wrap input-group flex-fill">
+										<select class="form-select " id="searchkey" name="searchKey">
+											<option value="sellername" selected>업체</option>
+											<option value="name">제품명</option>
+										</select>
+										<input type="text" class="form-control" id="searchWord" name="searchWord"/>
+										<button type="button" class="btn btn-info" id="search_btn">검색</button>
+									</div> 
+								</form>
+							</div>
 						</div>
 				    </div>
 					<div class="carousel-item form">

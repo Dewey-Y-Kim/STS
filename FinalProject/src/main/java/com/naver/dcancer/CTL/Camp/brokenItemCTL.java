@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.dcancer.DTO.brokenDTO;
+import com.naver.dcancer.DTO.pagingVO;
 import com.naver.dcancer.Service.CampService;
 
 @RestController
@@ -26,7 +27,6 @@ public class brokenItemCTL {
 		list = service.brokenList();
 		mav.addObject("list",list);
 		mav.setViewName("Camp/broken");
-		System.out.println(list);
 		return mav;
 	}
 	

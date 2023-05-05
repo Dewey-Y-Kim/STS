@@ -45,6 +45,7 @@ public class SellCTL {
         String formattedNow = now.format(formatter);
 		List<SellDTO> selledlist = service.selledList(code, now.toString());
 		List<SellDTO> selledData = service.selledData(code, now.toString());
+		
 		System.out.println(code+"   "+now.toString());
 		System.out.println("[sellInfo] list:"+selledlist);
 		System.out.println("[sellInfo] data:"+selledData);

@@ -16,5 +16,11 @@ public class LoginServiceImpl implements LoginService{
 		return dao.login(empno, pwd);
 	}
 
+	@Override
+	public String getNoticeContent(String no) {
+		// TODO Auto-generated method stub
+		return dao.getNoticeContent(no);
+	}
+
 	
 }

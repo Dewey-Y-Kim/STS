@@ -24,7 +24,7 @@ public class refundCTL {
 		ModelAndView mav = new ModelAndView();
 		List<refundDTO> list = new ArrayList<refundDTO>();
 		list = service.refundList();
-		mav.addObject("list",list);
+		mav.addObject("refundlist",list);
 		mav.setViewName("Camp/refund");
 		System.out.println(list);
 		return mav;

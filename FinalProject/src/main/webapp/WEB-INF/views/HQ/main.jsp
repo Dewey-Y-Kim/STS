@@ -14,16 +14,28 @@
  	#noticeBox{
  		width:50%;
  		margin: 0 auto;
- 		margin-top : 50px;
- 		border : 1px solid #fff; 
- 		
+ 		border : 1px solid #6c757d;
+ 		border-radius: 5px;
+ 		height : 30%;
+	
+ 		overflow: scroll;
+ 	}
+ 	#noticeLine{
+ 		background: #fff;
+ 		text-align : center;
  	}
  	.noticeNo{
  		width :20%;
- 	
  	}
- 	.noticeTitle{
- 		width : 80%;
+ 	.noticetitle{
+ 		width : 50%;
+ 	}
+ 	.noticeDate{
+ 		width : 30%;
+ 	}
+ 	.noticeLine:hover{
+ 		background:black;
+ 		color: white;
  	}
  </style>
  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
@@ -99,32 +111,54 @@
 		data = json2var(json,'sum');
 		
 		chart(data); // 그래프 표시
+		
+		//noticeLine click;
+		$(".noticeLine").click(function(){
+			var no=$(this).find(".noticeNo").attr("id")
+			$.ajax({
+				url:"noticeContent",
+				data:{no:no},
+				type:"post",
+				success:function(result){
+					$(".modal-body").html(result);
+					$("#noticeModal").modal('show')
+					
+				},error:function(e){
+					console.log(e.responseText);
+				}
+			});
+		});
+		$(document).on('click','.closeBtn',function(){
+			$(".modal-body").html("");
+		});
 	});
  </script>
 <main class="main_frm container-fluid ">
+	<div id="noticeBox" class="flex-column">
+		<div id="noticeLine" class=" bg-secondary text-white h3">공지</div>
+		<c:forEach var="notice" items="${notice}">
+			<div class="d-flex noticeLine flex-row">
+				<div class="noticeNo" id="${notice.no }">${notice.no }</div>
+				<div class="noticetitle">${notice.title}</div>
+				<div class="noticeDate">${notice.writeDate }</div>
+			</div>		
+		</c:forEach>
+		
+	</div>	
 	<div id = "chart" class="d-flex justify-content-center">
 		<canvas id='graph' style="width:80%;">
 		</canvas>
 	</div>
-	<div id="noticeBox">
-		<div id=notice class="d-flex">
-			<div class="noticeNo">no</div>
-			<div class="noticeTitle">title</div>
-		</div>
-		<div class="d-flex noticeLine">
-			
-		</div>
-	</div>
 </main>
 <!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
+<div class="modal" id="noticeModal">
+  <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <h4 class="modal-title">공지사항</h4>
+        <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
@@ -134,7 +168,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger closeBtn" data-bs-dismiss="modal">Close</button>
       </div>
 
     </div>

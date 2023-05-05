@@ -21,7 +21,13 @@ import com.naver.dcancer.DTO.soldDTO;
 public class CampServiceImpl implements CampService {
 	@Inject
 	CampDAO dao;
-
+	
+	@Override
+	public int pagingData(String bbs, String data) {
+		// TODO Auto-generated method stub
+		return dao.pagingData(bbs, data);
+	}
+	
 	@Override
 	public List<customDTO> customSelect(pagingVO vo) {
 		// TODO Auto-generated method stub
@@ -138,5 +144,13 @@ public class CampServiceImpl implements CampService {
 		// TODO Auto-generated method stub
 		return dao.promisedData(date);
 	}
+
+	@Override
+	public List<promiseDTO> promiseToday(int code, String now) {
+		// TODO Auto-generated method stub
+		return dao.promiseToday(code, now);
+	}
+
+	
 	
 }

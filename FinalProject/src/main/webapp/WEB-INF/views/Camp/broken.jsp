@@ -4,10 +4,17 @@
 #main_Frm{
 	width:100%;
 }
+#btn_box{
+	margin-top : 1%;
+	margin-right : 1%;
+}
 .list:nth-child(2n+1){
 	background: #ddd;
 }
-
+.title{
+	border-radius: 5px;
+	margin-top : 1%;
+}
 .no{
 	width : 10%;
 }
@@ -35,6 +42,9 @@
 #input{
 	width : 80%;
 	margin : 0 auto;
+}
+.line{
+	margin-bottom: 1%;
 }
 </style>
 
@@ -135,18 +145,19 @@
 		});	
 	}
 </script>
-<main id='main_Frm' class="container">
+<main id='main_Frm' class="container-fluid">
 	<div id='body'>
 		<div id='btn_box' class='d-flex justify-content-end'>
-			<div><input class='form-control' type="button" id="find" value="등록"/></div>
+			<div><input class='form-control btn-primary btn' type="button" id="find" value="등록"/></div>
 		</div>
-		<div id="brokenList" class='list flex-column container'>
-			<div class='title line d-flex justify-content-between container'>
+		<div id="brokenList" class='list flex-column container-fd'>
+			<div class='title line d-flex justify-content-between container bg-secondary text-white h3'>
 				<div class="no">번호</div>
 				<div class="model">상품명</div>
 				<div class="qtt">수량</div>
 				<div class="date">등록일</div>
 			</div>
+			<div id="listBox" class="h5">
 			<c:forEach var='data' items='${list }'>
 				<div class="d-flex line list justify-content-between container">
 					<div class="no">${data.brokenNo}</div>
@@ -155,6 +166,7 @@
 					<div class="date">${data.registdate }</div>
 				</div>
 			</c:forEach>
+			</div>
 			<div id="input">
 			</div>
 		</div>		
