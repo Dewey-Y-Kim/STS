@@ -7,7 +7,7 @@
 	}
 	#btn_box{
 		margin-bottom:1%;
-		margin-right : 3.9%;
+		margin-right : 1.9%;
 	}
 	.noticelist{
 	width : 100%;
@@ -29,10 +29,13 @@
 	}
 	.noficelist>ul>li:first-child{
 	}
-	.noticelist>ul>li:nth-child(3){
-		width : 64%;
+	.noticelist>ul>li:nth-child(2){
+		width : 50%;
 	}
-	.noticeline li:nth-child(2){
+	.noticelist>ul>li:nth-child(3){
+		width : 24%;
+	}
+	.noticeline li:nth-child(1){
 		text-align:left;
 		background-color:red;
 	}
@@ -51,7 +54,6 @@
 		width:30%;
 	}
 	.inputbox:eq(1){
-		width:30%;
 	}
 	.pagingbox ul{
 	margin:0 auto;
@@ -150,7 +152,7 @@
 			</div>
 		</div>
 		<div class='writeForm'>
-			<form id='writeFrm' method="post" action="noticeinsert">
+			<form id='writeFrm' method="post" action="noticeinsert" >
 				<div class="titlebox">
 				<div class="input-group mb-3">
 				  <span class="title input-group-text">제목</span>

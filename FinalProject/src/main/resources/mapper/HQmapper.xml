@@ -24,6 +24,11 @@
 		</when>
 		</choose>   
 	</select>
+	<select id="noticeList_six" resultType="com.naver.dcancer.DTO.NoticeDTO">
+		select no, title, e.ename writer, to_char(writedate,'YY-MM-DD') writedate,hit from noticeBBS n join empInfo e on n.empno = e.empno
+		 order by no desc 
+		<![CDATA[where rownum<=6 order by no asc]]>)
+	</select>
 	<select id="noticeView" resultType="com.naver.dcancer.DTO.NoticeDTO">
 		select no, title, e.ename writer, n.empno, content, writeDate from noticeBBS n join empInfo e on n.empno = e.empno where no=${param1}
 	</select>

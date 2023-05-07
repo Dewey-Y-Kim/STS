@@ -96,6 +96,7 @@ public class LoginCTL {
 		
 		// noticeList
 		pagingVO vo = new pagingVO();
+		vo.setLinePerPage(5);
 		List<NoticeDTO> notice =  hq.noticeList(vo);
 		mav.addObject("notice",notice);
 		mav.addObject("date",date);

@@ -102,7 +102,7 @@
 						success:function(result){
 							$(input).html("");
 							var tag=""
-							tag += '<div class="d-flex line list justify-content-between container">';
+							tag += '<div class="d-flex line list justify-content-between container h5">';
 							tag += '<div class="no">'+result.refundNo+'</div>';
 							tag += '<div class="model">'+result.model+'</div>';
 							tag += '<div class="qtt">'+result.qtt+'</div>';
@@ -155,16 +155,14 @@
 				<div class="qtt">수량</div>
 				<div class="date">등록일</div>
 			</div>
-			<div class="h5">
 			<c:forEach var='data' items='${refundlist }'>
-				<div class="d-flex line list justify-content-between container">
+				<div class="d-flex line list justify-content-between container h5">
 					<div class="no">${data.refundNo}</div>
 					<div class="model">${data.model }</div>
 					<div class="qtt">${data.qtt }</div>
 					<div class="date">${data.registdate }</div>
 				</div>
 			</c:forEach>
-			</div>
 		</div>
 		<div id="input">
 		</div>		

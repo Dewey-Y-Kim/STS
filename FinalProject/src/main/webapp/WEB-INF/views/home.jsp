@@ -2,12 +2,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <style>
+.mainfrm{
+}
+
 #loginFrm {
 	float : right;
 	width : 20%;
-	margin-top:40%;
-	margin-right:10%;
+	position : absolute;
+	top :80%;
+	right :10%;
+}
+#filterBox{
+position:absolute;
+	left: 45%;
+	top : 15%;
+	width : 350px;
+	height:500px;
+	background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(70,100,251,0) 5%, rgba(111,134,252,0) 95%, rgba(255,255,255,1) 100%), linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(70,100,251,0) 5%, rgba(111,134,252,0) 95%, rgba(255,255,255,1) 100%);
 	
+}
+#imgBox{
+	position:absolute;
+	left: 45%;
+	top : 15%;
+	width : 350px;
+	height:500px;
+	margin :0 auto;
+	border-radius : 20px;
 }
 </style>
     
@@ -27,4 +48,34 @@
 			</div></li>
 			</ul>
 	</form>
+	<div id="imgBox"> 
+		<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+		  <!-- Indicators/dots -->
+		  <div class="carousel-indicators" Style="display:none;">
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+		  </div>
+		
+		  <!-- The slideshow/carousel -->
+		  <div class="carousel-inner">
+		    <div class="carousel-item active  justify-content-center">
+		      <img src="resources/img/opt/optimg_10.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_11.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_12.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_13.jpg" class="d-block h-100">
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div id="filterBox" >
+	</div>
 </main>

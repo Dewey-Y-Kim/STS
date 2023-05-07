@@ -38,7 +38,6 @@ public class HQBtnCTL {
 	public ModelAndView sellerList(HttpSession session,pagingVO vo) {
 		ModelAndView mav = new ModelAndView();
 		List<SellerDTO> list = service.sellerList(vo);
-		System.out.println(((SellerDTO)list.get(1)).toString());
 		mav.addObject("sellerlist", list);
 		mav.setViewName("HQ/Sellerlist");
 		vo.setTotalLine(service.pagingData("sellerInfo","sellercode"));

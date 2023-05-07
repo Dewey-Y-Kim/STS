@@ -13,7 +13,7 @@ main{
 position: relative;
 }
 .section{
-min-height : 700px;
+min-height : 500px;
 }
 .good_line{
 	border-radius: 5px 5px 0 0;
@@ -31,6 +31,10 @@ input[class=]
  indicatebtn{
  	color: white;
  }
+ .carousel-item{
+ 	overflow: scroll;
+ 	max-height : 600px;
+ }
 .caro_body_line{
 	flex-direction : column;
 	display:flex;
@@ -40,18 +44,18 @@ input[class=]
 	display:flex;
 	flex:1;
 	width : 94%;
-	min-height : 700px;
+	min-height : 300px;
 }
 #caro_body{
 	width :100%;
 }
 .caro_btn{
-	min-height : 700px;
+	min-height : 500px;
 }
 .caro_L_btn{
 	flex:0 0 3%;
 	order : -1;
-	min-height : 700px;
+	min-height : 500px;
 }
 .caro_R_btn{
 	flex:0 0 3%;
@@ -84,8 +88,9 @@ input[class=]
 	width :40%;
 }
 #searchSpace{
-	width: 80%;
+	width: 90%;
 	margin:0 auto;
+	margin-top : 1%;
 }
 </style>
 <script>
@@ -173,9 +178,9 @@ input[class=]
 		$('.goodClass').change(function(){
 			var tag ='<div class="input-group mb-3 input-group-lg"> <span class="input-group-text">제품명</span><input type="text" class="form-control insertinput" name="name"></div>';
 			if($('.goodClass').val()==2 || $('.goodClass').val()==3){
-				tag += '<div class="input-group mb-3 input-group-lg"> <span class="input-group-text">sph +범위</span><input type="text" name="sphStart" class="form-control insertinput"></div>';
-				tag += '<div class="input-group mb-3 input-group-lg"> <span class="input-group-text">sph -범위</span><input type="text" name="sphEnd" class="form-control insertinput"></div>';
-				tag += '<div class="input-group mb-3 input-group-lg"> <span class="input-group-text">cyl -범위</span><input type="text" name="cylEnd" class="form-control insertinput" placeholder="-단위로 입력하셔야 합니다."></div>';
+				tag += '<div class="input-group mb-3 input-group-lg"> <span class="input-group-text">sph +범위</span><input type="number" step="0.25" name="sphStart" class="form-control insertinput dioptIn" value="0.00"></div>';
+				tag += '<div class="input-group mb-3 input-group-lg"> <span class="input-group-text">sph -범위</span><input type="number" step="0.25" name="sphEnd" class="form-control insertinput dioptIn" value="0.00"></div>';
+				tag += '<div class="input-group mb-3 input-group-lg"> <span class="input-group-text">cyl -범위</span><input type="number" step="0.25" name="cylEnd" class="form-control insertinput dioptIn" value="0.00"></div>';
 			}
 			$("#model").html(tag);
 		});
@@ -206,7 +211,24 @@ input[class=]
 				}
 			});
 		});
-		
+		$(".dioptIn").change(function(){
+			/*
+			if($(this).val() >20){
+				$(this).val(($(this).val()/100).toFixed(2));
+			}
+			*/
+			// 025 -1.00 -100
+			let num = $(this).val();
+			if( num > 20 || num < -20) {
+					$(this).val( (num/100).toFixed(2) ); //+-20 이상 124 -> 1.24
+			}else { // 20이내....
+					$(this).val(((100*$(this).val())/100).toFixed(2)); // -1 -1.00
+			}
+			num = $(this).val()
+			if ( num % 0.25 != 0 ){
+				alert('유효한 값인지 확인을 부탁드립니다.');
+			}
+		});
 	});
 	function listline(){
 		var tag="";
@@ -264,6 +286,18 @@ input[class=]
 				<div class="carousel-inner">
 					<div class="carousel-item active list">
 						<div id="goodlist">
+							<div id="searchSpace" class="d-flex flex-fill">
+								<form id="search_frm flex-fill" style="width: 80%;">
+									<div class="flex-wrap input-group flex-fill">
+										<select class="form-select " id="searchkey" name="searchKey">
+											<option value="sellername" selected>업체</option>
+											<option value="name">제품명</option>
+										</select>
+										<input type="text" class="form-control" id="searchWord" name="searchWord"/>
+										<button type="button" class="btn btn-info" id="search_btn">검색</button>
+									</div> 
+								</form>
+							</div>
 							<c:if test="${auth>2}">
 								<div class="d-flex flex-row-reverse" Style="margin-right:5%; margin-bottom:1%;">
 									<input type="button" class='good_del_btn btn btn-outline-warning' value="삭제"/>
@@ -289,18 +323,6 @@ input[class=]
 									</div>
 									<hr>
 								</c:forEach>
-							</div>
-							<div id="searchSpace" class="d-flex flex-fill">
-								<form id="search_frm flex-fill" style="width: 80%;">
-									<div class="flex-wrap input-group flex-fill">
-										<select class="form-select " id="searchkey" name="searchKey">
-											<option value="sellername" selected>업체</option>
-											<option value="name">제품명</option>
-										</select>
-										<input type="text" class="form-control" id="searchWord" name="searchWord"/>
-										<button type="button" class="btn btn-info" id="search_btn">검색</button>
-									</div> 
-								</form>
 							</div>
 						</div>
 				    </div>

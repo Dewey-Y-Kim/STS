@@ -93,7 +93,9 @@ main{
 #OptData span{
 	width :20%;
 }
-
+#tel3{
+	margin-right: 1%;
+}
 </style>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script>
@@ -170,9 +172,9 @@ main{
 					$("#birth").val(s.birth);
 					
 					if(s.gender=='M'){
-						$('.genderbox input[value="M"]').attr("selected",true);
+						$('#genderM').prop("checked", true);;
 					}else{
-						$('.genderbox input[value="F"]').attr("selected",true);
+						$('#genderF').prop("checked",true);
 					}
 					$("select[name='tel1'] option[value="+s.tel1+"]").attr("selected",true);
 					$("input[name='tel2']").val(s.tel2);
@@ -302,8 +304,7 @@ main{
 				$.each(result,function(idx,data){
 					console.log(data);
 					
-					
-					tag+='<div class="d-flex justify-content-start"><div class="input-group" style="width:50%;border-bottom:1px solid black;">';
+					tag+='<div class="d-flex justify-content-start" style="margin-bottom:1%;"><div class="input-group" style="width:50%;border-bottom:1px solid black;">';
 					tag+=data.registDate+'</div></div><div class="line d-flex flex-fill flex-row input-group">';
 					tag+='<span class="input-group-text">PD : '+data.pd+'</span>';
 					tag += '<span class="input-group-text">Sph</span><span class="input-group-text">Cyl</span><span class="input-group-text">Axis</span><span class="input-group-text">ADD</span></div><div class="line d-flex flex-fill flex-row">';
@@ -376,7 +377,7 @@ main{
 						<div class="d-flex">
 							<input type="button" class="btn btn-outline-primary" id="opto_submit_btn" value="검안등록"/>
 							<input type="button" class="btn btn-outline-success" id="custom_submit_btn" value="고객등록"/>
-							<input type="button" class="btn btn-outline-info" id="regist_btn" value="검색" onclick="btn_search()">
+							<input type="button" class="btn btn-info" id="regist_btn" value="검색" onclick="btn_search()">
 							
 							<input type="hidden" id="registed" value="N"/>
 						</div>
@@ -395,7 +396,7 @@ main{
 							<input type="text" maxlenth="8" class="form-control customIn" id="birth" name="birth">
 						</div>
 						<div class="input-group-text flex-fill d-inline-flex form-switch column input-group genderbox">
-							<span class = "gender_box_font">남</span><input type="radio" name="gender" value="M"><span class = "gender_box_font">여</span><input type="radio" name="gender" value="F">
+							<span class = "gender_box_font">남</span><input type="radio" name="gender" value="M" id='genderM'><span class = "gender_box_font">여</span><input type="radio" name="gender" value="F" id='genderF'>
 						</div>
 					</div>
 					
@@ -436,8 +437,8 @@ main{
 						<div class="flex-fill flex-row column input-group">
 							<span class="input-group-text">주소</span>
 							<input type="text" class="form-control customIn" id='addr1' name="addr1" readonly>
-							<input type="button" class ="btn btn-outline-info form-control" id="addr1_btn" value="검색" />
 							<input type="text" maxlenth="8" class="form-control customIn" name="addr2">
+							<input type="button" class ="btn btn-outline-info form-control" id="addr1_btn" value="검색" />
 						</div>
 					</div>
 				</div>

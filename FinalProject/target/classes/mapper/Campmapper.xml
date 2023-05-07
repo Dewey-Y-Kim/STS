@@ -63,7 +63,7 @@
 	<select id="soldDay" resultType="com.naver.dcancer.DTO.soldDTO">
 		select campname, sum, sellNo, round(sum/sellNo,-2) avg from (
 		select code,sum(qtt*realprice) sum, count(sellNo) sellNo from 
-		sellInfo where to_char(selldate,'YYYY-MM-DD')=#{date} 
+		sellInfo where to_char(selldate,'YYYY-MM-DD') like #{date} 
 		group by code) s join campInfo c on c.code=s.code order by c.code
 	</select>
 	<select id="soldBetween" resultType="com.naver.dcancer.DTO.soldDTO">
@@ -80,7 +80,7 @@
 	<insert id="brokenInsert">
 		insert into brokenlist(brokenNo, goodNo, qtt) values(broken_sq.nextval, ${goodNo}, ${qtt})
 		<selectKey keyProperty='brokenNo,registdate' resultType="com.naver.dcancer.DTO.brokenDTO">
-			select broken_sq.currval, to_char(sysdate,'YYYY-MM-DD') registDate from dual
+			select broken_sq.currval brokenNo, to_char(sysdate,'YYYY-MM-DD HH:mi:ss') registDate from dual
 		</selectKey>
 	</insert>
 	<select id="refundList" resultType="com.naver.dcancer.DTO.refundDTO">
@@ -92,7 +92,7 @@
 	<insert id="refundInsert">
 		insert into refundlist(refundNo, goodNo, qtt) values(refund_sq.nextval, ${goodNo}, ${qtt})
 		<selectKey keyProperty='refundNo,registdate' resultType="com.naver.dcancer.DTO.refundDTO">
-			select refund_sq.currval refundNo, to_char(sysdate,'YYYY-MM-DD') registDate from dual
+			select refund_sq.currval refundNo, to_char(sysdate,'YYYY-MM-DD HH:mi:ss') registDate from dual
 		</selectKey>
 	</insert>
 	<select id="promisedBuyer" resultType="com.naver.dcancer.DTO.promiseDTO">

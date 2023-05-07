@@ -8,6 +8,9 @@
  	#firstline{
  		min-height : 40%;
  	}
+ 	#searchList{
+ 		max-height : 40%;
+ 	}
  	#findBox{
  		width:45%;
  		margin: 1% auto;
@@ -43,7 +46,7 @@
  	.searchbox{
  		width : 80%;
  		margin :0 auto;
- 		margin-top : 15%;
+ 		margin-top : 1%;
  		
  	}
  	.nameText{
@@ -55,6 +58,7 @@
  	.noticeLine{
  		width :90%;
  		margin : 0 auto;
+ 		font-size: 1.6em;
  	}
  	.noticeNo{
  		width :20%;
@@ -192,19 +196,37 @@
 		$(document).on('click','.closeBtn',function(){
 			$(".modal-body").html("");
 		});
+	
 	});
+	
  </script>
 <main class="main_frm container-fluid ">
 	<div id="firstline" class="d-flex">
+		<!-- 
 		<div id="findBox">
-			<form>
 				<div id="searchLine" class="bg-secondary text-white h3 title">검색</div>
 				<div id="searchBox" class="searchbox input-group box">
 					<span class="input-group-text nameText">이름</span>
-					<input type="text" class="nameIn form-control" name="name" />
-					<input type="button" class="btn btn-secondary" value="검색"/>
+					<input type="text" class="nameIn form-control" id="name" name="name" placeholder=""/>
+					<input type="button" class="btn btn-secondary" id="search_btn" value="검색"/>
 				</div>
-			</form>
+				<div id="searchList"></div>
+		</div>
+		 -->
+		 <div id="promiseBox">
+			<div id="PromiseLine" class="bg-secondary text-white h3 title">고객과의 약속</div>
+			<div class="box">
+			<c:forEach var="promise" items="${promise}">
+				<div class="d-flex promiseLine flex-row" id="${promise.sellNo }">
+					<div class="promiseNoLine">${promise.sellNo }</div>
+					<div class="promiseNameLine">${promise.name }</div>
+					<div class="promiseTelLine">${promise.tel }</div>
+					<div class="promiseQttLine">${promise.qtt }(ea)</div>
+					<div class="promisePriceLine">₩${promise.price }</div>
+				</div>
+				<hr class="hrLine">		
+			</c:forEach>
+			</div>
 		</div>
 		<div id="noticeBox" class="flex-column ">
 			<div id="noticeLine" class=" bg-secondary text-white h3 title">공지</div>
@@ -221,21 +243,6 @@
 		</div>
 	</div>
 	<div class="d-flex">
-		<div id="promiseBox">
-			<div id="PromiseLine" class="bg-secondary text-white h3 title">고객과의 약속</div>
-			<div class="box">
-			<c:forEach var="promise" items="${promise}">
-				<div class="d-flex promiseLine flex-row" id="${promise.sellNo }">
-					<div class="promiseNoLine">${promise.sellNo }</div>
-					<div class="promiseNameLine">${promise.name }</div>
-					<div class="promiseTelLine">${promise.tel }</div>
-					<div class="promiseQttLine">${promise.qtt }(ea)</div>
-					<div class="promisePriceLine">₩${promise.price }</div>
-				</div>
-				<hr class="hrLine">		
-			</c:forEach>
-			</div>
-		</div>
 		<div id = "chart" class="d-flex justify-content-center">
 			<canvas id='graph'>
 			</canvas>

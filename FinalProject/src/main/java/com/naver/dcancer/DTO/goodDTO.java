@@ -18,8 +18,8 @@ public class goodDTO {
 	private int brandcode;
 	private double sphStart;
 	private double sphEnd;
-	private double cylStart=0;
-	private double cylEnd;
+	private double cylStart=0.0;
+	private double cylEnd =0.0;
 	private String buyStr;
 	private String sellStr;
 	
@@ -117,26 +117,37 @@ public class goodDTO {
 	public void setBrandcode(int brandcode) {
 		this.brandcode = brandcode;
 	}
-	public double getSphStart() {
-		
-		return sphStart;
-	}
+	
 	public void setSphStart(double sphStart) {
 		System.out.println("startin"+this.sphStart+"sph"+sphStart+"\t"+this.sphEnd+"\t"+sphEnd);
 		if(sphStart*this.sphEnd>0) {
 			this.sphEnd = sphEnd*(-1);
-		} 
+		} else {
 		this.sphStart = sphStart;
+		}
+		System.out.println("startin"+this.sphStart+"sph"+sphStart+"\t"+this.sphEnd+"\t"+sphEnd);
+	}
+public double getSphStart() {
+		
+		return sphStart;
 	}
 	public double getSphEnd() {
 		return sphEnd;
 	}
 	public void setSphEnd(double sphEnd) {
-		System.out.println("endin"+sphStart+"\t"+this.sphEnd+"\t"+sphEnd);
-		if(sphStart*this.sphEnd>0) {
+		System.out.println("sphendin"+sphStart+"\t"+this.sphEnd+"\t"+sphEnd);
+		if(sphStart<sphEnd) {
 			this.sphEnd = sphEnd*(-1);
 		} else {
 			this.sphEnd= sphEnd;
+		}
+		System.out.println("sphendin"+sphStart+"\t"+this.sphEnd+"\t"+sphEnd);
+	}
+	public void setCylEnd(double cylEnd) {
+		if(cylEnd>0) {
+			this.cylEnd = cylEnd*-1;
+		}else {
+			this.cylEnd = cylEnd;
 		}
 	}
 	public double getCylStart() {
@@ -148,12 +159,6 @@ public class goodDTO {
 	public double getCylEnd() {
 		return cylEnd;
 	}
-	public void setCylEnd(double cylEnd) {
-		if(cylEnd>0) {
-			this.cylEnd = cylEnd*-1;
-		}else {
-			this.cylEnd = cylEnd;
-		}
-	}
+	
 	
 }

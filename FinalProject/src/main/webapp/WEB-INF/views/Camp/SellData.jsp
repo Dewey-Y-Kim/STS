@@ -198,9 +198,9 @@ margin-right: 20px;
 					$("#birth").val(s.birth);
 					
 					if(s.gender=='M'){
-						$('.genderbox input[value="M"]').attr("selected",true);
+						$('#genderM').attr("checked",true);
 					}else{
-						$('.genderbox input[value="F"]').attr("selected",true);
+						$('#genderF').attr("checked",true);
 					}
 					$("select[name='tel1'] option[value="+s.tel1+"]").attr("selected",true);
 					$("input[name='tel2']").val(s.tel2);
@@ -388,7 +388,7 @@ margin-right: 20px;
 		tag += '<span class="input-group-text">이름</span><input type="text" class="customIn form-control nameIn" id="name" name="name"/></div>';
 		tag += '<div class="flex-fill column input-group" style="width:20%;" id="birthbox"><span class="input-group-text">생년월일</span>';
 		tag += '<input type="text" maxlenth="8" class="form-control customIn" id="birth" name="birth"></div>';
-		tag += '<div class="input-group-text flex-fill d-inline-flex form-switch column input-group genderbox" style="max-width:80px;"><span class = "gender_box_font">남</span><input type="radio" name="gender" value="M"><span class = "gender_box_font">여</span><input type="radio" name="gender" value="F"></div></div>';
+		tag += '<div class="input-group-text flex-fill d-inline-flex form-switch column input-group genderbox" style="max-width:80px;"><span class = "gender_box_font">남</span><input type="radio" name="gender" id="genderM" value="M"><span class = "gender_box_font">여</span><input type="radio" name="gender" id="genderF" value="F"></div></div>';
 		tag += '<div class="line d-flex flex-fill flex-row customInfo customInfoSecond">';
 		tag += '<div class="input-group flex-fill telbox"><span class="input-group-text">전화번호</span><select name="tel1" class="form-select dropdown-toggle" style="border: 1px solid gray"><option class="dropdown-item" value="010">010</option><option class="dropdown-item" value="02">02</option><option class="dropdown-item" value="031">031</option><option class="dropdown-item" value="032">032</option><option class="dropdown-item" value="033">033</option><option class="dropdown-item" value="041">041</option><option class="dropdown-item" value="042">042</option><option class="dropdown-item" value="043">043</option><option class="dropdown-item" value="044">044</option><option class="dropdown-item" value="051">051</option><option class="dropdown-item" value="052">052</option><option class="dropdown-item" value="053">053</option><option class="dropdown-item" value="054">054</option><option class="dropdown-item" value="055">055</option><option class="dropdown-item" value="061">061</option><option class="dropdown-item" value="062">062</option><option class="dropdown-item" value="063">063</option><option class="dropdown-item" value="064">064</option></select>';
 		tag += '<span class="input-group-text">-</span><input type="text" name="tel2" class="form-control btn-light telbox" minlength="3" maxlength="4">';
@@ -397,8 +397,8 @@ margin-right: 20px;
 		tag += '<div class="d-flex customInfo customInfothird"><div class="flex-fill flex-row input-group">';
 		tag += '<span class="input-group-text">주소</span>';
 		tag += '<input type="text" class="form-control customIn" Style="margin:0;" id="addr1" name="addr1" readonly>';
+		tag += '<input type="text" maxlenth="8" class="form-control customIn" name="addr2" Style="margin-right:0">';
 		tag += '<input type="button" class ="btn btn-outline-info form-control" id="addr1_btn" value="검색" />';
-		tag += '<input type="text" maxlenth="8" class="form-control customIn" name="addr2">';
 		tag += '</div></div></div></form>';
 		<!-- 검안정보입력창 -->
 		tag += '<form id="opt_frm"><div id="container" class="optolist container">';

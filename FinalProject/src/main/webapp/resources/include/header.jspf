@@ -41,7 +41,17 @@
 		background-repeat: no-repeat;
 		background-position:center;
 		background-size : cover;
-
+	}
+	.logoimg{
+		margin : 5%;
+		height : 65px;
+		
+	}
+	#Logo_text{
+		position: absolute;
+		top: 10px;
+		left : 200px;
+		width : 70%;
 	}
 </Style>
 </head>
@@ -52,15 +62,18 @@
 		<c:if test="${auth==null}">
 			<div><a href="<%=request.getContextPath()%>"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.png"/></a></div>
 		</c:if>
+		
 		<c:if test="${auth!=null}">
-			<a href="main"><img class="logo logoimg"src="/dcancer/resources/img/eye-Logo.png"/></a>
+			<a href="main"><img class="logo logoimg" src="/dcancer/resources/img/eye-Logo.png"/></a>
+			
 			<div class="logo-btn-menu menu align-self-center" style="margin-right :150px;">
 				  <!-- <button id='campSellgraph' type="button" class="logo-btn btn btn-outline-dark">매장별 매출현황</button> -->
 				  <a href="<%=request.getContextPath()%>/logout">
 				  	<button type="button" class="logo-btn btn btn-warning">LogOut</button>
 				  </a>
 			</div>
-	</c:if>
+		</c:if>
+		<img src="<%=request.getContextPath()%>/resources/img/header-Font.png" id="Logo_text">	
 	</div>
 	
 	

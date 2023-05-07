@@ -26,11 +26,12 @@ public class NoticeCTL {
 	@Autowired
 	HQService service;
 	
-	@PostMapping("HQ/noticeinsert")
+	@PostMapping(value="HQ/noticeinsert", produces="appication/text;charset=UTF-8")
 	public ResponseEntity<String> noticeInsert(NoticeDTO dto,HttpSession session,pagingVO vo) {
 		String respon = "";
 		int empno = (Integer) session.getAttribute("empno");
 		dto.setEmpno(empno);
+		System.out.println(dto.toString());
 		String htmltag="<script>";
 		try {
 			htmltag+="location.href='noticelist';";

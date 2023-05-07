@@ -68,7 +68,7 @@
 		});
 		//modal 선택시
 		$(document).on('click',".modelList",function(){
-			$("#model").val( $(this).find("div").attr('class') );
+			$("#model").val( $(this).find("div").attr('id') );
 			$('#goodNo').val( $(this).find('input').val() );
 			//모달닫기
 			$("#findmodal").modal('hide');
@@ -109,7 +109,7 @@
 							tag += '<div class="model">'+result.model+'</div>';
 							tag += '<div class="qtt">'+result.qtt+'</div>';
 							tag += '<div class="date">'+result.registdate+'</div></div>';
-							$("#brokenList").append(tag)
+							$("#listBox").append(tag);
 						}
 					});
 				}
@@ -133,7 +133,7 @@
 					$(result).each(function(idx,data){
 						//d-flex flex-column
 						tag +='<div class="modelList d-flex justify-content-around">';
-						tag +='<div class="'+data.model+' modal_model">'+data.model+'<input type="hidden" value="'+data.goodNo+'"></div>';
+						tag +='<div class="modal_model" id="'+data.model+'">'+data.model+'<input type="hidden" value="'+data.goodNo+'"></div>';
 						tag +='<div class="dodal_name">'+data.sellername+'</div><hr/></div>';
 					});	
 					$('.modal-body').html(tag);

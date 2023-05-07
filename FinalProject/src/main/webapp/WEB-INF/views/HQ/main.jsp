@@ -26,12 +26,15 @@
  	}
  	.noticeNo{
  		width :20%;
+ 		font-size : 1.3em
  	}
  	.noticetitle{
  		width : 50%;
+ 		font-size : 1.3em
  	}
  	.noticeDate{
  		width : 30%;
+ 		font-size : 1.3em
  	}
  	.noticeLine:hover{
  		background:black;

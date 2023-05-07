@@ -33,18 +33,18 @@ public class GoodCTL {
 		dto.setBrandcode(service.lastBrandcode()+1);
 		System.out.println("[goodInsert]"+dto.toString());
 		List<goodDTO> list = putter(dto);
-		System.out.println(list);
+		System.out.println("[goodInsert] list : "+list);
 		//System.out.println("[list]:"+list);
 		int result= service.goodinsert(list);
 		return "success";
 	}
 	
-	public ArrayList<goodDTO> putter(goodDTO dto){
+	public List<goodDTO> putter(goodDTO dto){
 		List<goodDTO> list = new ArrayList<goodDTO>();
 		if(dto.getClassifyno().equals("2") || dto.getClassifyno().equals("3")) {
 			DecimalFormat form = new DecimalFormat("#0.00");
 			String name;
-			//classifyno=2, model=prohit, buyprice=60000, sellprice=120000, Sellername=null, name=null, sphStart=4.0, sphEnd=-12.0, cylStart=0.0, cylEnd=-4.0
+//goodDTO(goodno=8631, Sellercode=34, classifyno=3, classifyname=CL, model=null, buyprice=10000, sellprice=20000, Sellername=null, name=vue, brandcode=9, sphStart=0.0, sphEnd=12.0, cylStart=0.0, cylEnd=0.0, buyStr=10,000, sellStr=20,000, price=java.text.DecimalFormat@674dc)
 			if (dto.getCylEnd()!=0) {
 				for (double sph = dto.getSphStart() ; sph >= dto.getSphEnd(); sph-=0.25 ) {
 					for(double cyl=0; cyl>=dto.getCylEnd(); cyl-=0.25) {
@@ -71,7 +71,9 @@ public class GoodCTL {
 					}
 				}
 			}else {
+				
 				//sph 만
+				System.out.println(dto.toString());
 				for (double sph = dto.getSphStart(); sph>=dto.getSphEnd(); sph-= 0.25) {
 					goodDTO goodDTO = new goodDTO();
 					name = dto.getName()+" S"+form.format(sph);
@@ -85,13 +87,14 @@ public class GoodCTL {
 					goodDTO.setBrandcode(dto.getBrandcode());
 					list.add(goodDTO);
 					dto.setGoodno(dto.getGoodno()+1);
+					System.out.println(list);
 				}
 			}
 		}else {
 			dto.setModel(dto.getName());
 			list.add(dto);
 		}
-		return (ArrayList<goodDTO>) list;
+		return list;
 	}
 	@PostMapping(value="brandDel")
 	//public String brandDel(@RequestBody String delarray) {

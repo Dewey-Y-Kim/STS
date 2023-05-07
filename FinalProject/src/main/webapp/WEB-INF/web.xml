@@ -53,7 +53,9 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>SpringEncodeFilter</filter-name>
-		<url-pattern>/**</url-pattern>
+		<url-pattern>/*</url-pattern>
+		<url-pattern>/HQ/*</url-pattern>
+		<url-pattern>/Camp/*</url-pattern>
 	</filter-mapping>
 	
 </web-app>
