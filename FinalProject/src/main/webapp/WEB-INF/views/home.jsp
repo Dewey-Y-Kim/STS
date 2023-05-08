@@ -14,7 +14,7 @@
 }
 #filterBox{
 position:absolute;
-	left: 45%;
+	left: 40%;
 	top : 15%;
 	width : 350px;
 	height:500px;
@@ -23,7 +23,7 @@ position:absolute;
 }
 #imgBox{
 	position:absolute;
-	left: 45%;
+	left: 40%;
 	top : 15%;
 	width : 350px;
 	height:500px;

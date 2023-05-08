@@ -151,6 +151,8 @@
 			<div><input class='form-control btn-primary btn' type="button" id="find" value="등록"/></div>
 		</div>
 		<div id="brokenList" class='list flex-column container-fd'>
+			<div id="input">
+			</div>
 			<div class='title line d-flex justify-content-between container bg-secondary text-white h3'>
 				<div class="no">번호</div>
 				<div class="model">상품명</div>
@@ -167,8 +169,7 @@
 				</div>
 			</c:forEach>
 			</div>
-			<div id="input">
-			</div>
+			
 		</div>		
 	</div>
 	

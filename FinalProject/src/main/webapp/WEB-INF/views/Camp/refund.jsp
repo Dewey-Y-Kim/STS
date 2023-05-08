@@ -8,6 +8,12 @@
 	margin : 1% 1% 1% 0;
 	
 }
+#input{
+	margin-bottom : 1%;
+}
+#brokenList{
+	margin-top :1%;
+}
 .list:nth-child(2n+1){
 	background: #ddd;
 }
@@ -143,11 +149,13 @@
 		});	
 	}
 </script>
-<main id='main_Frm' class="container">
+<main id='main_Frm' class="container-fluid">
 	<div id='body'>
 		<div id='btn_box' class='d-flex justify-content-end'>
 			<div><input class='form-control btn-primary btn' type="button" id="find" value="등록"/></div>
 		</div>
+		<div id="input">
+		</div>	
 		<div id="brokenList" class='list flex-column container'>
 			<div class='title line d-flex justify-content-between container bg-secondary text-white h3'>
 				<div class="no">번호</div>
@@ -164,8 +172,6 @@
 				</div>
 			</c:forEach>
 		</div>
-		<div id="input">
-		</div>		
 	</div>
 	
 <div class="modal" id="findmodal">

@@ -253,7 +253,7 @@ margin-right: 20px;
 					}else{
 						// $("#regist_btn").attr("onclick", "regist()");
 						// $("#regist_btn").attr("value", "고객등록");
-						// $("#custom_submit_btn").css("display","block");
+						$("#custom_submit_btn").css("display","block");
 						
 					}
 				},error:function(e){

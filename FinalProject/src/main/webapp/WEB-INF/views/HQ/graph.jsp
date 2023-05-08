@@ -40,7 +40,9 @@
 		display:none;
 	}
 	.btn_box{
+		float : right;
 		width : 100%;
+		padding-right : 5.2%;
 	}
 	.get_btn{
 		width : 100px;
@@ -252,10 +254,10 @@
 	
 </script>
 <main id='main_Frm' class="d-flex container-fluid d-flex flex-column main_frm">
-	<div class=' '>	
-		<div class="input-group">
+	<div class='btn_box'>	
+		<div class="input-group ">
 				<form id="callSold">
-					<div class="d-flex btn_box justify-content-end">
+					<div class="d-flex  justify-content-end">
 						<input type="button" class="btn btn-outline-success form-control get_btn" id="getBetween" value="기간검색"/>
 						<span class="input-group-text startDate">시작</span>
 						<input type="date" class="form-control startDate date" id="startdate" name="startDate"/>

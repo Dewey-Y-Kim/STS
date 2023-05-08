@@ -33,7 +33,7 @@ input[class=]
  }
  .carousel-item{
  	overflow: scroll;
- 	max-height : 600px;
+ 	max-height : 800px;
  }
 .caro_body_line{
 	flex-direction : column;

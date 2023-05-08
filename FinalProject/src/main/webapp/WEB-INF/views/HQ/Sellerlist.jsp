@@ -179,17 +179,19 @@ $(function(){
 		});
 	});
 	$('.del_btn').click(function(){
-		console.log($(this).attr("no"));
-		$.ajax({
-			url:"sellerDel",
-			data:{sellercode:$(this).attr("no")},
-			type:'post',
-			success:function(r){
-				location.reload();
-			}, error : function(e){
-				console.log(e.responseText)
-			}
-		})
+		if(confirm('삭제하게 되면 되돌릴 수 없습니다 삭제하겠습니까?')){
+			console.log($(this).attr("no"));
+			$.ajax({
+				url:"sellerDel",
+				data:{sellercode:$(this).attr("no")},
+				type:'post',
+				success:function(r){
+					location.reload();
+				}, error : function(e){
+					console.log(e.responseText)
+				}
+			});
+		};
 	});
 });
 </script>
@@ -320,10 +322,10 @@ $(function(){
 		        		<option value="064">064</option>
 		        	</select>
 		        	<span class="input-group-text">-</span>
-		        	<input type = "text" id="fax2" class="form-control" name="fax2" value="1234" minlength='3' maxlength="4"/>
+		        	<input type = "text" id="fax2" class="form-control" name="fax2" value="" minlength='3' maxlength="4"/>
 		        	<span class="input-group-text">-</span>
-		        	<input type = "text" id="fax3" class="form-control" name="fax3" value="1234" minlength='4' maxlength="4"/></div>
-		        <div class="input-group"><span class="input-group-text write_text">사업자번호</span><input type= "text" id="sellerno" class="form-control" name="sellerno" value="123-12-13413"/></div>
+		        	<input type = "text" id="fax3" class="form-control" name="fax3" value="" minlength='4' maxlength="4"/></div>
+		        <div class="input-group"><span class="input-group-text write_text">사업자번호</span><input type= "text" id="sellerno" class="form-control" name="sellerno" value=""/></div>
 		        <div class="d-flex justify-content-end input-group">
 		        <button id="cancelInput" class="btn btn-danger">등록취소</button><button id='submit' class="btn btn-primary">저장하기</button>
 		        </div>

@@ -11,12 +11,23 @@
  	#searchList{
  		max-height : 40%;
  	}
+ 	#promiseBox{
+ 		width:45%;
+ 		margin: 1% auto;
+ 		margin-top : 50px;
+ 		border : 1px solid #6c757d;
+ 		border-radius: 5px;
+ 		height : 400px;
+ 		overflow: scroll;
+ 	}
  	#findBox{
  		width:45%;
  		margin: 1% auto;
  		margin-top : 50px;
  		border : 1px solid #6c757d;
  		border-radius: 5px;
+ 		
+ 		overflow: scroll;
  	}
  	#chart{
  		min-width:45%;
