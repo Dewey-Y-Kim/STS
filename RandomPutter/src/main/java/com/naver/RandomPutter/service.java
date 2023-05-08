@@ -2,6 +2,7 @@ package com.naver.RandomPutter;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,14 @@ public class service {
 	}
 	public int selledData(List<sellVo> list) {
 		return dao.selledData(list);
+	}
+	public int[] getCustomNo() {
+		return dao.getCustomNo();
+	}
+	public int[] getSellNo(String date) {
+		return dao.getSellNo(date);
+	}
+	public int setSelldate(@Param("no")int customno, @Param("sellno")int sellno, String date ) {
+		return dao.setSelldate(customno, sellno, date);
 	}
 }

@@ -15,8 +15,8 @@
 	</select>
 	<insert id="selled" parameterType="list">
 		<foreach item="vo" collection="list" separator=" " open="insert all" close="select * from dual">
-		 	into sellInfo(sellno, empno, code, qtt , goodno, realprice) 
-		 	values(${vo.sellno}, ${vo.empno}, ${vo.code}, ${vo.qtt}, ${vo.goodno}, ${vo.realprice})
+		 	into sellInfo(sellno, empno, code, qtt , goodno, realprice, selldate) 
+		 	values(${vo.sellno}, ${vo.empno}, ${vo.code}, ${vo.qtt}, ${vo.goodno}, ${vo.realprice}, to_date(#{vo.date},'YYYY-MM-DD HH24:MI:SS'))
 		</foreach> 
 	</insert>
 	<insert id="selledlist">
@@ -31,4 +31,13 @@
 			values(${vo.goodno}, ${vo.qtt}, ${vo.realprice})
 		</foreach>
 	</insert>
+	<select id="getCustomNo" resultType="int">
+		select customNo from customInfo
+	</select>
+	<select id="getSellNo" resultType="int">
+		select sellNo from SellInfo  where to_char(selldate,'YYYY-MM-DD')=#{date}
+	</select>
+	<update id="setSelldate">
+		update sellInfo set customno=${no}, promiseDate=#{date} where sellno=${sellno}
+	</update>
 </mapper>

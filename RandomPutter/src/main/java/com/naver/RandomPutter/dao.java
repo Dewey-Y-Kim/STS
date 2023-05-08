@@ -11,5 +11,7 @@ public interface dao {
 	public int selled(List<sellVo> list);
 	public int selledList(List<sellVo> list);
 	public int selledData(List<sellVo> list);
-	
+	public int[] getCustomNo();
+	public int[] getSellNo(@Param("date")String date);
+	public int setSelldate(@Param("no")int customno, @Param("sellno")int sellno, @Param("date")String date);
 }
