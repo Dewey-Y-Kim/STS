@@ -52,7 +52,11 @@ public class CampServiceImpl implements CampService {
 		// TODO Auto-generated method stub
 		return dao.addOptData(opt);
 	}
-
+	@Override
+	public int addOpt(OptDTO opt) {
+		// TODO Auto-generated method stub
+		return dao.addOpt(opt);
+	}
 	@Override
 	public customDTO customfinder(String name, String tel, String code) {
 		// 고객이름 , 전화번호, 등록매장으로 고객검색
@@ -151,6 +155,4 @@ public class CampServiceImpl implements CampService {
 		return dao.promiseToday(code, now);
 	}
 
-	
-	
 }

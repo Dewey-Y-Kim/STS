@@ -113,6 +113,9 @@
  		width :90%;
  		margin : 0 auto;
  	}
+ 	.promiseChk{
+ 		background-color:#eee;
+ 	}
  </style>
  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
  <script>
@@ -158,7 +161,7 @@
 			const data = {
 					labels:chartLabelX,
 					datasets: [{
-					label: chartTitle,
+					label: "매출",
 					data: chartData,
 					backgroundColor: BchartColors,
 					borderColor: BchartBorderColors,
@@ -207,7 +210,14 @@
 		$(document).on('click','.closeBtn',function(){
 			$(".modal-body").html("");
 		});
-	
+		$(document).on('click','.promiseLine',function(){
+			if( $(this).hasClass("promiseChk") ){
+				$(this).removeClass('promiseChk');
+				console.log('had');
+			}else{
+				$(this).addClass('promiseChk');
+			}
+		})
 	});
 	
  </script>

@@ -126,7 +126,7 @@ public class customCTL {
 		if ( customNo !=0 ) {
 			dto.setCustomNo(customNo);
 		}
-		int result = service.addOptData(dto);
+		int result = service.addOpt(dto);
 		JsonObject json = new JsonObject();
 		if(result > 0) {
 			json.addProperty("memo", memo);

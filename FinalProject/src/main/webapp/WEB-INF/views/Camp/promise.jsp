@@ -59,6 +59,11 @@
 	.line:nth-child(2n){
 		background: #eee;
 	}
+	.promiseChk{
+		font-weight : bold;
+		font-style: italic;
+		
+	}
 </style>
 <script>
 	$(function(){
@@ -72,7 +77,7 @@
 					console.log(jdata);
 					var tag="";
 					jdata.map(function(line,idx){
-						tag += '<div class="line d-flex"><div class="title_name">'+line.name;
+						tag += '<div class="line d-flex promiseLine"><div class="title_name">'+line.name;
 						tag += '<input type="hidden" name="customNo" value="'+line.customNo+'"></div>';
 						tag += '<div class="title_tel">'+line.tel+'</div>';
 						tag += '<div class="title_selldate">'+line.selldate+'</div>';
@@ -88,10 +93,19 @@
 					$("#list").html(tag);
 				},error:function(e){
 					console.log(e.responseText);
-					}
-				});
-			});	
+				}
+			});
 		});
+		$(document).on('click','.promiseLine',function(){
+			if( $(this).hasClass("promiseChk") ){
+				$(this).removeClass('promiseChk');
+				console.log('had');
+			}else{
+				$(this).addClass('promiseChk');
+			}
+		})
+	});
+	
 </script>
 <main id='main_frm'>
 	<div id="main_body">
@@ -112,7 +126,7 @@
 		</div>
 		<div id="list" class="list d-flex flex-column">
 			<c:forEach var="list" items="${list }">
-			<div class="line d-flex">
+			<div class="line d-flex promiseLine">
 				<div class="title_name">
 					${list.name }
 					<input type="hidden" name="customNo" value="${list.customNo }">

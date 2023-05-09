@@ -19,6 +19,7 @@ public interface CampDAO {
 	public List<OptDTO> optDataSelect(@Param("no")int customNo);
 	public int addCustomData(customDTO custom);
 	public int addOptData(OptDTO opt);
+	public int addOpt(OptDTO opt);
 	public customDTO customfinder(@Param("name")String name, @Param("tel") String tel, @Param("code") String code);
 	public customDTO customfind(@Param("customNo")int no);
 	

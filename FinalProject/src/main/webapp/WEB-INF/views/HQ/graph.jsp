@@ -91,7 +91,6 @@
 	var json = ${json};	
 	var stackedBar;
 	let chartLabelX;
-	
 	$(function(){
 		//jsonData get
 		function json2var(json_data,returnType){ 
@@ -118,7 +117,7 @@
 		}
 		
 		//차트용 data
-		let chartTitle;
+		let chartTitle="매출";
 		chartLabelX=json2var(json,'camp');
 		
 		//let chartData = new Array();
@@ -208,11 +207,13 @@
 					chartLabelX = json2var(json,'camp');
 					if($('#chartType').val()=='no'){
 						data = json2var(json,'no');
-						
+						chartTitle="판매건수";
 					}else if($('#chartType').val()=='sum'){
 						data = json2var(json,'sum');
+						chartTitle="매출";
 					}else if($('#chartType').val()=='avg'){
 						data = json2var(json,'avg');
+						chartTitle="객단가";
 					}
 					
 					console.log("CData : "+data);
@@ -237,11 +238,14 @@
 			chartLabelX = json2var(json,'camp');
 			if($('#chartType').val()=='no'){
 				data = json2var(json,'no');
+				chartTitle="판매건수";
 				
 			}else if($('#chartType').val()=='sum'){
 				data = json2var(json,'sum');
+				chartTitle="매출";
 			}else if($('#chartType').val()=='avg'){
 				data = json2var(json,'avg');
+				chartTitle="객단가";
 			}
 			
 			console.log("CData : "+data);

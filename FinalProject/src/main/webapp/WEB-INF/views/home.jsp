@@ -49,14 +49,20 @@ position:absolute;
 			</ul>
 	</form>
 	<div id="imgBox"> 
-		<div id="demo" class="carousel slide" data-bs-ride="carousel">
-
+		<div id="demo" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
 		  <!-- Indicators/dots -->
 		  <div class="carousel-indicators" Style="display:none;">
 		    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
 		    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
 		    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
 		    <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="5"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="6"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="7"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="8"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="9"></button>
+		    <button type="button" data-bs-target="#demo" data-bs-slide-to="10"></button>
 		  </div>
 		
 		  <!-- The slideshow/carousel -->
@@ -72,6 +78,27 @@ position:absolute;
 		    </div>
 		    <div class="carousel-item justify-content-center">
 		      <img src="resources/img/opt/optimg_13.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_2.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_3.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_4.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_5.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_6.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_7.jpg" class="d-block h-100">
+		    </div>
+		    <div class="carousel-item justify-content-center">
+		      <img src="resources/img/opt/optimg_8.jpg" class="d-block h-100">
 		    </div>
 		  </div>
 		</div>

@@ -85,7 +85,7 @@
 			const data = {
 					labels:chartLabelX,
 					datasets: [{
-					label: chartTitle,
+					label: "매출",
 					data: chartData,
 					backgroundColor: BchartColors,
 					borderColor: BchartBorderColors,

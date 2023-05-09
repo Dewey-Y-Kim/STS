@@ -47,6 +47,13 @@
 			select to_Char(sysdate,'YYYY-MM-DD') registDate from dual
 		</selectKey>
 	</insert>
+	<insert id="addOpt">
+		insert into OptometryRegistry(Optometryno, customNo, Rsph, rcyl, raxis, lsph, lcyl, laxis, pd, radd, ladd, memo)
+		values( opt_sq.nextval, ${customNo}, ${RSph}, ${RCyl}, ${RAxis}, ${LSph}, ${LCyl}, ${LAxis}, ${pd}, ${RAdd}, ${LAdd}, #{memo,jdbcType=VARCHAR})
+		<selectKey keyProperty="registDate" resultType="String" order="AFTER">
+			select to_Char(sysdate,'YYYY-MM-DD') registDate from dual
+		</selectKey>
+	</insert>
 	<select id="selledList" resultType="com.naver.dcancer.DTO.SellDTO">
 		select distinct customNo, s.sellNo, s.empno, s.sellstatus, to_char(selldate,'YYYY-MM-DD') selldate, e.ename, optResult
 		from sellInfo s join empInfo e on e.empno=s.empno

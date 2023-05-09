@@ -14,7 +14,7 @@
 #brokenList{
 	margin-top :1%;
 }
-.list:nth-child(2n+1){
+#brokenList>.list:nth-child(2n){
 	background: #ddd;
 }
 
