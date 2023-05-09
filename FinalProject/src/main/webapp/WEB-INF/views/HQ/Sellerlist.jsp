@@ -138,12 +138,12 @@ $(function(){
 		});
 		return false;
 	});
-	$('#cancelInput').click(function(){
-		return false;
+	$(document).on('click','#cancelInput',function(){
 		$('#writeFrm input').val(""); // 입력내용 초기화
 		$(".writeForm").css('display','none');
 		$(".sellerlist").css('display','block');
 	});
+	
 	$('#submit').click(function(){
 		event.preventDefault();
 		

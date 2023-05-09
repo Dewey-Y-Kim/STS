@@ -60,9 +60,6 @@ position:absolute;
 		    <button type="button" data-bs-target="#demo" data-bs-slide-to="5"></button>
 		    <button type="button" data-bs-target="#demo" data-bs-slide-to="6"></button>
 		    <button type="button" data-bs-target="#demo" data-bs-slide-to="7"></button>
-		    <button type="button" data-bs-target="#demo" data-bs-slide-to="8"></button>
-		    <button type="button" data-bs-target="#demo" data-bs-slide-to="9"></button>
-		    <button type="button" data-bs-target="#demo" data-bs-slide-to="10"></button>
 		  </div>
 		
 		  <!-- The slideshow/carousel -->
@@ -83,16 +80,7 @@ position:absolute;
 		      <img src="resources/img/opt/optimg_2.jpg" class="d-block h-100">
 		    </div>
 		    <div class="carousel-item justify-content-center">
-		      <img src="resources/img/opt/optimg_3.jpg" class="d-block h-100">
-		    </div>
-		    <div class="carousel-item justify-content-center">
-		      <img src="resources/img/opt/optimg_4.jpg" class="d-block h-100">
-		    </div>
-		    <div class="carousel-item justify-content-center">
 		      <img src="resources/img/opt/optimg_5.jpg" class="d-block h-100">
-		    </div>
-		    <div class="carousel-item justify-content-center">
-		      <img src="resources/img/opt/optimg_6.jpg" class="d-block h-100">
 		    </div>
 		    <div class="carousel-item justify-content-center">
 		      <img src="resources/img/opt/optimg_7.jpg" class="d-block h-100">
