@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.joda.LocalDateParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -315,10 +316,14 @@ public class HomeController {
 		int[] customNo=service.getCustomNo();
 		int[] sellNo=service.getSellNo(date);
 		System.out.println("size:"+sellNo.length+"  "+Arrays.toString(sellNo));
+		LocalDate time= LocalDate.parse(date);
+		time=time.plusDays(1);
+		System.out.println(time.toString());
 		int result = 0;
 		for (int i = 0 ; i<sellNo.length; i++) {
 			int num=(int)( Math.random() * customNo.length);
 			System.out.println(i+"th:" + num);
+			
 			result += service.setSelldate(customNo[num],sellNo[i],date);
 			System.out.print(result+"+");
 		}

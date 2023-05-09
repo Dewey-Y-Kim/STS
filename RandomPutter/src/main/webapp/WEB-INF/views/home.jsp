@@ -7,19 +7,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <Script>
 	$(function(){
-		$('#StartSell').click(function(){
-			url='startSell';
-			$.ajax({
-				url:url,
-				type:"get",
-				success:function(){
-					$("#dayPut").html("success");
-				},error:function(){
-					alert('실패');
-				}
-			});
-		});
-		
 		$("#datePut").click(function(){
 			url="dateSell";
 			var date = $("#dateform").serialize();
@@ -52,7 +39,6 @@
 	
 </Script>
 <body>
-	<Input type='button' value='판매시작' id='StartSell'><br/>Dayput<div id="dayPut"></div>
 
 	<form id="dateform">
 		<div>start:<input type="date" name="start"></div>
