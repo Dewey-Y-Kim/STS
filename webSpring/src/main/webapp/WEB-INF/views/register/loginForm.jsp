@@ -5,7 +5,7 @@
 </Style>
 <script>
 	$(function(){
-		$("input[value='아이디 찾기']).click(function(){
+		$("input[value='아이디 찾기']").click(function(){
 			window.open("/findId","width=500, height=600");
 		});
 	});

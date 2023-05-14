@@ -63,10 +63,38 @@ header{
 	height:120px;
 	line-height:100px;
 }
-
-
-		
+	.HolyGrail {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
-div{
-	clear : both;
-	}
+
+.HolyGrail-body {
+  display: flex;
+  flex: 1;
+  
+}
+	.HolyGrail-content {
+  flex: 1;
+}
+
+.HolyGrail-nav, .HolyGrail-ads {
+  /* 12em은 열의 너비입니다. */
+  flex: 0 0 12em;
+background: yellow;
+}
+.header {
+	background: lightblue;
+}
+.HolyGrail-nav {
+  /* 좌측에 네비게이션을 놓습니다. */
+  order: -1;
+ background: blue; 
+}
+.logoimg{
+	height:100px;
+}
+
+ul,li{
+	list-style:none;
+}

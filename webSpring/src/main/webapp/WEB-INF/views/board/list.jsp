@@ -132,7 +132,7 @@
 			<li>prev</li>
 			</c:if>
 			<c:if test="${vo.idxPage!=1 }">
-			<li><a href="list?nowPage=${vo.idxPage-vo.onePageCnt}<c:if test="${vo.searchWord!=null}">&searchKey=${vo.searchKey }&searchWord=${vo.searchWord }</c:if>">prev</a></li>
+			<li><a href="list?nowPage=${vo.idxPage-vo.pagingCnt}">prev</a></li>
 			</c:if>
 			<!-- 페이지이동 -->
 			<c:forEach var="page" begin="${vo.idxPage}" end="${vo.idxPage + vo.onePageCnt-1}">
